@@ -11,6 +11,15 @@ module.exports = {
         xl: '24px',
         }
     },
+    colors: {
+      'white': '#FFFFFF',
+      'sand': '#EAD8AE',
+      'beige': '#C6B080',
+      'olive': '#727A52',
+      'charcoal': '#405064',
+      'earth': '#6A4024',
+    }
   },
   plugins: [],
+
 }
