@@ -24,7 +24,7 @@ export default function WalletModal({showModal, setShowModal}) {
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
-        <div className="fixed inset-0 z-10 overflow-y-auto">
+        <div className="fixed text-black inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
@@ -40,17 +40,17 @@ export default function WalletModal({showModal, setShowModal}) {
                 <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
                   <button
                     type="button"
-                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none">
+                    className="rounded-md bg-white focus:outline-none">
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" onClick={() => setShowModal(false)}/>
                   </button>
                 </div>
                   <div className="mt-3 text-center sm:mt-2">
-                    <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                    <Dialog.Title as="h3" className="text-lg font-medium leading-6">
                       Connect your Wallet
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm">
                         Choose your preferred wallet provider
                       </p>
                     </div>
@@ -73,7 +73,7 @@ const Providers = ({showModal, setShowModal}) => {
   available.map((connector) => (
     <div key={connector.id()} 
     onClick={() => connect(connector)}
-    className="flex flex-row mt-3 sm:mt-2 p-4 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3 rounded-md  border border-transparent bg-gray-50 hover:border-orange-200 hover:bg-gray-100 shadow-sm">
+    className="flex flex-row mt-3 sm:mt-2 p-4 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3 rounded-md border border-transparent border-sand hover:bg-sand hover:border-black shadow-sm">
     <p
     className="inline-flex items-center rounded-md text-base font-medium text-black "  
     key={connector.id()}>

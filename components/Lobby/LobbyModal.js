@@ -21,7 +21,7 @@ export default function LobbyModal({showModal, setShowModal}) {
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
-        <div className="fixed inset-0 z-10 overflow-y-auto">
+        <div className="fixed text-black inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
@@ -40,7 +40,7 @@ export default function LobbyModal({showModal, setShowModal}) {
                       Join a Lobby
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm">
                         You are about to join a game lobby. Click Join and wait for the queue to fill up. Once the minimum number of players in the queue is reached, you will join a new game.
                       </p>
                     </div>
@@ -49,14 +49,14 @@ export default function LobbyModal({showModal, setShowModal}) {
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-sand px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-sand focus:outline-none focus:ring-2 focus:ring-sand focus:ring-offset-2 sm:col-start-2 sm:text-sm"
                     onClick={() => setShowModal(false)}
                   >
                     Join
                   </button>
                   <button
                     type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm"
+                    className="mt-3 inline-flex w-full justify-center rounded-md border bg-white px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-sand focus:outline-none focus:ring-2 focus:ring-sand focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm"
                     onClick={() => setShowModal(false)}
                     ref={cancelButtonRef}
                   >
