@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { useStarknet, useConnectors } from '@starknet-react/core'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
+
 export default function WalletModal({showModal, setShowModal}) {
   const cancelButtonRef = useRef(null)
 
