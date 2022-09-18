@@ -2,7 +2,7 @@ import { useStarknet, useConnectors } from '@starknet-react/core'
 import { useState } from 'react'
 import WalletModal from './WalletModal'
 
-// refactor to implement Disconnect modal incl. transaction queue and link to explorer 
+// TODO: refactor to implement Disconnect modal incl. transaction queue and link to explorer 
 
 export default function ConnectWallet() {
   const { account } = useStarknet()
