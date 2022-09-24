@@ -67,27 +67,39 @@ export default function WalletModal() {
   );
 }
 
-// TODO: Add case where the user does not have a wallet installed on their browser
+// TODO: Add formatting to the paragraph
 const Providers = ({ showModal, setShowModal }) => {
   const { available, connect } = useConnectors();
 
-  return available.map((connector) => (
-    <div
-      key={connector.id()}
-      onClick={() => connect(connector)}
-      className="flex flex-row mt-3 sm:mt-2 p-4 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3 rounded-md border border-transparent border-sand hover:bg-sand hover:border-black shadow-sm"
-    >
-      <p
-        className="inline-flex items-center rounded-md text-base font-medium text-black "
+  if (available.length === 0) {
+    return (
+      <div>
+        <p className="inline-flex items-center rounded-md text-base font-small text-black "> 
+          It seems that you do not have any wallet installed on you browser. To
+          continue, please install a wallet from either Argent or Braavos, the two main
+          providers for Starknet. To learn more about wallets, read this guide.
+        </p>
+      </div>
+    );
+  } else {
+    return available.map((connector) => (
+      <div
         key={connector.id()}
+        onClick={() => connect(connector)}
+        className="flex flex-row mt-3 sm:mt-2 p-4 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3 rounded-md border border-transparent border-sand hover:bg-sand hover:border-black shadow-sm"
       >
-        {`${connector.name()}`}
-      </p>
-      <img
-        src={`/../${connector.name()}_logo.png`}
-        key={connector.name()}
-        className="w-12 h-auto ml-auto"
-      />
-    </div>
-  ));
-};
+        <p
+          className="inline-flex items-center rounded-md text-base font-medium text-black "
+          key={connector.id()}
+        >
+          {`${connector.name()}`}
+        </p>
+        <img
+          src={`/../${connector.name()}_logo.png`}
+          key={connector.name()}
+          className="w-12 h-auto ml-auto"
+        />
+      </div>
+    ));
+  }
+}
