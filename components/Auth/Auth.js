@@ -5,7 +5,6 @@ import { getDatabase, set, ref, onDisconnect, onValue } from "firebase/database"
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import { data } from "autoprefixer";
 
-import Player from "../GameContainer/Player";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -72,7 +71,7 @@ import Player from "../GameContainer/Player";
     }
     
     
-
+// TODO: Fix bug on Player.id - Might not be needing this but just in case..
 export function InitGame() {
 
     // Manage State
