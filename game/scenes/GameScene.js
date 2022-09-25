@@ -1,71 +1,40 @@
-import { Scene } from "phaser";
+import { useFrame } from "@react-three/fiber";
+import { useRef, useState } from "react";
+import _scene from "./sceneSlice";
+import { hovered, idle } from "./sceneSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-// Utils
-import {
-    handleCreateMap,
-    handleCreateHero,
-    handleObjectsLayer,
-    handleHeroMovement,
-    handleCreateGroups,
-    handleCreateControls,
-    handleConfigureCamera,
-    handleConfigureGridEngine,
-    handleCreateHeroAnimations,
-    handleCreateCharactersMovements,
-} from '../../utils/sceneHelpers';
 
-// Utils
-import { getDispatch } from '../../utils/utils';
+const BoxComponent = ({ route }) => {
+  const dispatch = useDispatch();
+//   const { isHovered } = useSelector((store) => store._scene);
 
-// Actions
-// TODO: Reconfigure if bug
-import setGameCameraSizeUpdateCallbackAction from '../../redux/actions/game/setGameCameraSizeUpdateCallbackAction';
+  // This reference will give us direct access to the THREE.Mesh object
+  const mesh = useRef(null);
+  // Set up state for the hovered and active state
 
-export default class GameScene extends Scene {
-    constructor() {
-        super('GameScene');
-    }
-
-    create() {
-        const dispatch = getDispatch();
-
-        // All of these functions need to be called in order
-
-        // Create controls
-        handleCreateControls(this);
-
-        // Create game groups
-        handleCreateGroups(this);
-
-        // Create the map
-        handleCreateMap(this);
-
-        // Create hero sprite
-        handleCreateHero(this);
-
-        // Configure grid engine
-        handleConfigureGridEngine(this);
-
-        // Load game objects like items, enemies, etc
-        handleObjectsLayer(this);
-
-        // Configure the main camera
-        // TODO: reconfigure if bug
-
-        // handleConfigureCamera(this);
-        // dispatch(setGameCameraSizeUpdateCallbackAction(() => {
-        //     handleConfigureCamera(this);
-        // }));
-
-        // Hero animations
-        handleCreateHeroAnimations(this);
-
-        // Handle characters movements
-        handleCreateCharactersMovements(this);
-    }
-
-    update(time, delta) {
-        handleHeroMovement(this);
-        this.heroSprite.update(time, delta);
-    }
-}
+  // Subscribe this component to the render-loop, rotate the mesh every frame
+  useFrame((state, delta) =>
+    mesh.current
+      ? (mesh.current.rotation.y = mesh.current.rotation.x += 0.1)
+      : null
+  );
+  // Return the view, these are regular Threejs elements expressed in JSX
+  return (
+    <>
+        <mesh
+          ref={mesh}
+          onClick={() => dispatch(hovered())}
+          onPointerover={() => dispatch(hovered())}
+          onPointerOut={() => dispatch(idle())}
+          scale={hovered ? 1 : 2}
+        >
+          <planeBufferGeometry args={[ 1, 1 ]} />
+          <meshPhysicalMaterial color={route === "/" ? "orange" : "red"} />
+        </mesh>
+        <directionalLight position={[8, 2, 1]} />
+        <ambientLight />
+    </>
+  );
+};
+export default BoxComponent;
