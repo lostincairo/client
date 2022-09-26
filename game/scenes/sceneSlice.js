@@ -1,23 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export const BoardDesk = [ 10, 10 ]
+const initialState = {
+  selectedCell: null,
+  highlightedCell: null,
+  availableMoves: [],
+  whoseMove: "player",
+  history: [],
+  isOver: "false",
+}
+
 
 export const sceneSlice = createSlice({
   name: "_scene",
-  initialState: {
-    isHovered: false,
-  },
+  initialState,
   reducers: {
-    hovered: (state) => {
-      state.isHovered = true;
+    selectCell: (state, action) => {
+        state.selectedCell = action.payload;
     },
-    idle: (state) => {
-        state.isHovered = false;
-      },
-  },
+    highlightCell: (state, action) => {
+        state.highlightedCell = action.payload;
+    }
+  }
 });
 
 // Action creators are generated for each case reducer function
-export const { hovered, idle } = sceneSlice.actions
+export const { selectCell, highlightCell } = sceneSlice.actions
 
 export default sceneSlice.reducer
