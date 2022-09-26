@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+export const BoardDesk = [ 10, 10 ]
+
 export const sceneSlice = createSlice({
   name: "_scene",
   initialState: {
