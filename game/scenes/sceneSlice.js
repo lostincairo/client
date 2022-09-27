@@ -7,6 +7,7 @@ const initialState = {
   whoseMove: "player",
   history: [],
   isOver: "false",
+  playerPosition: null,
 }
 
 
@@ -19,11 +20,14 @@ export const sceneSlice = createSlice({
     },
     highlightCell: (state, action) => {
         state.highlightedCell = action.payload;
+    },
+    movePlayer: (state, action) => {
+        state.playerPosition = action.payload;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { selectCell, highlightCell } = sceneSlice.actions
+export const { selectCell, highlightCel, movePlayer } = sceneSlice.actions
 
 export default sceneSlice.reducer

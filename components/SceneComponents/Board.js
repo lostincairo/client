@@ -1,5 +1,9 @@
 import React from "react";
 import Cell from "./Cell";
+import { highlightCell, movePlayer } from "../../game/scenes/sceneSlice";
+import { useDispatch, useSelector } from "react-redux";
+import CellPlayer from "../../game/scenes/Player";
+
 
 const Board = () => {
   const board = [
@@ -12,8 +16,6 @@ const Board = () => {
     ["a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"],
     ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"],
   ];
-
-
 
   return (
     <>
@@ -29,6 +31,8 @@ const Board = () => {
           ))}
         </React.Fragment>
       ))}
+
+      <CellPlayer />
     </>
   );
 };

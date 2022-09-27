@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Home from "./Home";
 import CombatScene from "../game/scenes/CombatScene";
+import CombatScene2 from "../game/scenes/CombatScene copy";
 import MoveDisplay from "./UI/MoveDisplay";
 import HighlightDisplay from "./UI/HighlightDisplay";
 
@@ -14,7 +15,7 @@ export default function Navigation() {
        <MoveDisplay />
        <HighlightDisplay />
       <div className="h-screen bg-sand w-95">
-      <CombatScene  />
+      <CombatScene />
       </div>
     </div>
   );

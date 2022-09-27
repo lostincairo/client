@@ -11,7 +11,7 @@ export default function MoveDisplay() {
 
   return (
     <div>
-    <span className="inline-flex items-center rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-800">
+    <span className="inline-flex items-center rounded-full bg-earth px-3 py-0.5 text-sm font-medium text-white">
       Move Player to {selectedCell}
     </span>
       </div>
