@@ -13,6 +13,8 @@ const Board = () => {
     ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"],
   ];
 
+
+
   return (
     <>
       {board.map((row, rowIndex) => (
@@ -22,7 +24,7 @@ const Board = () => {
             <Cell
               key={rowIndex.toString() + cellIndex.toString()}
               cell={cell}
-              position={{ x: rowIndex, z: 0, y: cellIndex}}
+              position={{ x: rowIndex, z: 0, y: cellIndex }}
             />
           ))}
         </React.Fragment>
