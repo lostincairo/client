@@ -28,6 +28,6 @@ export const sceneSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { selectCell, highlightCel, movePlayer } = sceneSlice.actions
+export const { selectCell, highlightCell, movePlayer } = sceneSlice.actions
 
 export default sceneSlice.reducer

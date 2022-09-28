@@ -1,29 +1,36 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCell, highlightCell } from "../../game/scenes/sceneSlice";
+import { selectCell, highlightCell, movePlayer } from "../../game/scenes/sceneSlice";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+import { board } from "../../utils/sceneHelpers";
 
 const CellPlayer = () => {
-  const dispatch = useDispatch();
 
+    // Store initialisation
+  const dispatch = useDispatch();
   const { highlightedCell } = useSelector((store) => store._scene);
   const { selectedCell } = useSelector((store) => store._scene);
+  const { movePlayer } = useSelector((store) => store._scene);
 
+  // Texture setup
   const playerMap = useLoader(TextureLoader, "spritesheet_caveman.png");
-
   playerMap.repeat.set(1/4, 1/4);
-
   playerMap.offset.x = 0;
   playerMap.offset.y = 0;
 
+  // Counters for sprite animation
+  // TODO: Add logic for capping the animation speed for different monitor refresh rates
   const timeElapsed = 0;
   const counter = 0;
 
+
+  // Sprite Animation 
+  // TODO: Add transition for movement from one cell to another
   useFrame(({ clock }, delta) => {
     timeElapsed += delta;
     counter += delta;
-    console.log(timeElapsed);
+    // console.log(timeElapsed);
     if (timeElapsed > 1) {
       playerMap.offset.x = 0;
       timeElapsed = 0;
@@ -33,12 +40,25 @@ const CellPlayer = () => {
     }
   });
 
-  return (
-    <mesh scale={[1, 1, 0.1]} position={[0, 0.6, 0]} rotation={[0,0.75,0]}>
-      <boxGeometry args={[1, 1]} />
-      <meshStandardMaterial map={playerMap} transparent={true} />
-    </mesh>
-  );
+
+  // Display the player on the grid cell.
+  // WIP
+  const displayPlayer = board.map((row, rowIndex) => (
+      row.map((cell, cellIndex) => (
+        <mesh scale={[1, 1, 0.1]} position={[rowIndex, 0.6, cellIndex]} rotation={[0,0.75,0]}>
+        <boxGeometry args={[1, 1]} />
+        <meshStandardMaterial map={playerMap} transparent={true} />
+         </mesh>))));
+        
+        // if( movePlayer === cell) {
+            return displayPlayer;
+        // }
+        // } else {
+        //     return;
+        // }
+        //   position={{ x: rowIndex, z: 0, y: cellIndex }}
+
+
 };
 
 export default CellPlayer;
