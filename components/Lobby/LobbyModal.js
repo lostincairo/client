@@ -1,14 +1,18 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
+import { useDispatch, useSelector } from 'react-redux'
+import { enterLobby, exitLobby } from '../../redux/gameSlice'
 
-export default function LobbyModal({showModal, setShowModal}) {
+export default function LobbyModal() {
 
-  const cancelButtonRef = useRef(null)
+  const dispatch = useDispatch();
+  const { inLobby } = useSelector((store => store._game));
+
 
   return (
-    <Transition.Root show={showModal} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setShowModal}>
+    <Transition.Root show={inLobby} as={Fragment}>
+      <Dialog as="div" className="relative z-10"  onClose={(e) => dispatch(exitLobby())}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -41,27 +45,12 @@ export default function LobbyModal({showModal, setShowModal}) {
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm">
-                        You are about to join a game lobby. Click Join and wait for the queue to fill up. Once the minimum number of players in the queue is reached, you will join a new game.
+                        You are about to join a game lobby. Confirm the action in your wallet from the pop-up window.
                       </p>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-sand px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-sand focus:outline-none focus:ring-2 focus:ring-sand focus:ring-offset-2 sm:col-start-2 sm:text-sm"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Join
-                  </button>
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md border bg-white px-4 py-2 text-base font-medium text-black shadow-sm hover:bg-sand focus:outline-none focus:ring-2 focus:ring-sand focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm"
-                    onClick={() => setShowModal(false)}
-                    ref={cancelButtonRef}
-                  >
-                    Cancel
-                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

@@ -3343,10 +3343,10 @@
   "resolved" "https://registry.npmjs.org/source-map-js/-/source-map-js-1.0.2.tgz"
   "version" "1.0.2"
 
-"starknet@^3.10", "starknet@^3.12.3", "starknet@^3.18.2":
-  "integrity" "sha512-w42BOws9np3C9dy4y9MOwY+KqxNhwTseci7CLVlLkui+jzQ7gGWoPVqn9OMeKy0PWIcZadCeuHvLez2xrg3zMg=="
-  "resolved" "https://registry.npmjs.org/starknet/-/starknet-3.18.2.tgz"
-  "version" "3.18.2"
+"starknet@^3.10", "starknet@^3.12.3", "starknet@^3.19.0":
+  "integrity" "sha512-1iUJdGtRDu2j3G8sS+yzRhp9O3O5Dr803oDfrm234Qmn05JTh5bU/wZwFPw9zWmMI0jyNZgjS+8dxPpBcpLgrQ=="
+  "resolved" "https://registry.npmjs.org/starknet/-/starknet-3.19.0.tgz"
+  "version" "3.19.0"
   dependencies:
     "@ethersproject/bytes" "^5.6.1"
     "bn.js" "^5.2.1"

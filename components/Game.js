@@ -3,6 +3,7 @@ import CombatScene from "../game/scenes/CombatScene";
 import MoveDisplay from "./UI/MoveDisplay";
 import HighlightDisplay from "./UI/HighlightDisplay";
 import DialogBox from "./UI/DialogBox";
+import TxNotification from "./TransactionStatus/Notification";
 
 export default function Navigation() {
   const [showModal, setShowModal] = useState(false);
@@ -10,6 +11,7 @@ export default function Navigation() {
   return (
     <div className="flex justify-center content-center mx-auto max-w-7xl h-screen w-full p-5 flex-col lg:px-8">
        {/* <Home /> */}
+       <TxNotification />
        <DialogBox />
        <MoveDisplay />
        <HighlightDisplay />
