@@ -1,10 +1,11 @@
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import { enterLobby, exitLobby } from '../../redux/gameSlice'
 
 export default function LobbyModal() {
+  const cancelButtonRef = useRef(null)
 
   const dispatch = useDispatch();
   const { inLobby } = useSelector((store => store._game));
@@ -12,7 +13,7 @@ export default function LobbyModal() {
 
   return (
     <Transition.Root show={inLobby} as={Fragment}>
-      <Dialog as="div" className="relative z-10"  onClose={(e) => dispatch(exitLobby())}>
+      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef}  onClose={(e) => dispatch(exitLobby())}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -43,7 +44,7 @@ export default function LobbyModal() {
                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                       Join a Lobby
                     </Dialog.Title>
-                    <div className="mt-2">
+                    <div className="mt-2" ref={cancelButtonRef}>
                       <p className="text-sm">
                         You are about to join a game lobby. Confirm the action in your wallet from the pop-up window.
                       </p>

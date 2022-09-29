@@ -68,7 +68,7 @@ export default function WalletModal() {
 }
 
 // TODO: Add formatting to the paragraph
-const Providers = ({ showModal, setShowModal }) => {
+const Providers = () => {
   const { available, connect } = useConnectors();
 
   if (available.length === 0) {

@@ -19,9 +19,10 @@ export default function ConnectWallet() {
   const dispatch = useDispatch()
   const { isOpen } = useSelector((store) => store._connectModal)
 
+  
     if (account) {
-      dispatch(connected())
-      dispatch(HideModal())
+      // dispatch(connected())
+      // dispatch(HideModal())
 
       return (
         <div className="flex flex-row">
