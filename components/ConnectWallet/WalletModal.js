@@ -4,8 +4,8 @@ import { useStarknet, useConnectors } from "@starknet-react/core";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useSelector, useDispatch } from "react-redux";
-import { connected, connecting, disconnected } from "./connectSlice";
-import { ShowModal, HideModal } from "./modalSlice";
+import { connected, connecting, disconnected } from "../../redux/connectSlice";
+import { ShowModal, HideModal } from "../../redux/modalSlice";
 
 
 export default function WalletModal() {

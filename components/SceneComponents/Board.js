@@ -19,7 +19,7 @@ const Board = () => {
           ))}
         </React.Fragment>
       ))}
-      <CellPlayer />
+      {/* <CellPlayer /> */}
     </>
   );
 };

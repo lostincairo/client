@@ -9,18 +9,21 @@ import Header from '../components/Header'
 import FooterComponent from '../components/FooterComponent.js'
 import Navigation from '../components/Navigation'
 
+import { useSelector } from 'react-redux'
 
 export default function Home() {
   const { account, connect, connectors } = useStarknet()
   const [connectMenuToggled, setConnectMenuToggled] = React.useState(false);
   const router = useRouter()
 
+  const { inGame } = useSelector((store) => (store._game))
+
   return (
     <div className="h-screen w-screen flex flex-col bg-cover bg-[url('../public/background.png')]">
       <Meta />
-      <Header />
+      { inGame ||<Header /> }
       <Navigation />
-      <FooterComponent />
+      { inGame || <FooterComponent /> }
     </div>
   )
 }

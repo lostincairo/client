@@ -2,10 +2,10 @@ import { useStarknet, useConnectors } from '@starknet-react/core';
 import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import _connect from './connectSlice';
-import { connected, connecting, disconnected } from './connectSlice';
-import _connectModal from './modalSlice'
-import { ShowModal, HideModal } from './modalSlice';
+import _connect from '../../redux/connectSlice';
+import { connected, connecting, disconnected } from '../../redux/connectSlice';
+import _connectModal from '../../redux/modalSlice'
+import { ShowModal, HideModal } from '../../redux/modalSlice';
 
 import WalletModal from './WalletModal'
 

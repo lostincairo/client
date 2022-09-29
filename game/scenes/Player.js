@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCell, highlightCell, movePlayer } from "../../game/scenes/sceneSlice";
+import { selectCell, highlightCell, movePlayer } from "../../redux/sceneSlice";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { board } from "../../utils/sceneHelpers";

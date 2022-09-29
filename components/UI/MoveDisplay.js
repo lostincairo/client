@@ -1,5 +1,5 @@
 import React from "react";
-import { selectedCell, highlightCell } from "../../game/scenes/sceneSlice"
+import { selectedCell, highlightCell } from "../../redux/sceneSlice"
 import { useSelector } from "react-redux";
 
 export default function MoveDisplay() {

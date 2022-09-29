@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
-import _scene from "./sceneSlice";
-import { hovered, idle } from "./sceneSlice";
+import _scene from "../../redux/sceneSlice";
+import { hovered, idle } from "../../redux/sceneSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Canvas, extend } from "@react-three/fiber";
 import Board from "../../components/SceneComponents/Board";
+
 
 import { Environment, OrbitControls, Lightformer } from "@react-three/drei";
 

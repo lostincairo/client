@@ -1,22 +1,18 @@
-import Link from "next/link";
-import { useState } from "react";
+import React from "react";
 import Home from "./Home";
-import CombatScene from "../game/scenes/CombatScene";
-import CombatScene2 from "../game/scenes/CombatScene copy";
-import MoveDisplay from "./UI/MoveDisplay";
-import HighlightDisplay from "./UI/HighlightDisplay";
+import Game from "./Game";
+import Exit from "./UI/Exit";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Navigation() {
-  const [showModal, setShowModal] = useState(false);
+
+  const { inGame } = useSelector((store) => (store._game))
 
   return (
     <div className="flex justify-center content-center mx-auto max-w-7xl h-screen w-full p-5 flex-col lg:px-8">
-       {/* <Home /> */}
-       <MoveDisplay />
-       <HighlightDisplay />
-      <div className="h-screen bg-sand w-95">
-      <CombatScene />
-      </div>
+      <Exit />
+      { inGame || <Home /> } 
+      { inGame && <Game /> }
     </div>
   );
 }

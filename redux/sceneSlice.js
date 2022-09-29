@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
+  gameState: "init",
   selectedCell: null,
   highlightedCell: null,
   availableMoves: [],
