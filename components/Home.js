@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import LobbyModal from "./Lobby/LobbyModal";
 import { useDispatch, useSelector } from "react-redux";
 import { enterGame, enterLobby } from "../redux/gameSlice";
-import { useContract, useStarknetInvoke } from "@starknet-react/core";
+import { useContract, useStarknetInvoke, useStarknetTransactionManager } from "@starknet-react/core";
 import { useLobbyContract } from "../hooks/contracts/Lobby";
 
 export default function Home() {
@@ -18,6 +18,18 @@ export default function Home() {
     contract: contract,
     method: "anyone_ask_to_queue",
   });
+
+  const { transactions } = useStarknetTransactionManager();
+
+  useEffect(() => {
+  for (const transaction of transactions)
+
+  if (transaction.transactionHash === LobbyData) {
+    console.log(transaction.status);
+    if (transaction.status === "TRANSACTION_RECEIVED") {
+      dispatch(enterLobby());
+  }}}, [contract, LobbyData, transactions]);
+  
 
   const JoinLobby = () => {
     invoke({

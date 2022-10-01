@@ -28,7 +28,7 @@ const CombatScene = () => {
     >
       <ambientLight intensity={0.6} />
       <group>
-      <directionalLight color="#ffe6b3" position={[4, 10, 5]} />
+      <directionalLight color="#ffe6b3" position={[4, 8, -5]} />
         <Board />
         {/* <OrbitControls enablePan={false} minDistance={4} maxDistance={60} /> */}
         {/* <orthographicCamera position={[0, 0, 10]} /> */}

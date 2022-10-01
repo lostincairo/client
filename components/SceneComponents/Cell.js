@@ -12,12 +12,12 @@ const Cell = ({ position, cell, key }) => {
   const dispatch = useDispatch();
 
   const sandMap = useLoader(TextureLoader, "sand.png");
-  const rockMap = useLoader(TextureLoader, "rock.png");
+  const rockMap = useLoader(TextureLoader, "brick.png");
   const colorMap = (position.x + position.y) % 2 === 0 ? sandMap : rockMap;
 
   return (
     <mesh
-      scale={[1, 1, 0.1]}
+      scale={[1, 1, 0.2]}
       rotation={[Math.PI / -2, 0, 0]}
       position={[position.x, 0, position.y]}
       onPointerEnter={(e) =>  dispatch(highlightCell(cell))}
