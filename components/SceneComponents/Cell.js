@@ -17,7 +17,7 @@ const Cell = ({ position, cell, key }) => {
 
   return (
     <mesh
-      scale={[1, 1, 0.2]}
+      scale={[1, 1, 1]}
       rotation={[Math.PI / -2, 0, 0]}
       position={[position.x, 0, position.y]}
       onPointerEnter={(e) =>  dispatch(highlightCell(cell))}
@@ -35,7 +35,7 @@ const Cell = ({ position, cell, key }) => {
       <meshStandardMaterial
         roughness={0.2}
         metalness={0.6}
-        map={colorMap}
+        map={rockMap}
         color={
           selectedCell === cell
             ? "red"

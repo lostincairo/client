@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import * as THREE from 'three';
 import _scene from "../../redux/sceneSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Canvas, extend } from "@react-three/fiber";
@@ -25,10 +26,11 @@ const CombatScene = () => {
         bottom: 10,
         zoom: 100,
       }}
+      gl={{toneMapping: THREE.NoToneMapping}}
     >
-      <ambientLight intensity={0.6} />
+      <ambientLight color="white" intensity={0} />
       <group>
-      <directionalLight color="#ffe6b3" position={[4, 8, -5]} />
+      {/* <directionalLight color="#FFFFFF" position={[-4, 5, -5]} /> */}
         <Board />
         {/* <OrbitControls enablePan={false} minDistance={4} maxDistance={60} /> */}
         {/* <orthographicCamera position={[0, 0, 10]} /> */}

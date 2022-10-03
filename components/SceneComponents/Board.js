@@ -2,6 +2,7 @@ import React from "react";
 import Cell from "./Cell";
 import CellPlayer from "../../game/scenes/Player";
 import { board } from "../../utils/sceneHelpers";
+import Palmito from "../../game/scenes/palmito";
 
 const Board = () => {
 
@@ -19,7 +20,8 @@ const Board = () => {
           ))}
         </React.Fragment>
       ))}
-      {/* <CellPlayer /> */}
+      <CellPlayer />
+      <Palmito />
     </>
   );
 };

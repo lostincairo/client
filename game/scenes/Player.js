@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { selectCell, highlightCell, movePlayer } from "../../redux/sceneSlice";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
@@ -18,6 +19,9 @@ const CellPlayer = () => {
   playerMap.repeat.set(1/4, 1/4);
   playerMap.offset.x = 0;
   playerMap.offset.y = 0;
+
+  
+
 
   // Counters for sprite animation
   // TODO: Add logic for capping the animation speed for different monitor refresh rates
@@ -45,10 +49,9 @@ const CellPlayer = () => {
   // WIP
   const displayPlayer = board.map((row, rowIndex) => (
       row.map((cell, cellIndex) => (
-        <mesh scale={[1, 1, 0.1]} position={[rowIndex, 0.6, cellIndex]} rotation={[0,0.75,0]}>
-        <boxGeometry args={[1, 1]} />
-        <meshStandardMaterial map={playerMap} transparent={true} />
-         </mesh>))));
+        <sprite scale={[1, 1, 0.1]} position={[rowIndex, 1, cellIndex]} rotation={[0,0.75,0]}>
+        <spriteMaterial transparent map={playerMap}  />
+         </sprite>))));
         
         // if( movePlayer === cell) {
             return displayPlayer;
