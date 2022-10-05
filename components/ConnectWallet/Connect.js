@@ -21,9 +21,6 @@ export default function ConnectWallet() {
 
   
     if (account) {
-      // dispatch(connected())
-      // dispatch(HideModal())
-
       return (
         <div className="flex flex-row">
           <button

@@ -3,17 +3,17 @@ import { createSlice } from '@reduxjs/toolkit'
 export const connectSlice = createSlice({
   name: "_connect",
   initialState: {
-    value: 0,
+    value: false,
   },
   reducers: {
     connected: (state) => {
-      state.value = 1;
+      state.value = true;
     },
     connecting: (state) => {
-        state.value = 2;
+        state.value = false;
       },
     disconnected: (state) => {
-      state.value = 0;
+      state.value = false;
     },
   },
 });

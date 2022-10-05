@@ -15,78 +15,35 @@
             }
         ],
         "keys": [],
-        "name": "ask_to_queue_occurred",
+        "name": "AskToQueueOccured",
         "type": "event"
     },
     {
-        "inputs": [],
-        "name": "queue_head_index_read",
-        "outputs": [
+        "data": [
             {
-                "name": "head_idx",
+                "name": "event_counter",
                 "type": "felt"
+            },
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "game_address",
+                "type": "felt"
+            },
+            {
+                "name": "arr_player_addresses_len",
+                "type": "felt"
+            },
+            {
+                "name": "arr_player_addresses",
+                "type": "felt*"
             }
         ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "queue_tail_index_read",
-        "outputs": [
-            {
-                "name": "tail_idx",
-                "type": "felt"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "name": "address",
-                "type": "felt"
-            }
-        ],
-        "name": "queue_address_to_index_read",
-        "outputs": [
-            {
-                "name": "idx",
-                "type": "felt"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "name": "idx",
-                "type": "felt"
-            }
-        ],
-        "name": "queue_index_to_address_read",
-        "outputs": [
-            {
-                "name": "address",
-                "type": "felt"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "event_counter_read",
-        "outputs": [
-            {
-                "name": "val",
-                "type": "felt"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
+        "keys": [],
+        "name": "GameActivationOccured",
+        "type": "event"
     },
     {
         "inputs": [],
@@ -97,6 +54,78 @@
     {
         "inputs": [],
         "name": "anyone_ask_to_queue",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "idx",
+                "type": "felt"
+            }
+        ],
+        "name": "reset_queue",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "set_game_contract_address",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "idx",
+                "type": "felt"
+            }
+        ],
+        "name": "find_idle_game",
+        "outputs": [
+            {
+                "name": "has_idle_game",
+                "type": "felt"
+            },
+            {
+                "name": "idle_game_idx",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "can_dispatch_player_to_game",
+        "outputs": [
+            {
+                "name": "curr_head_idx",
+                "type": "felt"
+            },
+            {
+                "name": "curr_tail_idx",
+                "type": "felt"
+            },
+            {
+                "name": "idle_game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "bool",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "dispatch_player_to_game",
         "outputs": [],
         "type": "function"
     }

@@ -5,6 +5,6 @@ export function useLobbyContract() {
   return useContract({
     abi: LobbyABI,
     address:
-      "0x07961d9acae000306cc5100d10e2c9851d9f05c6f03a91c3daea1886590674fc",
+      "0x058bc407db41c7503a15aa72d461741166c6cfa2a6d8c345a210e2dc6246f9a4",
   });
 }

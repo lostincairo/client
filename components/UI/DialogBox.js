@@ -1,6 +1,19 @@
 import React from 'react';
+import { useStarknet, useStarknetInvoke } from "@starknet-react/core";
+import { useLobbyContract } from '../../hooks/contracts/Lobby';
 
 export default function DialogBox() {
+
+  const { contract: lobby } = useLobbyContract(); 
+
+  const { data, loading, invoke } = useStarknetInvoke({contract: lobby, method: 'anyone_ask_to_queue'})
+
+  const join_queue = () => {
+    invoke({
+    args: [],
+  });
+}
+
     return (
       <div className="bg-white shadow sm:rounded-lg">
         <div className="px-4 py-5 sm:p-6">
@@ -15,6 +28,8 @@ export default function DialogBox() {
               <button
                 type="button"
                 className="inline-flex items-center rounded-md border border-transparent bg-charcoal px-4 py-2 font-medium text-white shadow-sm hover:bg-charcoal focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
+                onClick={join_queue}
+            
               >
                 Let's go
               </button>
