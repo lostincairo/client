@@ -10,40 +10,36 @@ import FooterComponent from '../components/FooterComponent.js'
 import Navigation from '../components/Navigation'
 
 import { useSelector } from 'react-redux'
-import clientPromise from "../utils/mongodb";
+import fetch from 'isomorphic-unfetch'
 
 
-export default function Home() {
+
+export default function Home({event}) {
   const { account, connect, connectors } = useStarknet()
   const [connectMenuToggled, setConnectMenuToggled] = React.useState(false);
   const router = useRouter()
 
   const { inGame } = useSelector((store) => (store._game))
 
+
   return (
     <div className="h-screen w-screen flex flex-col bg-cover bg-[url('../public/background.png')]">
       <Meta />
-      {events.map((event) => (
-        <li>{event.data}</li>
-      ))}
       { inGame ||<Header /> }
+      <div>{ event.name }</div>
       <Navigation />
       { inGame || <FooterComponent /> }
     </div>
   )
 }
 
-// Fetch events from MongoDB
-export async function getServerSideProps(context) {
-  let res = await fetch("http://localhost:3000/api/posts", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  let allPosts = await res.json();
-
+export async function getStaticProps(context) {
+  const res = await fetch("http://localhost:3000/api/posts");
+  const json = await res.json();
   return {
-    props: { events },
+    props: {
+      event: json,
+    },
   };
 }
+

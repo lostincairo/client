@@ -2474,6 +2474,14 @@
     "node-fetch" "^2.6.1"
     "whatwg-fetch" "^3.4.1"
 
+"isomorphic-unfetch@^3.1.0":
+  "integrity" "sha512-geDJjpoZ8N0kWexiwkX8F9NkTsXhetLPVbZFQ+JTW239QNOwvB0gniuR1Wc6f0AMTn7/mFGyXvHTifrCp/GH8Q=="
+  "resolved" "https://registry.npmjs.org/isomorphic-unfetch/-/isomorphic-unfetch-3.1.0.tgz"
+  "version" "3.1.0"
+  dependencies:
+    "node-fetch" "^2.6.1"
+    "unfetch" "^4.2.0"
+
 "its-fine@^1.0.1":
   "integrity" "sha512-E7ihBaOViboN99S9x1UkYVSrHyCguSls9ndOmLsq74wFZ6mUr+7PUSjykywVC5Ip065USSGdrjnys23nZb7xcQ=="
   "resolved" "https://registry.npmjs.org/its-fine/-/its-fine-1.0.1.tgz"
@@ -3839,6 +3847,11 @@
     "has-bigints" "^1.0.2"
     "has-symbols" "^1.0.3"
     "which-boxed-primitive" "^1.0.2"
+
+"unfetch@^4.2.0":
+  "integrity" "sha512-F9p7yYCn6cIW9El1zi0HI6vqpeIvBsr3dSuRO6Xuppb1u5rXpCPmMvLSyECLhybr9isec8Ohl0hPekMVrEinDA=="
+  "resolved" "https://registry.npmjs.org/unfetch/-/unfetch-4.2.0.tgz"
+  "version" "4.2.0"
 
 "update-browserslist-db@^1.0.5":
   "integrity" "sha512-dteFFpCyvuDdr9S/ff1ISkKt/9YZxKjI9WlRR99c180GaztJtRa/fn18FdxGVKVsnPY7/a/FDN68mcvUmP4U7Q=="

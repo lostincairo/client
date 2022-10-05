@@ -21,9 +21,9 @@ export default function Navigation() {
   return (
     <div className="flex justify-center content-center mx-auto max-w-7xl h-screen w-full p-5 flex-col lg:px-8">
       <Exit />
-      { inGame || <Home /> }
-      { inGame && <Game /> }
-      {/* <Game /> */}
+      {/* { inGame || <Home /> } */}
+      {/* { inGame && <Game /> } */}
+      <Game />
     </div>
   );
 }

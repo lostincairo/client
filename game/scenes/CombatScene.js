@@ -28,7 +28,7 @@ const CombatScene = () => {
       }}
       gl={{toneMapping: THREE.NoToneMapping}}
     >
-      <ambientLight color="white" intensity={0} />
+      <ambientLight color="white" intensity={0.8} />
       <group>
       {/* <directionalLight color="#FFFFFF" position={[-4, 5, -5]} /> */}
         <Board />

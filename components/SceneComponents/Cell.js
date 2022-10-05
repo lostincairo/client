@@ -9,6 +9,7 @@ const Cell = ({ position, cell, key }) => {
   const color = "white";
   const { highlightedCell } = useSelector((store) => store._scene);
   const { selectedCell } = useSelector((store) => store._scene);
+  const { playerPosition } = useSelector((store) => store._scene);
   const dispatch = useDispatch();
 
   const sandMap = useLoader(TextureLoader, "sand.png");

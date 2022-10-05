@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { enterGame, enterLobby } from "../../redux/gameSlice";
 import { useAccount, useConnectors, useContract, useStarknetInvoke, useStarknetTransactionManager, useStarknet } from "@starknet-react/core";
 import { useLobbyContract } from "../../hooks/contracts/Lobby";
+import { GetStaticProps } from "next";
 
-
-export default function JoinLobby() {
+export default function JoinLobby({event}) {
 
   const dispatch = useDispatch();
 
@@ -13,6 +13,7 @@ export default function JoinLobby() {
 
   const { data, loading, invoke } = useStarknetInvoke({contract: lobby, method: 'anyone_ask_to_queue'})
 
+  console.log(event)
   const join_queue = () => {
     invoke({
     args: [],
@@ -26,7 +27,7 @@ export default function JoinLobby() {
         // onClick={() => setShowModal(true)}
         onClick={() => [join_queue(), dispatch(enterLobby())]}
       >
-        Join Lobby
+        Join Lobby {event}
       </button>
     </div>
   );
