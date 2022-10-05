@@ -10,7 +10,9 @@ import {
 import { useLobbyContract } from "../hooks/contracts/Lobby";
 import ConnectingtoLobby from "./Lobby/ConnectingtoLobby";
 
-export default function Home() {
+
+
+export default function Home({events}) {
   const { value } = useSelector((store) => store._connect);
   const { inLobby } = useSelector((store) => store._game);
 
@@ -21,6 +23,9 @@ export default function Home() {
       </h1>
       { inLobby && value && <ConnectingtoLobby />}
       { inLobby || value && <JoinLobby />}
+      <JoinLobby />
     </div>
   );
 }
+
+

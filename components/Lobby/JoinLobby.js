@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { enterGame, enterLobby } from "../../redux/gameSlice";
-import { useContract, useStarknetInvoke, useStarknetTransactionManager } from "@starknet-react/core";
+import { useAccount, useConnectors, useContract, useStarknetInvoke, useStarknetTransactionManager, useStarknet } from "@starknet-react/core";
 import { useLobbyContract } from "../../hooks/contracts/Lobby";
+
 
 export default function JoinLobby() {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { contract: lobby } = useLobbyContract(); 
 

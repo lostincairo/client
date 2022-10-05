@@ -73,11 +73,12 @@ export default function WalletModal() {
 // TODO: Add formatting to the paragraph
 const Providers = () => {
   const { available, connect } = useConnectors();  
-  const cartridge = new ControllerConnector();
+  // const cartridge = new ControllerConnector();
 
-  if (available.length < 3) {
-  available.push(cartridge);
-  }
+  // if (available.length < 3) {
+  // available.push(cartridge);
+  // }
+
   
     return available.map((connector) => (
       <div
