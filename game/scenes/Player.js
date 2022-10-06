@@ -14,8 +14,8 @@ const CellPlayer = () => {
   const { movePlayer } = useSelector((store) => store._scene);
 
   // Texture setup
-  const playerMap = useLoader(TextureLoader, "walk_preview.png");
-  playerMap.repeat.set(1 / 7, 1);
+  const playerMap = useLoader(TextureLoader, "Sprite 3-4 left.png");
+  playerMap.repeat.set(1, 1);
   playerMap.offset.x = 0;
   playerMap.offset.y = 0;
 
@@ -31,27 +31,27 @@ const CellPlayer = () => {
 
   // Sprite Animation
   // TODO: Add transition for movement from one cell to another
-  useFrame(({ clock }, delta) => {
-    timeElapsed += delta;
-    counter += delta;
-    // console.log(timeElapsed);
-    if (timeElapsed > 4) {
-      playerMap.offset.x = 0;
+  // useFrame(({ clock }, delta) => {
+  //   timeElapsed += delta;
+  //   counter += delta;
+  //   // console.log(timeElapsed);
+  //   if (timeElapsed > 4) {
+  //     playerMap.offset.x = 0;
       
-      timeElapsed = 0;
-    } else if (counter > 0.4) {
-      playerMap.offset.x += 1 / 10;
-      row += 1
-      counter = 0;
-    }
-  });
+  //     timeElapsed = 0;
+  //   } else if (counter > 0.4) {
+  //     playerMap.offset.x += 1 / 9;
+  //     row += 1
+  //     counter = 0;
+  //   }
+  // });
 
 
   // if( movePlayer === cell) {
   return (
     <sprite
-      scale={[3, 3, 0.1]}
-      position={[row, 1, rowIndex]}
+      scale={[1, 1, 1]}
+      position={[row, 2, rowIndex]}
       rotation={[0, 0.75, 0]}
     >
       <spriteMaterial transparent map={playerMap} />
