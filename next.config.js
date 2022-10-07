@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-const webpack = require('webpack');
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -12,18 +10,4 @@ const nextConfig = {
 
 module.exports = nextConfig
 
-const withTM = require('next-transpile-modules')(['three'])
-module.exports = withTM()
 
-
-module.exports = {
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
-    })
-
-    return config
-  },
-}
