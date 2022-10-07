@@ -21,9 +21,9 @@ export default function Navigation() {
   return (
     <div className="flex content-center h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
       <Navbar />
-      {/* { inGame || <Home /> } */}
-      {/* { inGame && <Game /> } */}
-      <Game />
+      { inGame || <Home /> }
+      { inGame && <Game /> }
+      {/* <Game /> */}
     </div>
   );
 }

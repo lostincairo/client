@@ -4,7 +4,7 @@ import {  selectCell,  highlightCell,  movePlayer} from "../../redux/sceneSlice"
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
-const Cell = ({ position, cell, key }) => {
+const EmptyTile = ({ position, cell, key }) => {
 
   const color = "white";
   const { highlightedCell } = useSelector((store) => store._scene);
@@ -36,13 +36,7 @@ const Cell = ({ position, cell, key }) => {
       <meshStandardMaterial
         roughness={0.2}
         metalness={0.6}
-        map={rockMap}
-        color={
-          selectedCell === cell
-            ? "red"
-            : highlightedCell === cell
-            ? "blue"
-            : color
+        map={sandMap}
         }
       />
       <boxGeometry />
@@ -50,4 +44,4 @@ const Cell = ({ position, cell, key }) => {
   );
 };
 
-export default Cell;
+export default EmptyTile;;

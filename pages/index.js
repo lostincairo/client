@@ -15,7 +15,7 @@ import fetch from 'isomorphic-unfetch'
 
 
 
-export default function Home({event}) {
+export default function Home({}) {
   const { account, connect, connectors } = useStarknet()
   const router = useRouter()
 
@@ -32,13 +32,13 @@ export default function Home({event}) {
   )
 }
 
-export async function getStaticProps(context) {
-  const res = await fetch("http://localhost:3000/api/posts");
-  const json = await res.json();
-  return {
-    props: {
-      event: json,
-    },
-  };
-}
+// export async function getStaticProps(context) {
+//   const res = await fetch("http://localhost:3000/api/posts");
+//   const json = await res.json();
+//   return {
+//     props: {
+//       event: json,
+//     },
+//   };
+// }
 

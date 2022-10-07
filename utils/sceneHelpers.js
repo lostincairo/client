@@ -1,5 +1,26 @@
 import React from "react";
 
+// export const board = [];
+// const board_inner = [];
+
+// const ROWS = 50
+// const COLS = 50
+
+// export default function populate_board() { 
+// for (var a = 0; a < ROWS; a++) {
+//   for (var i = 0; i < COLS; i++) {
+//     board_inner.push(a + i)
+//   }
+//   board.push(board_inner[]);
+//   board_inner = [];
+// }
+
+// return(board)
+
+// }
+
+
+
 export const board = [
     ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"],
     ["a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2"],

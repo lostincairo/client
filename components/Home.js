@@ -15,7 +15,7 @@ import { useLobbyContract } from "../hooks/contracts/Lobby";
 import ConnectingtoLobby from "./Lobby/ConnectingtoLobby";
 import { useStarknet } from '@starknet-react/core';
 
-export default function Home({ events }) {
+export default function Home({ }) {
   const { value } = useSelector((store) => store._connect);
   const { inLobby } = useSelector((store) => store._game);
 
@@ -23,7 +23,7 @@ export default function Home({ events }) {
   return (
     <div className="my-2 h-full">
       {inLobby || (
-        <div className="flex justify-center content-center mx-auto max-w-3xl	h-auto p-5 flex-col lg:px-8">
+        <div className="flex flex-auto justify-center content-center mx-auto max-w-3xl p-5 flex-col lg:px-8">
             <Image
               src="/lost_in_cairo.svg"
               layout="responsive"

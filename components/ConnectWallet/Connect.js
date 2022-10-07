@@ -34,13 +34,13 @@ export default function ConnectWallet() {
     }
 
     return (
-      <div className="flex justify-center content-center mx-auto max-w-7xl w-full p-5 flex-col lg:px-8">
+      <div className="flex justify-center content-center max-w-7xl w-full p-5 flex-col lg:px-8">
         <button
           type="button"
-          className="mx-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="mx-auto w-40 h-20 bg-[url('../public/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4 "
           onClick={() => [dispatch(connecting()), dispatch(ShowModal())]}
         >
-          Sign In
+          
         </button>
         {isOpen && <WalletModal />}
       </div>

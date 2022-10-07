@@ -3,9 +3,10 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/20/solid'
 
+import Exit from "./UI/Exit";
 import ConnectWallet from './ConnectWallet/Connect'
 import { useStarknet } from '@starknet-react/core';
-
+import { useDispatch, useSelector } from "react-redux";
 
 
 const user = {
@@ -16,9 +17,9 @@ const user = {
 }
 
 const navigation = [
-  { name: "Blog", href: "#" },
-  { name: "Documentation", href: "#" },
-  { name: "About Us", href: "#" },
+  { name: "Scrolls", href: "#" },
+  { name: "How to Play", href: "#" },
+  { name: "Social", href: "#" },
 ];
 
 const userNavigation = [
@@ -33,9 +34,10 @@ function classNames(...classes) {
 
 export default function Example() {
   const { account } = useStarknet();
-  
+  const { inGame } = useSelector((store) => (store._game))
+
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="">
       {({ open }) => (
         <>
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,7 +45,7 @@ export default function Example() {
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                   {/* Mobile menu button */}
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
                       <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -52,25 +54,14 @@ export default function Example() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="logo_Main.png"
-                    alt="Lost in Cairo Logo"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="logo_Main.png"
-                    alt="Lost in Cairo Logo"
-                  />
-                </div>
+
                 <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        item.current ? ' text-white' : 'text-gray-400  hover:text-white',
                         'px-3 py-2 rounded-md text-sm font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -83,6 +74,7 @@ export default function Example() {
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                     { account && <ConnectWallet />}
+                    { inGame && <Exit />}
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                   {/* <button
