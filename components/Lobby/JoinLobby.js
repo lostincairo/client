@@ -21,9 +21,9 @@ export default function JoinLobby({event}) {
 }
 
   return (
-    <div className="flex justify-center content-center mx-auto max-w-7xl h-screen w-full p-5 flex-col lg:px-8">
+    <div className="flex justify-center content-center mx-auto max-w-7xl w-full p-5 flex-col lg:px-8">
       <button
-        className="p-10 mx-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="mx-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
         // onClick={() => setShowModal(true)}
         onClick={() => [join_queue(), dispatch(enterLobby())]}
       >

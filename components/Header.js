@@ -10,14 +10,14 @@ const navigation = [
 export default function Header() {
   return (
     <header className="">
-      <nav className=" mx-auto max-w-xl px-4 sm:px-6 lg:px-8" aria-label="Top">
+      <nav className=" max-w-xl px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex w-full items-center justify-between py-6 lg:border-none">
-          <div className="flex items-center">
+          <div className="flex w-full items-center">
             <a href="#">
               <span className="sr-only">Lost in Cairo</span>
               <img className="h-10 w-auto" src="logo_Main.png" alt="" />
             </a>
-            <div className="ml-10 hidden space-x-8 lg:block">
+            <div className="ml-10 hidden grow space-x-8 lg:block">
               {navigation.map((link) => (
                 <a
                   key={link.name}
@@ -27,10 +27,11 @@ export default function Header() {
                   {link.name}
                 </a>
               ))}
-              <div className="hidden space-x-8 lg:block">
+
+            </div>
+            <div className=" hidden grow space-x-8 lg:block">
                 <ConnectWallet />
               </div>
-            </div>
           </div>
         </div>
         <div className="flex justify-between w-full space-x-6 py-4 lg:hidden">

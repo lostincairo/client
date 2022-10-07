@@ -3,7 +3,7 @@ import { StarknetProvider, getInstalledInjectedConnectors } from '@starknet-reac
 import { Provider } from "react-redux"
 import store from "../redux/store"
 import ControllerConnector from "@cartridge/connector";
-import Controller from "@cartridge/controller";
+
 
 function MyApp({ Component, pageProps }) {
   const connectors = getInstalledInjectedConnectors()
@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <StarknetProvider autoConnect connectors={[cartridge]}>
+      <StarknetProvider autoConnect connectors={connectors}>
         <Component {...pageProps} />
       </StarknetProvider>
     </Provider>

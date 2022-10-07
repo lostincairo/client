@@ -22,9 +22,9 @@ export default function ConnectWallet() {
   
     if (account) {
       return (
-        <div className="flex flex-row">
+        <div className="flex justify-center content-center mx-auto max-w-7xl w-full p-5 flex-col lg:px-8">
           <button
-            className="p-10 ml-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-charcoal-100 hover:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mx-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
             onClick={() => [disconnect(), dispatch(disconnected())]}
           >
             {account.substring(0, 6)}...{account.substring(account.length - 4)}
@@ -34,13 +34,13 @@ export default function ConnectWallet() {
     }
 
     return (
-      <div className="flex flex-row">
+      <div className="flex justify-center content-center mx-auto max-w-7xl w-full p-5 flex-col lg:px-8">
         <button
           type="button"
-          className="p-10 ml-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-charcoal-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-charcoal-500"
+          className="mx-auto rounded-md bg-charcoal px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
           onClick={() => [dispatch(connecting()), dispatch(ShowModal())]}
         >
-          Connect Wallet
+          Sign In
         </button>
         {isOpen && <WalletModal />}
       </div>
