@@ -33,7 +33,7 @@ export default function Landing({ }) {
           <SwitchButton />
         </div>
       )}
-      {inLobby && value && <ConnectingtoLobby />}
+      {inLobby && value && <JoinLobbyButton />}
     </div>
   );
 }
