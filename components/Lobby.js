@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import {
   useTransactionManager,
@@ -15,7 +15,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const call_read_queue_index = () => {
+function CallReadQueueIndex() {
   const { address } = useAccount();
   const { contract: game } = useGameContract();
   const { data, loading, error, refresh } = useStarknetCall({
@@ -27,26 +27,35 @@ const call_read_queue_index = () => {
     },
   });
 
-  let txstatus;
-  if (data) {
-    txstatus = <div>{data}</div>;
-  } else if (loading) {
-    txstatus = <div>Accessing Queue ...</div>;
-  } else if (error) {
-    txstatus = <div>Error: {error}</div>;
-  }
 
-  return (
-    <div className="text-white">
-      {txstatus}
-    </div>
-  )
+  return{data, loading, error, refresh};
 }
+
+//   let txstatus;
+//   if (data) {
+//     txstatus = <div>{data}</div>;
+//   } else if (loading) {
+//     txstatus = <div>Accessing Queue ...</div>;
+//   } else if (error) {
+//     txstatus = <div>Error: {error}</div>;
+//   }
+
+//   return (
+//     <div className="text-white">
+//       {txstatus}
+//     </div>
+//   )
+// }
 
 
 export default function Lobby() {
   const { transactions } = useTransactionManager();
   const { address } = useAccount();
+
+  const { data: queue_index, loading: call_loading, error: call_error, refresh: call_refresh } = CallReadQueueIndex();
+
+  const QUEUE_INDEX = (queue_index ? queue_index.x.words[0] : []);
+  
 
 
   const txHash =
@@ -56,7 +65,11 @@ export default function Lobby() {
 
   // Replace by the right method for lobby
   const { contract: game } = useGameContract();
-  // const { data_queue, loading_queue, error_queue, refresh_queue } = useStarknetCall({
+
+
+
+  // useEffect(() => {
+  // const {  data, loading, error, refresh } = useStarknetCall({
   //   contract: game,
   //   method: "x_position_per_player_read",
   //   args: [address],
@@ -64,6 +77,8 @@ export default function Lobby() {
   //     watch: true,
   //   },
   // });
+// }, []); 
+
 
 
   // When Status goes from Pending to Accepted on L2, show check mark and call function
@@ -77,13 +92,13 @@ export default function Lobby() {
       status: "complete",
     },
     {
-      name: `${transactions}`,
+      name: `{data.status}`,
       description: "Cursus semper viverra facilisis et et some more.",
       href: "#",
       status: "current",
     },
     {
-      name: `sdv`,
+      name: `Position in queue : ${QUEUE_INDEX}`,
       description: "You are the 3rd in queue",
       href: "#",
       status: "upcoming",
@@ -105,7 +120,6 @@ export default function Lobby() {
   return (
     <div className=" mx-auto bg-black w-full h-screen py-12 sm:px-6 lg:px-8">
       <Panel />
-      <call_read_queue_index />
       <nav aria-label="Progress">
         <ol role="list" className="overflow-hidden">
           {steps.map((step, stepIdx) => (
