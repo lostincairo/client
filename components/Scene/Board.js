@@ -27,6 +27,8 @@ const Board = () => {
             <Cell
               key={rowIndex.toString() + cellIndex.toString()}
               cell={cell}
+              cellIndex={cellIndex}
+              rowIndex={rowIndex}
               position={{ x: rowIndex, z: 0, y: cellIndex }}
             />
           ))}

@@ -1,0 +1,680 @@
+[
+    {
+        "data": [
+            {
+                "name": "game_idx_counter",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "InitGameOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "game_idx_counter",
+                "type": "felt"
+            },
+            {
+                "name": "block_height_at_game_activation",
+                "type": "felt"
+            },
+            {
+                "name": "arr_player_addresses_len",
+                "type": "felt"
+            },
+            {
+                "name": "arr_player_addresses",
+                "type": "felt*"
+            },
+            {
+                "name": "player_turn",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "ActivateGameOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "x",
+                "type": "felt"
+            },
+            {
+                "name": "y",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "InitialPositionSetOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "InitPlayerOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "caller",
+                "type": "felt"
+            },
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "action",
+                "type": "felt"
+            },
+            {
+                "name": "damage",
+                "type": "felt"
+            },
+            {
+                "name": "block_height",
+                "type": "felt"
+            },
+            {
+                "name": "action_points_remaining",
+                "type": "felt"
+            },
+            {
+                "name": "caller_position_x",
+                "type": "felt"
+            },
+            {
+                "name": "caller_position_y",
+                "type": "felt"
+            },
+            {
+                "name": "player_position_x",
+                "type": "felt"
+            },
+            {
+                "name": "player_position_y",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "ActionOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "caller",
+                "type": "felt"
+            },
+            {
+                "name": "block_height",
+                "type": "felt"
+            },
+            {
+                "name": "move_points_remaining",
+                "type": "felt"
+            },
+            {
+                "name": "caller_initial_x",
+                "type": "felt"
+            },
+            {
+                "name": "caller_initial_y",
+                "type": "felt"
+            },
+            {
+                "name": "caller_destination_x",
+                "type": "felt"
+            },
+            {
+                "name": "caller_destination_y",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "MoveOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "current_turn",
+                "type": "felt"
+            },
+            {
+                "name": "next_turn",
+                "type": "felt"
+            },
+            {
+                "name": "block_height",
+                "type": "felt"
+            },
+            {
+                "name": "opponent_health",
+                "type": "felt"
+            },
+            {
+                "name": "game_duration",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "EndRoundOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "winner",
+                "type": "felt"
+            },
+            {
+                "name": "loser",
+                "type": "felt"
+            },
+            {
+                "name": "end_type",
+                "type": "felt"
+            },
+            {
+                "name": "block_height_at_game_activation",
+                "type": "felt"
+            },
+            {
+                "name": "block_height_at_game_end_read",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "EndGameOccured",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "lobby_address_read",
+        "outputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "game_idx_counter_read",
+        "outputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "block_height_at_game_activation_read",
+        "outputs": [
+            {
+                "name": "block_height",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "block_height_at_game_end_read",
+        "outputs": [
+            {
+                "name": "block_height",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "game_idx_to_status_read",
+        "outputs": [
+            {
+                "name": "game_status",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "health_per_player_read",
+        "outputs": [
+            {
+                "name": "health_value",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "movement_per_player_read",
+        "outputs": [
+            {
+                "name": "movement_value",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "action_per_player_read",
+        "outputs": [
+            {
+                "name": "action_value",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "player_turn_read",
+        "outputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "x_position_per_player_read",
+        "outputs": [
+            {
+                "name": "x",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "y_position_per_player_read",
+        "outputs": [
+            {
+                "name": "y",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "x",
+                "type": "felt"
+            },
+            {
+                "name": "y",
+                "type": "felt"
+            }
+        ],
+        "name": "player_address_per_coordinates_read",
+        "outputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "game_status",
+                "type": "felt"
+            }
+        ],
+        "name": "game_idx_to_status_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "health_value",
+                "type": "felt"
+            }
+        ],
+        "name": "health_per_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "movement_value",
+                "type": "felt"
+            }
+        ],
+        "name": "movement_per_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "action_value",
+                "type": "felt"
+            }
+        ],
+        "name": "action_per_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "player_turn_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "x",
+                "type": "felt"
+            }
+        ],
+        "name": "x_position_per_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "y",
+                "type": "felt"
+            }
+        ],
+        "name": "y_position_per_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "x",
+                "type": "felt"
+            },
+            {
+                "name": "y",
+                "type": "felt"
+            },
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "player_address_per_coordinates_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "set_lobby_address",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "init_game",
+        "outputs": [
+            {
+                "name": "new_game_idx",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "x",
+                "type": "felt"
+            },
+            {
+                "name": "y",
+                "type": "felt"
+            }
+        ],
+        "name": "set_initial_player_position",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "init_player",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "arr_player_addresses_len",
+                "type": "felt"
+            },
+            {
+                "name": "arr_player_addresses",
+                "type": "felt*"
+            }
+        ],
+        "name": "activate_game",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "opponent_address",
+                "type": "felt"
+            }
+        ],
+        "name": "end_turn",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "opponent_address",
+                "type": "felt"
+            },
+            {
+                "name": "x_dest",
+                "type": "felt"
+            },
+            {
+                "name": "y_dest",
+                "type": "felt"
+            }
+        ],
+        "name": "bow",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "opponent_address",
+                "type": "felt"
+            },
+            {
+                "name": "x_dest",
+                "type": "felt"
+            },
+            {
+                "name": "y_dest",
+                "type": "felt"
+            }
+        ],
+        "name": "punch",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "opponent_address",
+                "type": "felt"
+            },
+            {
+                "name": "x_dest",
+                "type": "felt"
+            },
+            {
+                "name": "y_dest",
+                "type": "felt"
+            }
+        ],
+        "name": "move",
+        "outputs": [],
+        "type": "function"
+    }
+]
