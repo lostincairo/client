@@ -6,7 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ConnectingtoLobby() {
+export default function Lobby() {
   const { transactions } = useStarknetTransactionManager();
 
   // When Status goes from Pending to Accepted on L2, show check mark and call function

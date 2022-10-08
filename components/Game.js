@@ -1,23 +1,24 @@
 import { useState } from "react";
-import CombatScene from "../game/scenes/CombatScene";
+import Combat from "./Scene/Combat";
 import MoveDisplay from "./UI/MoveDisplay";
 import HighlightDisplay from "./UI/HighlightDisplay";
-import DialogBox from "./UI/DialogBox";
-import TxNotification from "./TransactionStatus/Notification";
+import ControlBar from "./UI/ControlBar";
+import Notification from "./Starknet/Transaction/Notification";
+import ExitButton from "/components/UI/ExitButton";
 
 export default function Game() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="flex flex-col flex-auto justify-center bg-sand">
-      {/* <Home /> */}
-      <TxNotification />
-      <DialogBox />
+    <div className="flex flex-col relative flex-auto justify-center bg-sand">
+      <ExitButton className="" />
+      <Notification />
+      <div className=" grow">
+        <Combat />
+      </div>
+      <ControlBar />
       <MoveDisplay />
       <HighlightDisplay />
-      <div className=" grow">
-        <CombatScene />
-      </div>
     </div>
   );
 }

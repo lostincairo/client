@@ -1,9 +1,8 @@
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCell, highlightCell, movePlayer } from "../../redux/sceneSlice";
+import { selectCell, highlightCell, movePlayer } from "/redux/sceneSlice";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { board } from "../../utils/sceneHelpers";
 import * as THREE from "three"
 
 const Palmito = () => {

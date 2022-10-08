@@ -4,7 +4,7 @@ import { Transition } from '@headlessui/react'
 import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { FaceSmileIcon, XMarkIcon } from '@heroicons/react/20/solid'
 
-export default function TxNotification() {
+export default function Notification() {
 
     // TODO: Implement logic to handle Wait/Confirmed/Failed status.
     // TODO: Add correct link to the Starkscan tx

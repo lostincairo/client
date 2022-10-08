@@ -1,5 +1,5 @@
 import { useContract } from "@starknet-react/core";
-import LobbyABI from "../../utils/ContractABIs/lobby.json";
+import LobbyABI from "/components/Starknet/ABI/lobby.json";
 
 export function useLobbyContract() {
   return useContract({

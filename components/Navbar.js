@@ -3,8 +3,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/20/solid'
 
-import Exit from "./UI/Exit";
-import ConnectWallet from './ConnectWallet/Connect'
+import Exit from "./UI/ExitButton";
+import ConnectWallet from './Starknet/Connect/ConnectButton'
 import { useStarknet } from '@starknet-react/core';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,7 +19,7 @@ const user = {
 const navigation = [
   { name: "Scrolls", href: "#" },
   { name: "How to Play", href: "#" },
-  { name: "Social", href: "#" },
+  { name: "Social", href: "https://twitter.com/lostincairogame/" },
 ];
 
 const userNavigation = [
@@ -61,7 +61,7 @@ export default function Example() {
                       key={item.name}
                       href={item.href}
                       className={classNames(
-                        item.current ? ' text-white' : 'text-red-900  hover:text-white',
+                        item.current ? ' text-white' : 'text-gray-400  hover:text-white',
                         'px-3 py-2 rounded-md text-sm font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -73,8 +73,6 @@ export default function Example() {
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                    { account && <ConnectWallet />}
-                    { inGame && <Exit />}
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                   {/* <button

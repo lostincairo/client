@@ -2,24 +2,17 @@ import { Fragment, useRef, useState, useMemo } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useStarknet, useConnectors } from "@starknet-react/core";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-
 import { useSelector, useDispatch } from "react-redux";
-import { connected, connecting, disconnected } from "../../redux/connectSlice";
-import { ShowModal, HideModal } from "../../redux/modalSlice";
+import { connected, connecting, disconnected } from "/redux/connectSlice";
+import { ShowModal, HideModal } from "/redux/modalSlice";
 import ControllerConnector from "@cartridge/connector";
 
-
-
 export default function WalletModal() {
-
   const { isOpen } = useSelector((store) => store._connectModal);
   const dispatch = useDispatch();
-  
+
   const { account } = useStarknet();
   const { available, connect, disconnect } = useConnectors();
-  
-
-
 
   return (
     <Dialog
@@ -72,31 +65,29 @@ export default function WalletModal() {
 
 // TODO: Add formatting to the paragraph
 const Providers = () => {
-  const { available, connect } = useConnectors();  
+  const { available, connect } = useConnectors();
   // const cartridge = new ControllerConnector();
 
   // if (available.length < 3) {
   // available.push(cartridge);
   // }
 
-  
-    return available.map((connector) => (
-      <div
+  return available.map((connector) => (
+    <div
+      key={connector.id()}
+      onClick={() => connect(connector)}
+      className="flex flex-row mt-3 sm:mt-2 p-4 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3 rounded-md border border-transparent border-sand hover:bg-sand hover:border-black shadow-sm"
+    >
+      <p
+        className="inline-flex items-center rounded-md text-base font-medium text-black "
         key={connector.id()}
-        onClick={() => connect(connector)}
-        className="flex flex-row mt-3 sm:mt-2 p-4 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3 rounded-md border border-transparent border-sand hover:bg-sand hover:border-black shadow-sm"
       >
-        <p
-          className="inline-flex items-center rounded-md text-base font-medium text-black "
-          key={connector.id()}
-        >
-          {`${connector.name()}`}
-        </p>
-        <img
-          src={`/../${connector.name()}_logo.png`}
-          className="w-12 h-auto ml-auto"
-        />
-      </div>
-    ));
-  }
-
+        {`${connector.name()}`}
+      </p>
+      <img
+        src={`/../${connector.name()}_logo.png`}
+        className="w-12 h-auto ml-auto"
+      />
+    </div>
+  ));
+};

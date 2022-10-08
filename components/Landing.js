@@ -1,21 +1,20 @@
-import { useEffect } from "react";
-import JoinLobby from "./Lobby/JoinLobby";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import CairoLogo from "./UI/Logo";
-import ConnectWallet from './ConnectWallet/Connect';
+import JoinLobbyButton from "./Starknet/JoinLobbyButton";
+import ConnectButton from './Starknet/Connect/ConnectButton';
+import Lobby from "./Lobby";
 import { useDispatch, useSelector } from "react-redux";
-import { enterGame, enterLobby } from "../redux/gameSlice";
+import { enterGame, enterLobby } from "/redux/gameSlice";
 import {
   useContract,
   useStarknetInvoke,
   useStarknetTransactionManager,
 } from "@starknet-react/core";
-import { useLobbyContract } from "../hooks/contracts/Lobby";
-import ConnectingtoLobby from "./Lobby/ConnectingtoLobby";
+import { useLobbyContract } from "/hooks/LobbyContract";
+
 import { useStarknet } from '@starknet-react/core';
 
-export default function Home({ }) {
+export default function Landing({ }) {
   const { value } = useSelector((store) => store._connect);
   const { inLobby } = useSelector((store) => store._game);
 
@@ -31,8 +30,7 @@ export default function Home({ }) {
               width="183"
             />
 
-          {/* <CairoLogo /> */}
-          <ChooseBtn />
+          <SwitchButton />
         </div>
       )}
       {inLobby && value && <ConnectingtoLobby />}
@@ -41,15 +39,15 @@ export default function Home({ }) {
 }
 
 
-function ChooseBtn() {
+function SwitchButton() {
   const { account } = useStarknet();
 
   if(account) {
     return(
-      <JoinLobby />
+      <JoinLobbyButton />
     )} else {
       return(
-        <ConnectWallet />
+        <ConnectButton />
         )
     }
   }

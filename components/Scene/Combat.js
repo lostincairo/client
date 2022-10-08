@@ -1,15 +1,14 @@
 import React, { useRef } from "react";
+import Board from "./Board";
+import Player from "./Player";
 import * as THREE from 'three';
-import _scene from "../../redux/sceneSlice";
+import _scene from "/redux/sceneSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Canvas, extend } from "@react-three/fiber";
-import Board from "../../components/SceneComponents/Board";
-import Player from "./Player";
-
 import { Environment, OrbitControls, Lightformer } from "@react-three/drei";
 
 
-const CombatScene = () => {
+const Combat = () => {
   // State management
   const dispatch = useDispatch();
   //   const { isHovered } = useSelector((store) => store._scene);
@@ -38,6 +37,7 @@ const CombatScene = () => {
       camera={camera}
       gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}
     >
+      <color attach="background" args={['#f5efe6']} />
       <ambientLight color="white" intensity={0.8} />
       <group>
       <directionalLight color="#FFFFFF" position={[-12, 12, -6]} />
@@ -52,4 +52,4 @@ const CombatScene = () => {
     </Canvas>
   );
 };
-export default CombatScene;
+export default Combat;

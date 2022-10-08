@@ -1,12 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as THREE from "three";
-import { selectCell, highlightCell, movePlayer } from "../../redux/sceneSlice";
+import { selectCell, highlightCell, movePlayer } from "/redux/sceneSlice";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { board } from "../../utils/sceneHelpers";
 
-const CellPlayer = () => {
+
+const Player = () => {
   // Store initialisation
   const dispatch = useDispatch();
   const { highlightedCell } = useSelector((store) => store._scene);
@@ -60,4 +60,4 @@ const CellPlayer = () => {
 
 };
 
-export default CellPlayer;
+export default Player;

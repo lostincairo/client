@@ -1,8 +1,8 @@
 import React from 'react';
 import { useStarknet, useStarknetInvoke } from "@starknet-react/core";
-import { useLobbyContract } from '../../hooks/contracts/Lobby';
+import { useLobbyContract } from '/hooks/LobbyContract';
 
-export default function DialogBox() {
+export default function ControlBar() {
 
   const { contract: lobby } = useLobbyContract(); 
 
