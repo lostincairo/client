@@ -8,7 +8,11 @@ import {
 } from "@starknet-react/core";
 import { useLobbyContract } from "/hooks/LobbyContract";
 import { useGameContract } from "/hooks/GameContract";
-import { Accepted, Rejected, Pending } from '/components/Starknet/Transaction/Status';
+import {
+  Accepted,
+  Rejected,
+  Pending,
+} from "/components/Starknet/Transaction/Status";
 import Panel from "/components/Starknet/Transaction/Panel";
 
 function classNames(...classes) {
@@ -27,62 +31,43 @@ function CallReadQueueIndex() {
     },
   });
 
-
-  return{data, loading, error, refresh};
+  return { data, loading, error, refresh };
 }
-
-//   let txstatus;
-//   if (data) {
-//     txstatus = <div>{data}</div>;
-//   } else if (loading) {
-//     txstatus = <div>Accessing Queue ...</div>;
-//   } else if (error) {
-//     txstatus = <div>Error: {error}</div>;
-//   }
-
-//   return (
-//     <div className="text-white">
-//       {txstatus}
-//     </div>
-//   )
-// }
-
 
 export default function Lobby() {
   const { transactions } = useTransactionManager();
   const { address } = useAccount();
 
-  const { data: queue_index, loading: call_loading, error: call_error, refresh: call_refresh } = CallReadQueueIndex();
+  const {
+    data: queue_index,
+    loading: call_loading,
+    error: call_error,
+    refresh: call_refresh,
+  } = CallReadQueueIndex();
 
-  const QUEUE_INDEX = (queue_index ? queue_index.x.words[0] : []);
-  
+  const QUEUE_INDEX = queue_index ? queue_index.x.words[0] : [];
 
-
+  // TODO: Need to dynamically allocate the hash based on the Transaction Manager
   const txHash =
     "0x06b26a4f819e0dcecc04914900caa75e335f05a2ed28d6ba28088d7db3380e03";
-  const { data, loading, error } = useTransaction({ hash: txHash });
+  const {
+    data: tx_data,
+    loading: tx_loading,
+    error: tx_error,
+  } = useTransaction({ hash: txHash });
 
 
-  // Replace by the right method for lobby
-  const { contract: game } = useGameContract();
+  const TX_DATA = tx_data ? tx_data.status : [];
 
+  let TX_STATUS;
+  if (TX_DATA === "TRANSACTION_RECEIVED" || TX_DATA === "RECEIVED" || TX_DATA === "PENDING")
+    TX_STATUS = "Entering the Queue, please stand by";
+  if (TX_DATA === "REJECTED")
+    TX_STATUS = "Something went wrong. Please submit a bug report";
+  if (TX_DATA === "ACCEPTED_ON_L1" || TX_DATA === "ACCEPTED_ON_L1")
+    TX_STATUS = "Well done, you're in queue";
 
-
-  // useEffect(() => {
-  // const {  data, loading, error, refresh } = useStarknetCall({
-  //   contract: game,
-  //   method: "x_position_per_player_read",
-  //   args: [address],
-  //   options: {
-  //     watch: true,
-  //   },
-  // });
-// }, []); 
-
-
-
-  // When Status goes from Pending to Accepted on L2, show check mark and call function
-
+console.log
 
   const steps = [
     {
@@ -92,7 +77,7 @@ export default function Lobby() {
       status: "complete",
     },
     {
-      name: `{data.status}`,
+      name: `${TX_STATUS}`,
       description: "Cursus semper viverra facilisis et et some more.",
       href: "#",
       status: "current",
