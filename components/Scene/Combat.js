@@ -41,12 +41,12 @@ const Combat = () => {
       <ambientLight color="white" intensity={0.8} />
       <group>
       <directionalLight color="#FFFFFF" position={[-12, 12, -6]} />
-        {/* <Board /> */}
+        <Board />
   
-        <mesh>
+        {/* <mesh>
         <boxGeometry args={[3, 3, 3]} />
          <meshStandardMaterial color={"orange"} />
-         </mesh>
+         </mesh> */}
       </group>
       <Player />
     </Canvas>

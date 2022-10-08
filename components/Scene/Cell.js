@@ -6,7 +6,7 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { useStarknetInvoke } from "@starknet-react/core";
 import { useGameContract } from "/hooks/GameContract";
 
-const Cell = ({ position, cell, key }) => {
+const Cell = ({ position, cell, key, cellIndex, rowIndex }) => {
 
   const { highlightedCell } = useSelector((store) => store._scene);
   const { selectedCell } = useSelector((store) => store._scene);
@@ -18,16 +18,15 @@ const Cell = ({ position, cell, key }) => {
   const rockMap = useLoader(TextureLoader, "brick.png");
   const colorMap = (position.x + position.y) % 2 === 0 ? sandMap : rockMap;
 
-  const { contract: game } = useLobbyContract();
+  const { contract: game } = useGameContract();
   const { data, loading, invoke } = useStarknetInvoke({
     contract: game,
     method: "move",
   });
 
-  console.log(event);
-  const call_move = () => {
+  const call_move = (x, y) => {
     invoke({
-      args: [],
+      args: [x, y]
     });
   };
 
@@ -36,7 +35,7 @@ const Cell = ({ position, cell, key }) => {
       scale={[1, 1, 0.1]}
       rotation={[Math.PI / -2, 0, 0]}
       position={[position.x, 0, position.y]}
-      onPointerEnter={(e) => [dispatch(highlightCell(cell)),console.log(key)]}
+      onPointerEnter={(e) => [dispatch(highlightCell(cell)),console.log(cellIndex, rowIndex)]}
       onClick={(e) => {
         if (cell === selectedCell && playerPosition !== cell) {
           dispatch(movePlayer(cell));

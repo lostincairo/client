@@ -1,31 +1,76 @@
 import React from "react";
-import { useStarknetTransactionManager } from "@starknet-react/core";
 import { CheckIcon } from "@heroicons/react/20/solid";
+import {
+  useTransactionManager,
+  useTransaction,
+  useAccount,
+  useStarknetCall,
+} from "@starknet-react/core";
+import { useLobbyContract } from "/hooks/LobbyContract";
+import { useGameContract } from "/hooks/GameContract";
+
+import Panel from "/components/Starknet/Transaction/Panel";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+// const call_read_queue_index = () => {
+//   const { address } = useAccount();
+//   const { contract: game } = useGameContract();
+//   const { data, loading, error, refresh } = useStarknetCall({
+//     contract: game,
+//     method: "x_position_per_player_read",
+//     args: [address],
+//     options: {
+//       watch: true,
+//     },
+//   });
+
+//   if (data) {
+//     return (<div>{data}</div>);
+//   } else if (loading) {
+//     return (<div>Accessing Queue ...</div>);
+//   } else if (error) {
+//     return (<div>Error: {error}</div>);
+//   }
+// }
+
 export default function Lobby() {
-  const { transactions } = useStarknetTransactionManager();
+  const transactions = useTransactionManager();
+  const { address } = useAccount();
+
+  const txHash = "0x06b26a4f819e0dcecc04914900caa75e335f05a2ed28d6ba28088d7db3380e03"
+  const { data, loading , error } = useTransaction({ hash: txHash })
+  console.log(data);
+  // Replace by the right method for lobby
+  const { contract: game } = useGameContract();
+  // const { data_queue, loading_queue, error_queue, refresh_queue } = useStarknetCall({
+  //   contract: game,
+  //   method: "x_position_per_player_read",
+  //   args: [address],
+  //   options: {
+  //     watch: true,
+  //   },
+  // });
 
   // When Status goes from Pending to Accepted on L2, show check mark and call function
 
   const steps = [
     {
-      name: "Checking for acces key",
+      name: `Checking for access key for account ${address}`,
       description: "Vitae sed mi luctus laoreet.",
       href: "#",
       status: "complete",
     },
     {
-      name: "Accessing queue",
+      name: `g`,
       description: "Cursus semper viverra facilisis et et some more.",
       href: "#",
       status: "current",
     },
     {
-      name: "You are 2nd in queue",
+      name: `sdv`,
       description: "You are the 3rd in queue",
       href: "#",
       status: "upcoming",
@@ -44,9 +89,9 @@ export default function Lobby() {
     },
   ];
 
-
   return (
-    <div className="mx-auto bg-black w-full py-12 sm:px-6 lg:px-8">
+    <div className=" mx-auto bg-black w-full h-screen py-12 sm:px-6 lg:px-8">
+      <Panel />
       <nav aria-label="Progress">
         <ol role="list" className="overflow-hidden">
           {steps.map((step, stepIdx) => (

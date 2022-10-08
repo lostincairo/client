@@ -22,7 +22,7 @@ export default function JoinLobbyButton({ event }) {
     method: "anyone_ask_to_queue",
   });
 
-  console.log(event);
+
   const join_queue = () => {
     invoke({
       args: [],

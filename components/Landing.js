@@ -5,13 +5,6 @@ import ConnectButton from './Starknet/Connect/ConnectButton';
 import Lobby from "./Lobby";
 import { useDispatch, useSelector } from "react-redux";
 import { enterGame, enterLobby } from "/redux/gameSlice";
-import {
-  useContract,
-  useStarknetInvoke,
-  useStarknetTransactionManager,
-} from "@starknet-react/core";
-import { useLobbyContract } from "/hooks/LobbyContract";
-
 import { useStarknet } from '@starknet-react/core';
 
 export default function Landing({ }) {
@@ -33,7 +26,6 @@ export default function Landing({ }) {
           <SwitchButton />
         </div>
       )}
-      {inLobby && value && <JoinLobbyButton />}
     </div>
   );
 }
