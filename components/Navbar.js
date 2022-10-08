@@ -4,7 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/20/solid'
 
 import Exit from "./UI/ExitButton";
-import ConnectWallet from './Starknet/Connect/ConnectButton'
+import ConnectButton from './Starknet/Connect/ConnectButton'
 import { useStarknet } from '@starknet-react/core';
 import { useDispatch, useSelector } from "react-redux";
 
@@ -70,6 +70,7 @@ export default function Example() {
                     </a>
                   ))}
                 </div>
+                <ConnectButton />
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">

@@ -1,61 +1,36 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
-import { Transition } from '@headlessui/react'
-import { CheckCircleIcon } from '@heroicons/react/24/outline'
-import { FaceSmileIcon, XMarkIcon } from '@heroicons/react/20/solid'
+import { Accepted, Rejected, Pending } from './Status';
+import { useStarknetTransactionManager } from '@starknet-react/core'
 
-export default function Notification() {
 
-    // TODO: Implement logic to handle Wait/Confirmed/Failed status.
-    // TODO: Add correct link to the Starkscan tx
+export default function Notif({ transaction }) {
 
-  return (
-    <>
-      {/* Global notification live region, render this permanently at the end of the document */}
-      <div
-        aria-live="assertive"
-        className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
-      >
-        <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
-          {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
-          <Transition
-            show={false} // implement logic from Redux State
-            as={Fragment}
-            enter="transform ease-out duration-300 transition"
-            enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-            enterTo="translate-y-0 opacity-100 sm:translate-x-0"
-            leave="transition ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-              <div className="p-4">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0">
-                    <CheckCircleIcon className="h-6 w-6 text-olive" aria-hidden="true" />
-                  </div>
-                  <div className="ml-3 w-0 flex-1 pt-0.5">
-                    <p className="text-sm font-medium text-black">Transaction sent to Starknet</p>
-                    <p className="mt-1 text-sm text-black">Check its status on <a href="https://starkscan.co/">Starkscan</a></p>
-                  </div>
-                  <div className="ml-4 flex flex-shrink-0">
-                    <button
-                      type="button"
-                      className="inline-flex rounded-md bg-white text-black hover:text-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      onClick={() => {
-                        setShow(false)
-                      }}
-                    >
-                      <span className="sr-only">Close</span>
-                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
-                    </button>
-                  </div>
+    const { removeTransaction } = useStarknetTransactionManager()
+    
+    let status;
+    if (transaction.status === "TRANSACTION_RECEIVED"
+        || transaction.status === "RECEIVED" || transaction.status === "PENDING")
+        status = <Pending />;
+    else if (transaction.status === "REJECTED")
+        status = <Rejected />;
+    else if (transaction.status === "ACCEPTED_ON_L1" || transaction.status === "ACCEPTED_ON_L2")
+        status = <Accepted />;
+
+    return (
+        <div className="">
+            <div >
+                <div className="">
+                    {status}
+                    <h1 className="">Transaction</h1>
                 </div>
-              </div>
+                <p className="">Transaction Description</p>
             </div>
-          </Transition>
+            <div className="">
+                <svg onClick={() => removeTransaction(transaction.transactionHash)} className="" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+                <a className="" href={"https://testnet.starkscan.co/tx/" + transaction.transactionHash} target="_blank" rel="noreferrer">
+                    <svg className="" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+                </a>
+            </div>
         </div>
-      </div>
-    </>
-  )
+    );
+
 }

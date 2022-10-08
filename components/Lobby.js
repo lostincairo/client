@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/20/solid";
 import {
   useTransactionManager,
@@ -8,41 +8,52 @@ import {
 } from "@starknet-react/core";
 import { useLobbyContract } from "/hooks/LobbyContract";
 import { useGameContract } from "/hooks/GameContract";
-
+import { Accepted, Rejected, Pending } from '/components/Starknet/Transaction/Status';
 import Panel from "/components/Starknet/Transaction/Panel";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// const call_read_queue_index = () => {
-//   const { address } = useAccount();
-//   const { contract: game } = useGameContract();
-//   const { data, loading, error, refresh } = useStarknetCall({
-//     contract: game,
-//     method: "x_position_per_player_read",
-//     args: [address],
-//     options: {
-//       watch: true,
-//     },
-//   });
+const call_read_queue_index = () => {
+  const { address } = useAccount();
+  const { contract: game } = useGameContract();
+  const { data, loading, error, refresh } = useStarknetCall({
+    contract: game,
+    method: "x_position_per_player_read",
+    args: [address],
+    options: {
+      watch: true,
+    },
+  });
 
-//   if (data) {
-//     return (<div>{data}</div>);
-//   } else if (loading) {
-//     return (<div>Accessing Queue ...</div>);
-//   } else if (error) {
-//     return (<div>Error: {error}</div>);
-//   }
-// }
+  let txstatus;
+  if (data) {
+    txstatus = <div>{data}</div>;
+  } else if (loading) {
+    txstatus = <div>Accessing Queue ...</div>;
+  } else if (error) {
+    txstatus = <div>Error: {error}</div>;
+  }
+
+  return (
+    <div className="text-white">
+      {txstatus}
+    </div>
+  )
+}
+
 
 export default function Lobby() {
-  const transactions = useTransactionManager();
+  const { transactions } = useTransactionManager();
   const { address } = useAccount();
 
-  const txHash = "0x06b26a4f819e0dcecc04914900caa75e335f05a2ed28d6ba28088d7db3380e03"
-  const { data, loading , error } = useTransaction({ hash: txHash })
-  console.log(data);
+
+  const txHash =
+    "0x06b26a4f819e0dcecc04914900caa75e335f05a2ed28d6ba28088d7db3380e03";
+  const { data, loading, error } = useTransaction({ hash: txHash });
+
+
   // Replace by the right method for lobby
   const { contract: game } = useGameContract();
   // const { data_queue, loading_queue, error_queue, refresh_queue } = useStarknetCall({
@@ -54,7 +65,9 @@ export default function Lobby() {
   //   },
   // });
 
+
   // When Status goes from Pending to Accepted on L2, show check mark and call function
+
 
   const steps = [
     {
@@ -64,7 +77,7 @@ export default function Lobby() {
       status: "complete",
     },
     {
-      name: `g`,
+      name: `${transactions}`,
       description: "Cursus semper viverra facilisis et et some more.",
       href: "#",
       status: "current",
@@ -92,6 +105,7 @@ export default function Lobby() {
   return (
     <div className=" mx-auto bg-black w-full h-screen py-12 sm:px-6 lg:px-8">
       <Panel />
+      <call_read_queue_index />
       <nav aria-label="Progress">
         <ol role="list" className="overflow-hidden">
           {steps.map((step, stepIdx) => (

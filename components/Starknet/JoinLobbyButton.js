@@ -12,7 +12,7 @@ import {
 import { useLobbyContract } from "/hooks/LobbyContract";
 import { GetStaticProps } from "next";
 
-export default function JoinLobbyButton({ event }) {
+export default function JoinLobbyButton() {
   const dispatch = useDispatch();
 
   const { contract: lobby } = useLobbyContract();
@@ -21,6 +21,7 @@ export default function JoinLobbyButton({ event }) {
     contract: lobby,
     method: "anyone_ask_to_queue",
   });
+
 
 
   const join_queue = () => {
