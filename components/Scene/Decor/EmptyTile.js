@@ -16,28 +16,19 @@ const EmptyTile = ({ position, cell, key }) => {
   const rockMap = useLoader(TextureLoader, "brick.png");
   const colorMap = (position.x + position.y) % 2 === 0 ? sandMap : rockMap;
 
+  // Removed SelectedCell state
   return (
     <mesh
       scale={[1, 1, 0.1]}
       rotation={[Math.PI / -2, 0, 0]}
       position={[position.x, 0, position.y]}
-      onPointerEnter={(e) =>  dispatch(highlightCell(cell))}
-      onClick={(e) => {
-        if (cell === selectedCell && playerPosition !== cell) {
-          dispatch(movePlayer(cell));
-          dispatch(selectCell(null));
-        } else if (cell !== selectedCell) {
-          dispatch(selectCell(cell));
-        } else {
-          dispatch(selectCell(null));
-          console.log("move invalid, please try again");
-        }}}
+
     >
       <meshStandardMaterial
         roughness={0.2}
         metalness={0.6}
         map={sandMap}
-        }
+        
       />
       <boxGeometry />
     </mesh>
