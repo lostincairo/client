@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { position } from '/redux/starknetSlice'; 
+import { positionRow, positionCol } from '/redux/starknetSlice'; 
 import {
   useStarknetInvoke, 
   useAccount,
@@ -23,12 +23,11 @@ export default function InitialPosition() {
       contract: game,
       method: "set_initial_player_position"
   });
-  
-  const { selectedCell } = useSelector((store) => store._scene)
+
   
   const call_set_initial_position = () => {
     invoke({
-      args:[1, selectedCell[0], selectedCell[1]],
+      args:[1, selectedRow, selectedCol],
     });
   };
     
@@ -37,7 +36,7 @@ export default function InitialPosition() {
         <h1>Select your starting position</h1>
         <p>Click on any cell on the grid to set your starting position</p>
         <p>You will be starting from Row: {selectedRow}, Column: {selectedCol}</p>
-        <button className="bg-blue-400" onClick={() => [call_set_initial_position, dispatch(positionRow(selectedRow)), dispatch(positionCol(selectedCol))]}>I'm ready!</button>
+        <button className="bg-blue-400" onClick={() => [call_set_initial_position(), dispatch(positionRow(selectedRow)), dispatch(positionCol(selectedCol))]}>I'm ready!</button>
 
     </div>
   );

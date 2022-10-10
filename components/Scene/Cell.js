@@ -43,11 +43,13 @@ const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
       onPointerEnter={(e) => [dispatch(highlightRow(rowIndex)), dispatch(highlightCol(cellIndex))]}
       onClick={(e) => {
         if ((cellIndex === selectedCol && rowIndex === selectedRow) && (playerCol !== cellIndex && playerRow !== rowIndex)) {
-          dispatch(positionCol(cellIndex));
-          dispatch(positionRow(rowIndex));
+          // TODO: verify if needed to set the player coordinates at this moment.
+          // dispatch(positionCol(cellIndex));
+          // dispatch(positionRow(rowIndex));
           dispatch(selectCol(null));
           dispatch(selectRow(null));
-        } else if (cellIndex !== selectedCol && rowIndex !== selectedRow) {
+        }
+        if (cellIndex !== selectedCol || rowIndex !== selectedRow) {
           dispatch(selectCol(cellIndex));
           dispatch(selectRow(rowIndex));
         } else {
