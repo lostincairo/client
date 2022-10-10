@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
   inLobby: false,
   inGame: false,
+  inInit: false,
 }
 
 
@@ -21,11 +22,17 @@ export const gameSlice = createSlice({
     },
     exitLobby: (state) => {
         state.inLobby = false;
+    },
+    enterInit: (state) => {
+        state.inInit = true;
+    },
+    exitInit: (state) => {
+        state.inInit = false;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { enterGame, exitGame, enterLobby, exitLobby } = gameSlice.actions
+export const { enterGame, exitGame, enterLobby, exitLobby, enterInit, exitInit } = gameSlice.actions
 
 export default gameSlice.reducer

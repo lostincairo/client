@@ -5,6 +5,7 @@ const initialState = {
   selectedAction: null,
   playerPosition: [],
   playerDirection: null,
+  highlight: null
 }
 
 
@@ -26,11 +27,17 @@ export const starknetSlice = createSlice({
   },
   direction: (state, action) => {
       state.playerDirection = action.payload;
+  },
+  SNhighlightRow: (state, action) => {
+      state.highlightActionRow = action.payload;
+  },
+  SNhighlightCol: (state, action) => {
+      state.highlightActionCol = action.payload;
   }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { turn, action, positionRow, positionCol, direction } = starknetSlice.actions
+export const { turn, action, positionRow, positionCol, direction, SNhighlightRow, SNhighlightCol } = starknetSlice.actions
 
 export default starknetSlice.reducer

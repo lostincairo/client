@@ -12,10 +12,8 @@ import { useGameContract } from "/hooks/GameContract";
 
 export default function InitialPosition() {
 
-    const { selectedRow } = useSelector((store) => store._scene);
-    const { selectedCol } = useSelector((store) => store._scene);
-    const { playerRow } = useSelector((store) => store._starknet);
-    const { playerCol } = useSelector((store) => store._starknet);
+    const { selectedRow, selectedCol } = useSelector((store) => store._scene);
+    const { playerRow, playerCol } = useSelector((store) => store._starknet);
     const dispatch = useDispatch();
     const { address } = useAccount();
     const { contract: game } = useGameContract();

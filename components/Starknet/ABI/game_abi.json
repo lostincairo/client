@@ -27,6 +27,17 @@
             {
                 "name": "arr_player_addresses",
                 "type": "felt*"
+            }
+        ],
+        "keys": [],
+        "name": "ActivateGameOccured",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "game_idx_counter",
+                "type": "felt"
             },
             {
                 "name": "player_turn",
@@ -34,7 +45,7 @@
             }
         ],
         "keys": [],
-        "name": "ActivateGameOccured",
+        "name": "StartGameOccured",
         "type": "event"
     },
     {
@@ -774,6 +785,44 @@
             }
         ],
         "name": "activate_game",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "probe_can_start_game",
+        "outputs": [
+            {
+                "name": "bool",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "can_start_game",
+        "outputs": [
+            {
+                "name": "bool",
+                "type": "felt"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "start_game",
         "outputs": [],
         "type": "function"
     },

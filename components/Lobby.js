@@ -14,6 +14,9 @@ import {
   Pending,
 } from "/components/Starknet/Transaction/Status";
 import Panel from "/components/Starknet/Transaction/Panel";
+import { useDispatch, useSelector } from "react-redux";
+import { exitLobby, enterInit, exitInit } from "/redux/gameSlice";
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -21,6 +24,9 @@ function classNames(...classes) {
 
 // TODO: redeploy contracts with address_to_queue_index_read exposed
 function CallReadQueueIndex() {
+
+
+
   const { address } = useAccount();
   const { contract: lobby } = useLobbyContract();
   const { data, loading, error, refresh } = useStarknetCall({
@@ -36,6 +42,11 @@ function CallReadQueueIndex() {
 }
 
 export default function Lobby() {
+
+  const { inInit } = useSelector((store) => store._game);
+  const dispatch = useDispatch();
+
+
   const { transactions } = useTransactionManager();
   const { address } = useAccount();
 
@@ -52,7 +63,7 @@ export default function Lobby() {
 
   // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
   const txHash =
-    "0x135ebb5cca23afa8901a53f95fb14c12f45a6bed5cb5fdd2cfbcc0791c6991b";
+    "0x1109bbe58a1eddb4b4950a07e5f33ee0401865204b7b03c53a54418ce83ee19";
   const {
     data: tx_data,
     loading: tx_loading,
@@ -71,7 +82,7 @@ export default function Lobby() {
     TX_STATUS = "Well done, you're in queue";
 
 
-  // Listen for game activation and dispatch(ExitQueue) and EnterGame.
+  // Listen for game activation and dispatch(ExitLobby) and EnterGame.
 
   const steps = [
     {
@@ -87,7 +98,7 @@ export default function Lobby() {
       status: "current",
     },
     {
-      name: `Position in queue : ${QUEUE_INDEX}`,
+      name: `Position in queue : ${QUEUE_INDEX} `,
       description: "You are the 3rd in queue",
       href: "#",
       status: "upcoming",
@@ -201,6 +212,7 @@ export default function Lobby() {
           ))}
         </ol>
       </nav>
+      <button className="bg-blue-800" onClick={(e) => [dispatch(enterInit()),dispatch(exitLobby())]}>Enter the Game</button>
     </div>
   );
 }
