@@ -29,7 +29,7 @@ const Board = () => {
               cell={cell}
               cellIndex={cellIndex}
               rowIndex={rowIndex}
-              position={{ x: rowIndex, z: 0, y: cellIndex }}
+              cellPosition={{ x: rowIndex, z: 0, y: cellIndex }}
             />
           ))}
         </React.Fragment>

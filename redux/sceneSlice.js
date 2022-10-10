@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
-  selectedCell: null,
-  highlightedCell: null,
+  selectedCell: [],
+  highlightedCell: [],
   availableMoves: [],
   whoseMove: "player",
   history: [],

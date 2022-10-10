@@ -5,6 +5,7 @@ import HighlightDisplay from "./UI/HighlightDisplay";
 import ControlBar from "./UI/ControlBar";
 import Notification from "./Starknet/Transaction/Notification";
 import TopBar from "/components/UI/TopBar";
+import InitialPosition from "/components/UI/InitialPosition"
 
 export default function Game() {
   const [showModal, setShowModal] = useState(false);
@@ -15,6 +16,7 @@ export default function Game() {
       <div className=" grow">
         <Combat />
       </div>
+      <InitialPosition />
       <ControlBar />
     </div>
   );
