@@ -35,7 +35,7 @@ const Board = () => {
         </React.Fragment>
       ))}
       <Player />
-      <Palmito />
+      {/* <Palmito /> */}
     </>
   );
 };

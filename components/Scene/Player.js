@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as THREE from "three";
 import { selectRow, selectCol, highlightRow, highlightCol, movePlayer } from "/redux/sceneSlice";
@@ -14,10 +14,17 @@ const Player = () => {
   const { movePlayer } = useSelector((store) => store._scene);
 
   // Texture setup
-  const playerMap = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
+  const playerMapUL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
+  const playerMapUR = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
+  const playerMapDL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
+  const playerMapDR = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
+
+
+
+  const playerMap = playerMapUL
 
   playerMap.magFilter = THREE.NearestFilter
-  playerMap.offset.x = 1/8;
+  playerMap.offset.x = 0;
   playerMap.offset.y = 0;
   playerMap.repeat.set(1/8,1)
 
@@ -29,10 +36,13 @@ const Player = () => {
   const row = 1;
   const rowIndex = 1;
 
-  const spritePosition = {
-    x: 1,
-    y: 1
-  }
+
+  
+  const pos_x = 1
+
+
+
+  const ref = useRef()
 
 
   // Sprite Animation
@@ -40,14 +50,16 @@ const Player = () => {
   useFrame(({ clock }, delta) => {
     timeElapsed += delta;
     counter += delta;
+
     // console.log(timeElapsed);
-    if (timeElapsed > 4) {
+    if (timeElapsed > 2) {
       playerMap.offset.x = 0;
       
       timeElapsed = 0;
-    } else if (counter > 0.4) {
+    } else if (counter > 0.6) {
       playerMap.offset.x += 1 / 8;
-      spritePosition.y += 1;
+      ref.current.position.z = 0.2
+      
       counter = 0;
     }
   });
@@ -56,12 +68,13 @@ const Player = () => {
   // if( movePlayer === cell) {
   return (
     <sprite
+      ref={ref}
       scale={[1, 1, 1]}
-      position={[spritePosition.x, 0.6, spritePosition.y]}
+      position={[1, 0.6, 1]}
       rotation={[2, 1.5, 1]}
     >
-      <spriteMaterial transparent map={playerMap} />
-    </sprite>
+     <spriteMaterial transparent map={playerMap} />
+    </sprite> 
   );
 
 };

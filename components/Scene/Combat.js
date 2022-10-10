@@ -15,12 +15,12 @@ const Combat = () => {
   const mesh = useRef();
 
   var aspect = window.innerWidth / window.innerHeight;
-  var d = 20;
+  var d = 15;
   const camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 1000 );
   
-  camera.position.set( -20, 20, -20 ); // all components equal
-  camera.lookAt( 0,0,0 ); // or the origin
-  camera.zoom = 75
+  camera.position.set( -15, 10, -15 ); // all components equal
+  camera.lookAt( 3,0,3 ); // or the origin
+  camera.zoom = 150
 
 
   return (
