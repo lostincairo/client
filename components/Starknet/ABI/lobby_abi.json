@@ -1,5 +1,22 @@
 [
     {
+        "inputs": [
+            {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "address_to_queue_index_read",
+        "outputs": [
+            {
+                "name": "idx",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "data": [
             {
                 "name": "event_counter",
