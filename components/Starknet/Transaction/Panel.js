@@ -1,13 +1,12 @@
 import Notification from './Notification';
-import { useTransactionManager } from '@starknet-react/core'
+import { useTransactionManager, useTransactions } from '@starknet-react/core'
 
-export default function Panel({ toggle }) {
-    const { transactions } = useTransactionManager()
+export default function Panel() {
+    const { hashes, addTransaction } = useTransactionManager()
+    const transactions = useTransactions({ hashes })
     return (
         transactions.length === 0
-            ? <div onClick={() => toggle(false)}>
-                <div >You have no pending transactions</div>
-            </div>
+            ? <div >You have no pending transactions</div>
             : <div>
                 {
                     transactions.map(transaction => {

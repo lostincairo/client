@@ -6,7 +6,7 @@ import {
   useConnectors,
   useContract,
   useStarknetInvoke,
-  useStarknetTransactionManager,
+  useTransactionManager,
   useStarknet,
 } from "@starknet-react/core";
 import { useLobbyContract } from "/hooks/LobbyContract";
@@ -21,6 +21,9 @@ export default function JoinLobbyButton() {
     contract: lobby,
     method: "anyone_ask_to_queue",
   });
+
+  // TODO: Find a way to implement the addTransaction function based on the called Ask_anyone_to_queue function
+  const { hashes, addTransaction } = useTransactionManager()
 
 
 

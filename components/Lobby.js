@@ -19,12 +19,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+// TODO: redeploy contracts with address_to_queue_index_read exposed
 function CallReadQueueIndex() {
   const { address } = useAccount();
-  const { contract: game } = useGameContract();
+  const { contract: lobby } = useLobbyContract();
   const { data, loading, error, refresh } = useStarknetCall({
-    contract: game,
-    method: "x_position_per_player_read",
+    contract: lobby,
+    method: "address_to_queue_index_read",
     args: [address],
     options: {
       watch: true,
@@ -45,18 +46,20 @@ export default function Lobby() {
     refresh: call_refresh,
   } = CallReadQueueIndex();
 
-  const QUEUE_INDEX = queue_index ? queue_index.x.words[0] : [];
 
-  // TODO: Need to dynamically allocate the hash based on the Transaction Manager
+  const QUEUE_INDEX = queue_index ? queue_index[0] : [];
+  console.log(QUEUE_INDEX);
+
+  // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
   const txHash =
-    "0x06b26a4f819e0dcecc04914900caa75e335f05a2ed28d6ba28088d7db3380e03";
+    "0x135ebb5cca23afa8901a53f95fb14c12f45a6bed5cb5fdd2cfbcc0791c6991b";
   const {
     data: tx_data,
     loading: tx_loading,
     error: tx_error,
   } = useTransaction({ hash: txHash });
 
-
+  // Need to refresh the state
   const TX_DATA = tx_data ? tx_data.status : [];
 
   let TX_STATUS;
@@ -64,10 +67,11 @@ export default function Lobby() {
     TX_STATUS = "Entering the Queue, please stand by";
   if (TX_DATA === "REJECTED")
     TX_STATUS = "Something went wrong. Please submit a bug report";
-  if (TX_DATA === "ACCEPTED_ON_L1" || TX_DATA === "ACCEPTED_ON_L1")
+  if (TX_DATA === "ACCEPTED_ON_L2" || TX_DATA === "ACCEPTED_ON_L1")
     TX_STATUS = "Well done, you're in queue";
 
-console.log
+
+  // Listen for game activation and dispatch(ExitQueue) and EnterGame.
 
   const steps = [
     {

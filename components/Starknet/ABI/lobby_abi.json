@@ -47,6 +47,18 @@
     },
     {
         "inputs": [],
+        "name": "probe_can_dispatch_player_to_game",
+        "outputs": [
+            {
+                "name": "bool",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "constructor",
         "outputs": [],
         "type": "constructor"

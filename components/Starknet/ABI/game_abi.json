@@ -40,6 +40,10 @@
     {
         "data": [
             {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
                 "name": "player_address",
                 "type": "felt"
             },
@@ -73,6 +77,10 @@
     },
     {
         "data": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "caller",
                 "type": "felt"
@@ -120,6 +128,10 @@
     },
     {
         "data": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "caller",
                 "type": "felt"
@@ -216,6 +228,29 @@
         "type": "event"
     },
     {
+        "data": [
+            {
+                "name": "id",
+                "type": "felt"
+            },
+            {
+                "name": "player",
+                "type": "felt"
+            },
+            {
+                "name": "metadataURI_len",
+                "type": "felt"
+            },
+            {
+                "name": "metadataURI",
+                "type": "felt*"
+            }
+        ],
+        "keys": [],
+        "name": "quest_progress",
+        "type": "event"
+    },
+    {
         "inputs": [],
         "name": "lobby_address_read",
         "outputs": [
@@ -297,6 +332,57 @@
                 "type": "felt"
             }
         ],
+        "name": "player_address_to_game_idx_read",
+        "outputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "game_idx_to_first_player_read",
+        "outputs": [
+            {
+                "name": "first_player_address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "game_idx_to_second_player_read",
+        "outputs": [
+            {
+                "name": "second_player_address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            }
+        ],
         "name": "health_per_player_read",
         "outputs": [
             {
@@ -342,7 +428,12 @@
         "type": "function"
     },
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
         "name": "player_turn_read",
         "outputs": [
             {
@@ -355,6 +446,10 @@
     },
     {
         "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "player_address",
                 "type": "felt"
@@ -372,6 +467,10 @@
     },
     {
         "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "player_address",
                 "type": "felt"
@@ -430,6 +529,51 @@
                 "type": "felt"
             },
             {
+                "name": "game_idx",
+                "type": "felt"
+            }
+        ],
+        "name": "player_address_to_game_idx_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "first_player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "game_idx_to_first_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "second_player_address",
+                "type": "felt"
+            }
+        ],
+        "name": "game_idx_to_second_player_write",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "player_address",
+                "type": "felt"
+            },
+            {
                 "name": "health_value",
                 "type": "felt"
             }
@@ -471,6 +615,10 @@
     {
         "inputs": [
             {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
                 "name": "player_address",
                 "type": "felt"
             }
@@ -481,6 +629,10 @@
     },
     {
         "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "player_address",
                 "type": "felt"
@@ -496,6 +648,10 @@
     },
     {
         "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "player_address",
                 "type": "felt"
@@ -529,6 +685,23 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "name": "arguments",
+                "type": "felt"
+            }
+        ],
+        "name": "probe_can_init_game",
+        "outputs": [
+            {
+                "name": "bool",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "constructor",
         "outputs": [],
@@ -548,16 +721,15 @@
     {
         "inputs": [],
         "name": "init_game",
-        "outputs": [
-            {
-                "name": "new_game_idx",
-                "type": "felt"
-            }
-        ],
+        "outputs": [],
         "type": "function"
     },
     {
         "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "x",
                 "type": "felt"
@@ -574,11 +746,11 @@
     {
         "inputs": [
             {
-                "name": "player_address",
+                "name": "game_idx",
                 "type": "felt"
             },
             {
-                "name": "game_idx",
+                "name": "player_address",
                 "type": "felt"
             }
         ],
@@ -623,6 +795,10 @@
     {
         "inputs": [
             {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
                 "name": "opponent_address",
                 "type": "felt"
             },
@@ -642,6 +818,10 @@
     {
         "inputs": [
             {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
                 "name": "opponent_address",
                 "type": "felt"
             },
@@ -660,6 +840,10 @@
     },
     {
         "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
             {
                 "name": "opponent_address",
                 "type": "felt"
