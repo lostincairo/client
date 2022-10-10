@@ -6,6 +6,7 @@ import {
   useAccount,
 } from "@starknet-react/core";
 import { useGameContract } from "/hooks/GameContract";
+import { exitInit } from "/redux/gameSlice";
 
 
 
@@ -34,7 +35,7 @@ export default function InitialPosition() {
         <h1>Select your starting position</h1>
         <p>Click on any cell on the grid to set your starting position</p>
         <p>You will be starting from Row: {selectedRow}, Column: {selectedCol}</p>
-        <button className="bg-blue-400" onClick={() => [call_set_initial_position(), dispatch(positionRow(selectedRow)), dispatch(positionCol(selectedCol))]}>I'm ready!</button>
+        <button className="bg-blue-400" onClick={() => [call_set_initial_position(), dispatch(positionRow(selectedRow)), dispatch(positionCol(selectedCol)), dispatch(exitInit())]}>I'm ready!</button>
 
     </div>
   );

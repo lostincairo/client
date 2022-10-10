@@ -4,9 +4,11 @@ import ControlBar from "./UI/ControlBar";
 import Notification from "./Starknet/Transaction/Notification";
 import TopBar from "/components/UI/TopBar";
 import InitialPosition from "/components/UI/InitialPosition"
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Game() {
   const [showModal, setShowModal] = useState(false);
+  const { inInit } = useSelector((store) => store._game);
 
   return (
     <div className="flex flex-col relative flex-auto justify-center h-screen bg-sand">
@@ -14,7 +16,7 @@ export default function Game() {
       <div className=" grow">
         <Combat />
       </div>
-      <InitialPosition />
+      { inInit && <InitialPosition />}
       <ControlBar />
     </div>
   );
