@@ -8,10 +8,11 @@ import { useStarknet } from '@starknet-react/core'
 import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import fetch from 'isomorphic-unfetch'
+import { connectToDatabase } from '../utils/mongodb'
 
 
 
-export default function Home({}) {
+export default function Home({ isConnected }) {
   const { account, connect, connectors } = useStarknet()
   const router = useRouter()
 
@@ -26,13 +27,14 @@ export default function Home({}) {
   )
 }
 
-// export async function getStaticProps(context) {
-//   const res = await fetch("http://localhost:3000/api/posts");
-//   const json = await res.json();
-//   return {
-//     props: {
-//       event: json,
-//     },
-//   };
-// }
+export async function getServerSideProps(context) {
+  
+  const { client } = await connectToDatabase();
 
+  const isConnected = await client.isConnected();
+
+  return {
+    props: { isConnected },
+  }
+}
+  
