@@ -4,11 +4,13 @@ import Game from "./Game";
 import Navbar from "./Navbar";
 import Lobby from "./Lobby";
 
+import EventHistory from "./UI/EventHistory";
+
 import { useStarknet, useConnectors } from "@starknet-react/core";
 import { useDispatch, useSelector } from "react-redux";
 import { connected } from "/redux/connectSlice";
 
-export default function Navigation() {
+export default function Navigation({ properties}) {
   const { account } = useStarknet();
   const dispatch = useDispatch();
   const { inGame, inLobby } = useSelector((store) => store._game);
@@ -22,7 +24,8 @@ export default function Navigation() {
       { inGame || <Navbar /> } 
       { inLobby && <Lobby />}
       { inGame || <Landing /> }
-      { inGame && <Game /> }
+      { inGame && <Game properties={properties}/> }
+
 
       {/* <Game /> */}
     </div>

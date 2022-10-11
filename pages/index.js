@@ -12,29 +12,31 @@ import { connectToDatabase } from '../utils/mongodb'
 
 
 
-export default function Home({ isConnected }) {
+export default function Home({ properties }) {
   const { account, connect, connectors } = useStarknet()
   const router = useRouter()
 
   const { inGame } = useSelector((store) => (store._game))
 
-
   return (
     <div className="h-full w-screen flex flex-col">
       <Meta />
-      <Navigation />
+      <Navigation properties={properties} />
+
     </div>
   )
 }
 
 export async function getServerSideProps(context) {
   
-  const { client } = await connectToDatabase();
+  const { db } = await connectToDatabase();
+  const data = await db.collection("events").find({}).limit(5).toArray(); 
 
-  const isConnected = await client.isConnected();
+  const properties = JSON.parse(JSON.stringify(data));
+
 
   return {
-    props: { isConnected },
+    props: { properties: properties  },
   }
 }
   
