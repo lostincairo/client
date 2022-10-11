@@ -20,7 +20,7 @@ export default function Navigation({ properties}) {
   }
 
   return (
-    <div className="flex content-center h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
+    <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
       {/* { inGame || <Navbar /> } 
       { inLobby && <Lobby />}
       { inGame || <Landing /> }

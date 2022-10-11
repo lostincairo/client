@@ -10,7 +10,7 @@ export default function ExitButton() {
   return (
         <button
           type="button"
-          className="mx-auto w-40 h-20 hover:bg-[url('/exit_game_button_hover.svg')] bg-[url('/exit_game_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4"
+          className="ml-40 w-40 h-20 hover:bg-[url('/exit_game_button_hover.svg')] bg-[url('/exit_game_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4"
           onClick={() => [dispatch(exitGame()), dispatch(exitLobby())]}
         ></button>
   );

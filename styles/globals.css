@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Mario";
+    font-weight: 900;
+    src: url("/mario_font.ttf");
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -23,12 +31,9 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
 }
-
-
-
-

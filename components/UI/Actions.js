@@ -35,10 +35,10 @@ const call_action = (x,y) => {
 
 
   return actions.map((_action) => (
-    <div>
-    <div>{_action.name}</div>
-    <button onClick={(e) => dispatch(action("bow"))}>Button</button>
+    <div className='justify-center mt-6'>
+    <a onClick={(e) => dispatch(action("bow"))}>
     <Image key={_action.name} src={_action.href} width="70" height="70"/>
+    </a>
     </div>
   ))
 }

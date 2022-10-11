@@ -19,7 +19,7 @@ export default function BlockNumber() {
   }, [data, loading, error]);
 
   return (
-      <div className="ml-auto px-10 btn btn-primary">
+      <div className="font-mario text-2xl -ml-6 px-10 btn btn-primary">
           {`Block ${indicatorText}`}
       </div>
   )
