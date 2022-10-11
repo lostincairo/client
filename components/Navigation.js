@@ -13,22 +13,43 @@ import { connected } from "/redux/connectSlice";
 export default function Navigation({ properties}) {
   const { account } = useStarknet();
   const dispatch = useDispatch();
-  const { inGame, inLobby } = useSelector((store) => store._game);
+  const { inGame, inLobby, inInit } = useSelector((store) => store._game);
 
   if (account) {
     dispatch(connected());
   }
-
-  return (
+  if (inLobby) {
+    return( 
     <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
-      {/* { inGame || <Navbar /> } 
-      { inLobby && <Lobby />}
-      { inGame || <Landing /> }
-      { inGame && <Game properties={properties}/> } */}
-      <Game properties={properties}/>
-
-
-      {/* <Game /> */}
+      <Lobby />
     </div>
-  );
+  )} else if (inGame) {
+    return(
+      <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
+      <Game />
+    </div>
+    )
+  } else {
+    return(
+      <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
+      <Navbar />
+      <Landing />
+    </div>
+    )
+  }
 }
+
+//   return (
+//     <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
+//       { inLobby || <Navbar /> } 
+//       { inGame || <Navbar /> } 
+//       { inLobby || <Landing /> }
+//       { inGame && <Game properties={properties}/> }
+//       {/* { inInit && <Game properties={properties}/> } */}
+//       {/* <Game properties={properties}/> */}
+
+
+//       {/* <Game /> */}
+//     </div>
+//   );
+// }

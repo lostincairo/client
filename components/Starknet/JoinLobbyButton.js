@@ -40,7 +40,7 @@ export default function JoinLobbyButton() {
         onClick={() => [
           join_queue(),
           dispatch(enterLobby()),
-          dispatch(enterGame()),
+          // dispatch(enterGame()),
         ]}
       ></button>
     </div>

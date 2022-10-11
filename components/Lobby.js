@@ -15,7 +15,7 @@ import {
 } from "/components/Starknet/Transaction/Status";
 import Panel from "/components/Starknet/Transaction/Panel";
 import { useDispatch, useSelector } from "react-redux";
-import { exitLobby, enterInit, exitInit } from "/redux/gameSlice";
+import { enterGame, exitLobby, enterInit, exitInit } from "/redux/gameSlice";
 
 
 function classNames(...classes) {
@@ -62,8 +62,9 @@ export default function Lobby() {
   console.log(QUEUE_INDEX);
 
   // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
+  // Little trick for now
   const txHash =
-    "0x1109bbe58a1eddb4b4950a07e5f33ee0401865204b7b03c53a54418ce83ee19";
+    "0x1118f7a1e7602a55c955e6113cfc7567719304605b80320e86f19efb29d11c3";
   const {
     data: tx_data,
     loading: tx_loading,
@@ -74,10 +75,10 @@ export default function Lobby() {
   const TX_DATA = tx_data ? tx_data.status : [];
 
   let TX_STATUS;
-  if (TX_DATA === "TRANSACTION_RECEIVED" || TX_DATA === "RECEIVED" || TX_DATA === "PENDING")
+  if (TX_DATA === "TRANSACTION_RECEIVED" || TX_DATA === "RECEIVED" || TX_DATA === "PENDING" || TX_DATA === "REJECTED")
     TX_STATUS = "Entering the Queue, please stand by";
-  if (TX_DATA === "REJECTED")
-    TX_STATUS = "Something went wrong. Please submit a bug report";
+  // if (TX_DATA === "REJECTED")
+  //   TX_STATUS = "Something went wrong. Please submit a bug report";
   if (TX_DATA === "ACCEPTED_ON_L2" || TX_DATA === "ACCEPTED_ON_L1")
     TX_STATUS = "Well done, you're in queue";
 
@@ -86,7 +87,7 @@ export default function Lobby() {
 
   const steps = [
     {
-      name: `Checking for access key for account ${address}`,
+      name: `Access key identified for player ${address}`,
       description: "Vitae sed mi luctus laoreet.",
       href: "#",
       status: "complete",
@@ -118,8 +119,8 @@ export default function Lobby() {
   ];
 
   return (
-    <div className=" mx-auto bg-black w-full h-screen py-12 sm:px-6 lg:px-8">
-      <Panel />
+    <div className="flex flex-col justify-center items-center font-mario bg-[url('../public/scene.png')] bg-cover w-full h-screen py-12 sm:px-6 lg:px-8">
+      <div className="bg-white p-10 rounded-2xl shadow-xl">
       <nav aria-label="Progress">
         <ol role="list" className="overflow-hidden">
           {steps.map((step, stepIdx) => (
@@ -134,7 +135,7 @@ export default function Lobby() {
                 <>
                   {stepIdx !== steps.length - 1 ? (
                     <div
-                      className="absolute top-4 left-4 -ml-px mt-0.5 h-full w-0.5 bg-indigo-600"
+                      className="absolute top-4 left-4 -ml-px mt-0.5 h-full w-0.5 bg-charcoal"
                       aria-hidden="true"
                     />
                   ) : null}
@@ -143,7 +144,7 @@ export default function Lobby() {
                     className="group relative flex items-center"
                   >
                     <span className="flex h-9 items-center">
-                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 group-hover:bg-indigo-800">
+                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-charcoal group-hover:bg-charcoal">
                         <CheckIcon
                           className="h-5 w-5 text-white"
                           aria-hidden="true"
@@ -151,7 +152,7 @@ export default function Lobby() {
                       </span>
                     </span>
                     <span className="ml-4 flex min-w-0 flex-col">
-                      <span className="text-sm font-medium">{step.name}</span>
+                      <span className="text-sm text-black font-medium">{step.name}</span>
                       {/* <span className="text-sm text-gray-500">{step.description}</span> */}
                     </span>
                   </a>
@@ -170,12 +171,12 @@ export default function Lobby() {
                     aria-current="step"
                   >
                     <span className="flex h-9 items-center" aria-hidden="true">
-                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-indigo-600 bg-white">
-                        <span className="h-2.5 w-2.5 rounded-full bg-indigo-600" />
+                      <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-charcoal bg-white">
+                        <span className="h-2.5 w-2.5 rounded-full bg-charcoal" />
                       </span>
                     </span>
                     <span className="ml-4 flex min-w-0 flex-col">
-                      <span className="text-sm font-medium text-sand">
+                      <span className="text-sm font-medium text-orange-700">
                         {step.name}
                       </span>
                       {/* <span className="text-sm text-gray-500">{step.description}</span> */}
@@ -212,7 +213,8 @@ export default function Lobby() {
           ))}
         </ol>
       </nav>
-      <button className="bg-blue-800" onClick={(e) => [dispatch(enterInit()),dispatch(exitLobby())]}>Enter the Game</button>
+      <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/ready_button_hover.svg')] bg-[url('/ready_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby())]}></button>
+      </div>
     </div>
   );
 }

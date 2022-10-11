@@ -70,10 +70,12 @@ export default function Example() {
                     </a>
                   ))}
                 </div>
-                <ConnectButton />
+               
               </div>
+
               <div className="flex items-center">
                 <div className="flex-shrink-0">
+                        <ConnectButton />
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                   {/* <button
