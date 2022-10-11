@@ -29,6 +29,10 @@ const Player = () => {
   playerMap.offset.y = 0;
   playerMap.repeat.set(1/8,1)
 
+  const height = 1;
+  const width =(1/playerMap.height)*playerMap.width;
+
+
   // Counters for sprite animation
   // TODO: Add logic for capping the animation speed for different monitor refresh rates
   const timeElapsed = 0;
@@ -71,8 +75,8 @@ const Player = () => {
     <sprite
       ref={ref}
       scale={[1, 1, 1]}
-      position={[1, 0.6, 1]}
-      rotation={[2, 1.5, 1]}
+      position={[0, 0.6, 0]}
+      rotation={[1, 1, 1]}
     >
      <spriteMaterial transparent map={playerMap} />
     </sprite> 

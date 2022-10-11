@@ -60,10 +60,11 @@ export default Combat;
 
 function Background() {
   const {gl} = useThree();
-  const texture = useLoader(TextureLoader, "scene.png" )
+  const texture = useLoader(TextureLoader, "scene.svg" )
   texture.wrapS = THREE.RepeatWrapping
   texture.wrapT = THREE.RepeatWrapping
   texture.magFilter = THREE.NearestFilter
+  texture.minFilter = THREE.NearestFilter
   const formatted = new THREE.WebGLCubeRenderTarget(texture.image.height).fromEquirectangularTexture(gl, texture)
 
   return(

@@ -7,8 +7,7 @@ import { useGameContract } from "/hooks/GameContract";
 
 export default function Vitals() {
   return (
-    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div>Vitals</div>
+    <div className="flex flex-row justify-start mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div>
         <Health />
       </div>
@@ -37,7 +36,7 @@ function Health() {
 
   const HEALTH_POINTS = data ? data[0].toString() : [];
 
-  return <div>100 {HEALTH_POINTS}</div>;
+  return <div className="pt-8	pl-9 w-20 h-20 bg-contain bg-no-repeat bg-center bg-[url('../public/life_nav_bar.svg')]">{HEALTH_POINTS}</div>;
 }
 
 function Action() {
@@ -55,7 +54,7 @@ function Action() {
 
   const ACTION_POINTS = data ? data[0].toString() : [];
 
-  return <div>2 {ACTION_POINTS}</div>;
+  return <div className="pt-8 pl-9 w-20 h-20 bg-contain bg-no-repeat bg-center bg-[url('../public/AP.svg')]">{ACTION_POINTS}</div>;
 }
 
 function Movement() {
@@ -73,5 +72,5 @@ function Movement() {
 
   const MOVEMENT_POINTS = data ? data[0].toString() : [];
 
-  return <div>1 {MOVEMENT_POINTS}</div>;
+  return <div className="pt-8 pl-9 w-20 h-20 bg-contain bg-no-repeat bg-center bg-[url('../public/MP.svg')]">{MOVEMENT_POINTS}</div>;
 }

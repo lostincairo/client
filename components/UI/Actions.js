@@ -9,8 +9,8 @@ import { action, positionCol, positionRow, direction, SNhighlightRow, SNhighligh
 
 
 const actions = [
-  { name: "Bow", description: "Launches an arrow towards the opponent", href:"/logo_Main.png" },
-  { name: "Punch", description: "Trows a powerful punch towards the opponent", href:"/brick.png" },
+  { name: "Bow", description: "Launches an arrow towards the opponent", href:"/spell_card.svg" },
+  { name: "Punch", description: "Trows a powerful punch towards the opponent", href:"/spell_card.svg" },
 ];
 
 //TODO: Add game_idx, opponent address to state
@@ -38,7 +38,7 @@ const call_action = (x,y) => {
     <div>
     <div>{_action.name}</div>
     <button onClick={(e) => dispatch(action("bow"))}>Button</button>
-    <Image key={_action.name} src={_action.href} width="36" height="36"/>
+    <Image key={_action.name} src={_action.href} width="70" height="70"/>
     </div>
   ))
 }
