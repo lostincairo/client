@@ -35,9 +35,9 @@ const call_action = (x,y) => {
 
 
   return actions.map((_action) => (
-    <div className='w-24 ml-20'>
+    <div className='flex flex-row grow items-center justify-end pr-10'>
     <a onClick={(e) => dispatch(action("bow"))}>
-    <Image key={_action.name} src={_action.href} width="62" height="62"/>
+    <Image key={_action.name} src={_action.href} width="66" height="65"/>
     </a>
     </div>
   ))

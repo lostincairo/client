@@ -7,7 +7,7 @@ import { useGameContract } from "/hooks/GameContract";
 
 export default function Vitals() {
   return (
-    <div className="flex flex-row items-center font-mario text-2xl lg:px-8">
+    <div className="flex flex-row grow w-60 font-mario text-2xl lg:px-8">
         <Health />
         <Action />
        <Movement />
@@ -30,7 +30,7 @@ function Health() {
 
   const HEALTH_POINTS = data ? data[0].toString() : [];
 
-  return <div className="text-white bg-cover bg-no-repeat bg-center bg-[url('../public/life_nav_bar.svg')]">{HEALTH_POINTS}</div>;
+  return <div className="flex items-center mx-2 px-5 pl-6 text-white bg-contain bg-no-repeat bg-center bg-[url('../public/life_nav_bar.svg')]">{HEALTH_POINTS}</div>;
 }
 
 function Action() {
@@ -48,7 +48,7 @@ function Action() {
 
   const ACTION_POINTS = data ? data[0].toString() : [];
 
-  return <div className="bg-cover bg-no-repeat bg-center bg-[url('../public/AP.svg')]">{ACTION_POINTS}</div>;
+  return <div className="flex items-center px-6 pl-7 mb-1 bg-contain bg-no-repeat bg-center bg-[url('../public/AP.svg')]">{ACTION_POINTS}</div>;
 }
 
 function Movement() {
@@ -66,5 +66,5 @@ function Movement() {
 
   const MOVEMENT_POINTS = data ? data[0].toString() : [];
 
-  return <div className="bg-contain bg-no-repeat bg-center bg-[url('../public/MP.svg')]">{MOVEMENT_POINTS}</div>;
+  return <div className="flex items-center px-6 pl-7 mb-1 bg-contain bg-no-repeat bg-center bg-[url('../public/MP.svg')]">{MOVEMENT_POINTS}</div>;
 }
