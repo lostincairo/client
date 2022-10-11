@@ -16,6 +16,11 @@ import {
 import Panel from "/components/Starknet/Transaction/Panel";
 import { useDispatch, useSelector } from "react-redux";
 import { enterGame, exitLobby, enterInit, exitInit } from "/redux/gameSlice";
+import { setGameIdx, setPlayerAddress, setOpponentAddress } from "/redux/starknetSlice";
+
+
+// TODO: Clean and searate those functions. This is gross.
+// TODO: Only display the button when the game is active.
 
 
 function classNames(...classes) {
@@ -319,7 +324,7 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
           ))}
         </ol>
       </nav>
-      <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/ready_button_hover.svg')] bg-[url('/ready_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby())]}></button>
+      <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/play_button_hover.svg')] bg-[url('/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby()),,dispatch(setGameIdx(GAME_IDX)),,dispatch(setPlayerAddress(PLAYER)),,dispatch(setOpponentAddress(OPPONENT))]}></button>
       </div>
     </div>
   );

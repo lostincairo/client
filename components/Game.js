@@ -7,7 +7,6 @@ import InitialPosition from "/components/UI/InitialPosition";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Game({ properties }) {
-  const [showModal, setShowModal] = useState(false);
   const { inInit } = useSelector((store) => store._game);
 
   return (

@@ -75,7 +75,7 @@ export default function Example() {
 
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                        <ConnectButton />
+                        {/* <ConnectButton /> */}
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
                   {/* <button
