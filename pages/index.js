@@ -30,7 +30,7 @@ export default function Home({ properties }) {
 export async function getServerSideProps(context) {
   
   const { db } = await connectToDatabase();
-  const data = await db.collection("events").find({}).limit(5).toArray(); 
+  const data = await db.collection("events").find({}).limit(5).sort({ _id: -1 }).toArray(); 
 
   const properties = JSON.parse(JSON.stringify(data));
 

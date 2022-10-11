@@ -696,12 +696,13 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "name": "arguments",
-                "type": "felt"
-            }
-        ],
+        "inputs": [],
+        "name": "constructor",
+        "outputs": [],
+        "type": "constructor"
+    },
+    {
+        "inputs": [],
         "name": "probe_can_init_game",
         "outputs": [
             {
@@ -711,12 +712,6 @@
         ],
         "stateMutability": "view",
         "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "constructor",
-        "outputs": [],
-        "type": "constructor"
     },
     {
         "inputs": [
@@ -813,6 +808,7 @@
                 "type": "felt"
             }
         ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -838,6 +834,29 @@
             }
         ],
         "name": "end_turn",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "game_idx",
+                "type": "felt"
+            },
+            {
+                "name": "caller",
+                "type": "felt"
+            },
+            {
+                "name": "opponent_address",
+                "type": "felt"
+            },
+            {
+                "name": "end_type",
+                "type": "felt"
+            }
+        ],
+        "name": "end_game",
         "outputs": [],
         "type": "function"
     },

@@ -5,6 +5,6 @@ export function useGameContract() {
   return useContract({
     abi: GameABI,
     address:
-      "0x07ab646063e190d88ab9058f529f347a7c6e66b2c5723f54a4e3cf89058d60c2",
+      "0x073006b1156b9fcdf8088a43281a6f87e772b0632702bf962a9d9d6d04ed3fef",
   });
 }
