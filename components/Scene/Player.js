@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as THREE from "three";
 import { selectRow, selectCol, highlightRow, highlightCol, movePlayer } from "/redux/sceneSlice";
@@ -12,7 +12,7 @@ const Player = () => {
   const { highlightedCell } = useSelector((store) => store._scene);
   const { selectedCell } = useSelector((store) => store._scene);
   const { movePlayer } = useSelector((store) => store._scene);
-  const { positionRow, positionCol } = useSelector((store) => store._starknet);
+  const { playerRow, playerCol } = useSelector((store) => store._starknet);
 
   // Texture setup
   const playerMapUL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
@@ -20,23 +20,21 @@ const Player = () => {
   const playerMapDL = useLoader(TextureLoader, "sprite_walk_down_left.svg ");
   const playerMapDR = useLoader(TextureLoader, "sprite_walk_down_right.svg ");
 
- var playerMap = playerMapUL;
-  if (positionRow < 7) {
-    const playerMap = playerMapUL
-  } else {
-    const playerMap = playerMapDR
+  var playerMap = playerMapUL;
+
+  if (playerRow < 7) {
+    playerMap = playerMapUL
+  } else if (playerRow >= 7){
+    playerMap = playerMapDR
   }
 
-  
 
   playerMap.magFilter = THREE.NearestFilter
-  playerMapUL.encoding = THREE.LinearEncoding
+  playerMap.encoding = THREE.LinearEncoding
   playerMap.offset.x = 0;
   playerMap.offset.y = 0;
   playerMap.repeat.set(1/8,1)
 
-  const height = 1;
-  const width =(1/playerMap.height)*playerMap.width;
 
 
   // Counters for sprite animation
@@ -53,14 +51,14 @@ const Player = () => {
 
     // console.log(timeElapsed);
     if (timeElapsed > 2) {
-      playerMap.offset.x = 1/8;
+      // playerMap.offset.x = 4/8;
       
       timeElapsed = 0;
       counter = 0;
     } else if (counter > 0.5) {
 
-      playerMap.offset.x += 1 / 8;
-      ref.current.position.z = 0
+      // playerMap.offset.x = 4 / 8;
+
       
       counter = 0;
     }
@@ -72,7 +70,7 @@ const Player = () => {
     <sprite
       ref={ref}
       scale={[1, 2, 1]}
-      position={[0, 1, 0]}
+      position={[playerRow, 1, playerCol]}
       rotation={[1, 1, 1]}
     >
      <spriteMaterial transparent map={playerMap} />

@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
   isYourTurn: false,
   selectedAction: null,
-  playerRow: null,
-  playerCol: null,
+  playerRow: -0,
+  playerCol: 8,
   playerDirection: null,
   highlight: null,
   gameIdx: null,

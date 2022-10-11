@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useStarknetInvoke, useAccount } from "@starknet-react/core";
 import { useGameContract } from "/hooks/GameContract";
 
@@ -7,6 +7,8 @@ export default function Move() {
   const { selectedCol } = useSelector((store) => store._scene);
   const { playerRow, gameIdx, opponent_address } = useSelector((store) => store._starknet);
   const { playerCol } = useSelector((store) => store._starknet);
+
+  const dispatch = useDispatch();
 
   function call_move() {
     const { address } = useAccount();
@@ -22,6 +24,25 @@ export default function Move() {
       });
     };
   }
+
+  const rowMove = (selectedRow - playerRow)
+  const colMove = (selectedCol - playerCol)
+
+  const rowMoveAbs = Math.abs(selectedRow - playerRow)
+  const colMoveAbs = Math.abs(selectedCol - playerCol)
+  
+  if (rowMoveAbs > colMoveAbs) {
+    if(rowMove >= 0) {
+        dispatch(direction('UR'));
+    } else if (rowMove < 0) {
+        dispatch(direction('DL'));
+    }} else if (rowMoveAbs <= colMoveAbs) {
+      if (colMove >= 0){
+        dispatch(direction('UL'));
+      } else if (colMove < 0) {
+        dispatch(direction('DR'));
+      }
+    }
 
   return (
     <div className="flex justify-center content-center max-w-7xl w-full p-5 flex-col lg:px-8">

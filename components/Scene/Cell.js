@@ -99,111 +99,111 @@ const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
           // TODO: Abstract the logic from the color selection
           // Do not watch this plz 
           selectedRow == cellPosition.x && selectedCol == cellPosition.y
-            ? "red"
+            ? "#AEE5A5"
             : highlightedCol === cellIndex && highlightedRow === rowIndex
-            ? "blue"
+            ? "#FFC5C9"
             : selectedAction === "bow" && highlightActionRow === rowIndex 
-            ? "green"
+            ? "#DBEDFF"
             : selectedAction === "bow" && highlightActionCol === cellIndex 
-            ? "green"
+            ? "#DBEDFF"
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex - 1 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex - 2 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex - 3 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex + 1 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex + 2 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex && highlightActionCol === cellIndex + 3 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex - 1 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex - 2 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex - 3 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex + 1 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex + 2 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 1 && highlightActionCol === cellIndex + 3 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex - 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex - 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex - 3
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex + 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex + 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 2 && highlightActionCol === cellIndex + 3
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex - 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex - 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex - 3
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex + 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex + 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex - 3 && highlightActionCol === cellIndex + 3
-            ? "yellow"  
+            ? "#DEFFE8"  
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex - 1 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex - 2 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex - 3 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex + 1 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex + 2 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 1 && highlightActionCol === cellIndex + 3 
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex - 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex - 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex - 3
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex + 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex + 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 2 && highlightActionCol === cellIndex + 3
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex - 0
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex - 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex - 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex - 3
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex + 1
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex + 2
-            ? "yellow" 
+            ? "#DEFFE8" 
             : selectedAction === "move" && highlightActionRow === rowIndex + 3 && highlightActionCol === cellIndex + 3
-            ? "yellow"  
+            ? "#DEFFE8"  
             : color
         }
       />
