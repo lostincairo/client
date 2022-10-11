@@ -12,7 +12,7 @@ const Player = () => {
   const { highlightedCell } = useSelector((store) => store._scene);
   const { selectedCell } = useSelector((store) => store._scene);
   const { movePlayer } = useSelector((store) => store._scene);
-  const { playerRow, playerCol } = useSelector((store) => store._starknet);
+  const { playerRow, playerCol, direction } = useSelector((store) => store._starknet);
 
   // Texture setup
   const playerMapUL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");

@@ -142,7 +142,7 @@ const {
   loading: first_player_loading,
   error: first_player_error,
   refresh: first_player_refresh,
-} = CallPlayerAddressToGameIdx();
+} = CallFirstPlayerAddress();
 
 const FIRST_PLAYER = first_player ? first_player[0] : [];
 console.log(FIRST_PLAYER);
@@ -153,7 +153,7 @@ const {
   loading: second_player_loading,
   error: second_player_error,
   refresh: second_player_refresh,
-} = CallPlayerAddressToGameIdx();
+} = CallSecondPlayerAddress();
 
 const SECOND_PLAYER = second_player ? second_player[0] : [];
 console.log(SECOND_PLAYER);
@@ -175,7 +175,7 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
   // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
   // Little trick for now
   const txHash =
-    "0x1118f7a1e7602a55c955e6113cfc7567719304605b80320e86f19efb29d11c3";
+    "0x14ca13f3ef0847f8095aa1386318487edca659d3f6869c6a3da586e279f6879";
   const {
     data: tx_data,
     loading: tx_loading,
