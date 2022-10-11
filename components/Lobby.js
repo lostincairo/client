@@ -22,7 +22,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// TODO: redeploy contracts with address_to_queue_index_read exposed
 function CallReadQueueIndex() {
 
 
@@ -41,6 +40,66 @@ function CallReadQueueIndex() {
   return { data, loading, error, refresh };
 }
 
+
+////////////////////////////////////////////////////////////////
+
+function CallPlayerAddressToGameIdx() {
+
+  const { address } = useAccount();
+  const { contract: game } = useGameContract();
+  const { data, loading, error, refresh } = useStarknetCall({
+    contract: game,
+    method: "player_address_to_game_idx_read",
+    args: [address],
+    options: {
+      watch: true,
+    },
+  });
+
+  return { data, loading, error, refresh };
+}
+
+////////////////////////////////////////////////////////////////
+
+function CallFirstPlayerAddress(GAME_IDX) {
+
+  const { address } = useAccount();
+  const { contract: game } = useGameContract();
+  const { data, loading, error, refresh } = useStarknetCall({
+    contract: game,
+    method: "game_idx_to_first_player_read",
+    args: [GAME_IDX],
+    options: {
+      watch: true,
+    },
+  });
+
+  return { data, loading, error, refresh };
+}
+
+////////////////////////////////////////////////////////////////
+
+function CallSecondPlayerAddress(GAME_IDX) {
+
+  const { address } = useAccount();
+  const { contract: game } = useGameContract();
+  const { data, loading, error, refresh } = useStarknetCall({
+    contract: game,
+    method: "game_idx_to_second_player_read",
+    args: [GAME_IDX],
+    options: {
+      watch: true,
+    },
+  });
+
+  return { data, loading, error, refresh };
+}
+
+
+
+////////////////////////////////////////////////////////////////
+
+
 export default function Lobby() {
 
   const { inInit } = useSelector((store) => store._game);
@@ -57,9 +116,56 @@ export default function Lobby() {
     refresh: call_refresh,
   } = CallReadQueueIndex();
 
-
   const QUEUE_INDEX = queue_index ? queue_index[0] : [];
   console.log(QUEUE_INDEX);
+
+
+  const {
+    data: game_idx,
+    loading: game_idx_loading,
+    error: game_idx_error,
+    refresh: game_idx_refresh,
+  } = CallPlayerAddressToGameIdx();
+
+const GAME_IDX = game_idx ? game_idx[0] : [];
+console.log(GAME_IDX);
+
+////////////////////////////////////////////////////////////////
+
+const {
+  data: first_player,
+  loading: first_player_loading,
+  error: first_player_error,
+  refresh: first_player_refresh,
+} = CallPlayerAddressToGameIdx();
+
+const FIRST_PLAYER = first_player ? first_player[0] : [];
+console.log(FIRST_PLAYER);
+
+
+const {
+  data: second_player,
+  loading: second_player_loading,
+  error: second_player_error,
+  refresh: second_player_refresh,
+} = CallPlayerAddressToGameIdx();
+
+const SECOND_PLAYER = second_player ? second_player[0] : [];
+console.log(SECOND_PLAYER);
+
+let PLAYER;
+let OPPONENT;
+if (!FIRST_PLAYER && !SECOND_PLAYER) {
+  const OPPONENT = "...";
+} else if (address === FIRST_PLAYER) {
+  const PLAYER = first_player ? first_player[0] : [];
+  const OPPONENT = second_player ? second_player[0] : [];
+} else {
+  const PLAYER = second_player ? second_player[0] : [];
+  const OPPONENT = first_player ? first_player[0] : [];
+}
+
+////////////////////////////////////////////////////////////////
 
   // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
   // Little trick for now
@@ -105,13 +211,13 @@ export default function Lobby() {
       status: "upcoming",
     },
     {
-      name: "Opening the arena",
+      name: `Opening the arena for game #${GAME_IDX}`,
       description: "Training will start soon",
       href: "#",
       status: "upcoming",
     },
     {
-      name: "It's your turn, be brave",
+      name: `It's your turn, be brave. You're facing ${OPPONENT}`,
       description: "Iusto et officia maiores porro ad non quas.",
       href: "#",
       status: "upcoming",

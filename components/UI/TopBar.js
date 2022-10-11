@@ -4,10 +4,10 @@ import ConnectButton from "/components/Starknet/Connect/ConnectButton";
 
 export default function TopBar() {
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row justify-around">
       <NetworkInfo />        
       <ConnectButton />
-      <div className="flex-row mx-auto">
+      <div className="">
         <ExitButton />
       </div>
     </div>

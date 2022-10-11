@@ -3,9 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
   isYourTurn: false,
   selectedAction: null,
-  playerPosition: [],
+  playerRow: null,
+  playerCol: null,
   playerDirection: null,
-  highlight: null
+  highlight: null,
+  gameIdx: null,
+  player_address: null,
+  opponent_address: null,
 }
 
 
@@ -33,11 +37,20 @@ export const starknetSlice = createSlice({
   },
   SNhighlightCol: (state, action) => {
       state.highlightActionCol = action.payload;
-  }
+  },
+  setGameIdx: (state, action) => {
+    state.gameIdx = action.payload;
+  },
+  setPlayerAddress: (state, action) => {
+    state.player_address = action.payload;
+  },
+  setOpponentAddress: (state, action) => {
+    state.opponent_address = action.payload;
+  },
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { turn, action, positionRow, positionCol, direction, SNhighlightRow, SNhighlightCol } = starknetSlice.actions
+export const { turn, action, positionRow, positionCol, direction, SNhighlightRow, SNhighlightCol, setGameIdx, setPlayerAddress, setOpponentAddress } = starknetSlice.actions
 
 export default starknetSlice.reducer

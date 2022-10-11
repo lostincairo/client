@@ -31,11 +31,10 @@ export default function InitialPosition() {
   };
     
   return (
-    <div className="flex flex-col bg-sand shadow sm:rounded-lg">
-        <h1>Select your starting position</h1>
+    <div className="flex flex-col justify-center items-center max-w-7xl bg-white text-charcoal font-mario p-10 rounded-2xl shadow-xl">
         <p>Click on any cell on the grid to set your starting position</p>
-        <p>You will be starting from Row: {selectedRow}, Column: {selectedCol}</p>
-        <button className="bg-blue-400" onClick={() => [call_set_initial_position(), dispatch(positionRow(selectedRow)), dispatch(positionCol(selectedCol)), dispatch(exitInit())]}>I'm ready!</button>
+        <p className="pt-3 pb-6">You will be starting from Position ({selectedRow}, {selectedCol})</p>
+        <button className="pt-2 max-w-7xl w-36 h-20 hover:bg-[url('/ready_button_hover.svg')] bg-[url('/ready_button.svg')] bg-contain bg-no-repeat bg-center px-4" onClick={() => [call_set_initial_position(), dispatch(positionRow(selectedRow)), dispatch(positionCol(selectedCol)), dispatch(exitInit())]}></button>
 
     </div>
   );
