@@ -4,8 +4,11 @@ import Player from "./Player";
 import * as THREE from 'three';
 import _scene from "/redux/sceneSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Canvas, extend } from "@react-three/fiber";
+import { Canvas, extend, useLoader, useThree } from "@react-three/fiber";
+import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { Environment, OrbitControls, Lightformer } from "@react-three/drei";
+
+
 
 
 const Combat = () => {
@@ -14,17 +17,18 @@ const Combat = () => {
   //   const { isHovered } = useSelector((store) => store._scene);
   const mesh = useRef();
 
-  var aspect = window.innerWidth / window.innerHeight;
+  var aspect = 2140 / 1500;
   var d = 15;
   const camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 1000 );
   
-  camera.position.set( -15, 10, -15 ); // all components equal
-  camera.lookAt( 3,0,3 ); // or the origin
-  camera.zoom = 150
+  camera.position.set( -15, 15, -15 ); // all components equal
+  camera.lookAt( 10,0,10 ); // or the origin
+  camera.zoom = 80
 
 
   return (
     <Canvas
+    linear
       orthographic
       // camera={{
       //   position: [-10, 6, -10],
@@ -37,8 +41,7 @@ const Combat = () => {
       camera={camera}
       gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}
     >
-      <color attach="background" args={['#f5efe6']} />
-      <ambientLight color="white" intensity={0.8} />
+      <ambientLight color="white" intensity={1} />
       <group>
       <directionalLight color="#FFFFFF" position={[-12, 12, -6]} />
         <Board />
@@ -53,3 +56,20 @@ const Combat = () => {
   );
 };
 export default Combat;
+
+
+function Background() {
+  const {gl} = useThree();
+  const texture = useLoader(TextureLoader, "scene.png" )
+  texture.wrapS = THREE.RepeatWrapping
+  texture.wrapT = THREE.RepeatWrapping
+  texture.magFilter = THREE.NearestFilter
+  const formatted = new THREE.WebGLCubeRenderTarget(texture.image.height).fromEquirectangularTexture(gl, texture)
+
+  return(
+    <mesh rotation={[0, 0.8, 0]} scale={20}>
+      <planeBufferGeometry />
+      <meshBasicMaterial map={texture} depthTest={true} depthWrite={false} side={THREE.BackSide} />
+    </mesh>
+  )
+};

@@ -11,7 +11,7 @@ export default function Game({properties}) {
   const { inInit } = useSelector((store) => store._game);
 
   return (
-    <div className="flex flex-col relative flex-auto justify-center h-screen bg-sand">
+    <div className="flex flex-col relative flex-auto justify-center h-screen bg-[url('../public/scene.png')] bg-cover">
       <TopBar />
       <div className=" grow">
         <Combat />

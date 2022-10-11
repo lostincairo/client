@@ -7,7 +7,7 @@ import ControllerConnector from "@cartridge/connector";
 
 function MyApp({ Component, pageProps }) {
   const connectors = getInstalledInjectedConnectors()
-  const cartridge = new ControllerConnector();
+  // const cartridge = new ControllerConnector();
 
   return (
     <Provider store={store}>

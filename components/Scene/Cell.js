@@ -25,8 +25,8 @@ const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
   const dispatch = useDispatch();
 
   const color = "white";
-  const sandMap = useLoader(TextureLoader, "sand.png");
-  const rockMap = useLoader(TextureLoader, "brick.png");
+  const sandMap = useLoader(TextureLoader, "tile_front.png");
+  const rockMap = useLoader(TextureLoader, "test_tile.svg");
   const colorMap =
     (cellPosition.x + cellPosition.y) % 2 === 0 ? sandMap : rockMap;
 
@@ -92,8 +92,8 @@ const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
     >
 
       <meshStandardMaterial
-        roughness={0.2}
-        metalness={0.6}
+        roughness={0.5}
+        metalness={0.4}
         map={rockMap}
         color={
           // TODO: Abstract the logic from the color selection

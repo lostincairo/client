@@ -9,7 +9,7 @@ import EndTurn from "./EndTurn";
 export default function ControlBar({properties}) {
 
   return (
-    <div className="flex flex-row bg-sand shadow sm:rounded-lg">
+    <div className="flex flex-row  shadow sm:rounded-lg">
       <EventHistory properties={properties}/>
       <Vitals />
       <Actions />

@@ -24,6 +24,7 @@ const Player = () => {
   const playerMap = playerMapUL
 
   playerMap.magFilter = THREE.NearestFilter
+  playerMapUL.encoding = THREE.LinearEncoding
   playerMap.offset.x = 0;
   playerMap.offset.y = 0;
   playerMap.repeat.set(1/8,1)
