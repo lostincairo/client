@@ -20,6 +20,7 @@ export default function Actions() {
   const { address } = useAccount();
   const { contract: game } = useGameContract();
   const { selectedCell } = useSelector((store) => store._scene)
+  const { gameIdx, opponent_address } = useSelector((store) => store._starknet)
   const dispatch = useDispatch();
   const { data, loading, invoke } = useStarknetInvoke({
     contract: game,
@@ -29,13 +30,13 @@ export default function Actions() {
 
 const call_action = (x,y) => {
   invoke({
-    args:[1, 0x1, x, y],
+    args:[gameIdx, opponent_address, x, y],
   });
 };
 
 
   return actions.map((_action) => (
-    <div className='flex flex-row grow items-center justify-end pr-10'>
+    <div className='flex flex-row grow items-center justify-end pr-14 mr-4'>
     <a onClick={(e) => dispatch(action("bow"))}>
     <Image key={_action.name} src={_action.href} width="66" height="65"/>
     </a>

@@ -147,8 +147,6 @@ const {
 
 // const FIRST_PLAYER = first_player ? first_player.first_player_address : [];
 const FIRST_PLAYER = "0x00Bed5456bfF4DF658E5EC00EDb2CE66E0194dF12f1Cfe3f99f9B279a7230cc6"
-console.log(FIRST_PLAYER);
-
 
 const {
   data: second_player,

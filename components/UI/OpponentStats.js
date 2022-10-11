@@ -18,22 +18,7 @@ export default function OpponentStats() {
     const dispatch = useDispatch();
 
 
-    // function CallOpponentX(GAME_IDX, OPPONENT) {
 
-
-    //   const { address } = useAccount();
-    //   const { contract: game } = useGameContract();
-    //   const { data, loading, error, refresh } = useStarknetCall({
-    //     contract: game,
-    //     method: "x_position_per_player_read",
-    //     args: [GAME_IDX, OPPONENT],
-    //     options: {
-    //       watch: true,
-    //     },
-    //   });
-    
-    //   return { data, loading, error, refresh };
-    // }
     
     function CallHealthOpponent(opponent_address) {
 
@@ -101,7 +86,7 @@ export default function OpponentStats() {
     //////////////////////////////////////////////////////////////
     
 
-    //TODO: Fix because this seems to call repeatedly the starknet RPC
+    //TODO: Fix because this call repeatedly the starknet RPC
 
   //   function CallOpponentY(GAME_IDX, OPPONENT) {
     
@@ -150,6 +135,7 @@ export default function OpponentStats() {
         <div>Health: {HEALTH}</div>
         <div>ACTION: {ACTION}</div>
         <div>MOVEMENT: {MOVEMENT}</div>
+        <div>POSITION: {opponentRow}, {opponentCol}</div>
         {/* <CallHealthOpponent opponent_address={opponent_address}/>
         <CallActionOpponent opponent_address={opponent_address}/>
         <CallMovementOpponent opponent_address={opponent_address}/> */}

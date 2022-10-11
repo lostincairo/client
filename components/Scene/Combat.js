@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Board from "./Board";
 import Player from "./Player";
 import Opponent from "./Opponent";
+import Palmito from "./Palmito";
 import * as THREE from 'three';
 import _scene from "/redux/sceneSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,6 +55,7 @@ const Combat = () => {
       </group>
       <Player />
       <Opponent />
+      <Palmito />
     </Canvas>
   );
 };

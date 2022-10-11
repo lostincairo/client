@@ -25,16 +25,15 @@ const Opponent = () => {
 
 
   // Texture setup
-  const playerMapUL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
-  const playerMapUR = useLoader(TextureLoader, "sprite_walk_up_right.svg ");
-  const playerMapDL = useLoader(TextureLoader, "sprite_walk_down_left.svg ");
-  const playerMapDR = useLoader(TextureLoader, "sprite_walk_down_right.svg ");
 
-  var playerMap = playerMapUL;
+  const playerMapDL = useLoader(TextureLoader, "opponent_down_left.svg ");
+  const playerMapDR = useLoader(TextureLoader, "opponent_down_right.svg ");
 
-  if (opponentRow < 7) {
-    playerMap = playerMapUL
-  } else if (opponentRow >= 7){
+  var playerMap = playerMapDL;
+
+  if (opponentCol < 7) {
+    playerMap = playerMapDL
+  } else if (opponentCol >= 7){
     playerMap = playerMapDR
   }
 

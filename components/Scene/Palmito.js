@@ -13,7 +13,7 @@ const Palmito = () => {
   const { movePlayer } = useSelector((store) => store._scene);
 
   // Texture setup
-  const palmitoMap =  useLoader(TextureLoader, "palmito.png");
+  const palmitoMap =  useLoader(TextureLoader, "palmito.svg");
     palmitoMap.repeat.set(1, 1);
     palmitoMap.magFilter = THREE.NearestFilter;
     palmitoMap.wrapS = palmitoMap.wrapT = THREE.RepeatWrapping;
@@ -22,7 +22,7 @@ const Palmito = () => {
   // Display the player on the grid cell.
   // WIP
   return (
-    <sprite scale={[1, 1, 1]} position={[-1, 1, -1]} rotation={[0, 0, 0]}>
+    <sprite scale={[2, 2.6, 2]} position={[0, 1.4, 15]} rotation={[0, 0, 0]}>
       <spriteMaterial transparent map={palmitoMap} />
     </sprite>
   );

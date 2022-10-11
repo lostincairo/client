@@ -7,10 +7,10 @@ import {
   highlightCol,
   movePlayer,
 } from "../../redux/sceneSlice";
-import { action, positionCol, positionRow, direction, SNhighlightRow, SNhighlightCol } from "../../redux/starknetSlice";
+import { action, positionCol, positionRow, direction, SNhighlightRow, SNhighlightCol, setOpponentRow, setOpponentCol } from "../../redux/starknetSlice";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { useStarknetInvoke } from "@starknet-react/core";
+import { useStarknetInvoke, useAccount, useStarknetCall } from "@starknet-react/core";
 import { useGameContract } from "/hooks/GameContract";
 import Actions from '/components/UI/Actions';
 
@@ -20,7 +20,7 @@ import Actions from '/components/UI/Actions';
 const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
   const { highlightedRow, highlightedCol, selectedRow, selectedCol } =
     useSelector((store) => store._scene);
-  const { selectedAction, playerRow, playerCol, highlightActionRow, highlightActionCol } = useSelector((store) => store._starknet);
+  const {  gameIdx, opponent_address, opponentRow, opponentCol, selectedAction, playerRow, playerCol, highlightActionRow, highlightActionCol } = useSelector((store) => store._starknet);
 
   const dispatch = useDispatch();
 
@@ -38,9 +38,68 @@ const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
 
   const call_move = (x, y) => {
     invoke({
-      args: [1, 0x1, x, y],
+      args: [gameIdx, opponent_address, x, y],
     });
   };
+
+//////////////////////////////////
+
+    function CallOpponentX(GAME_IDX, OPPONENT) {
+
+
+      const { address } = useAccount();
+      const { contract: game } = useGameContract();
+      const { data, loading, error, refresh } = useStarknetCall({
+        contract: game,
+        method: "x_position_per_player_read",
+        args: [GAME_IDX, OPPONENT],
+        options: {
+          watch: true,
+        },
+      });
+    
+      return { data, loading, error, refresh };
+    }
+
+   function CallOpponentY(GAME_IDX, OPPONENT) {
+    
+      const { address } = useAccount();
+      const { contract: game } = useGameContract();
+      const { data, loading, error, refresh } = useStarknetCall({
+        contract: game,
+        method: "y_position_per_player_read",
+        args: [GAME_IDX, OPPONENT],
+        options: {
+          watch: true,
+        },
+      });
+    
+      return { data, loading, error, refresh };
+    }
+  
+    const {
+      data: opponent_x,
+    } = CallOpponentX(gameIdx, opponent_address);
+  
+  const OPPONENT_X = opponent_x ? opponent_x.x.words[0] : [];
+  // console.log(OPPONENT_X);
+  // dispatch(setOpponentRow(OPPONENT_X));
+  
+    const {
+      data: opponent_y,
+    } = CallOpponentY(gameIdx, opponent_address);
+  
+  const OPPONENT_Y = opponent_y ? opponent_y.y.words[0] : [];
+  
+  // dispatch(setOpponentCol(OPPONENT_Y));
+  
+
+
+    // const opponent_row = CallOpponentX(gameIdx, opponent_address)
+    // const opponent_col = CallOpponentY(gameIdx, opponent_address)
+
+
+
 
   // TODO: need 2 different logic to invoke the function both on initiation and during the game. 2 different contract function so 2 dispatches
   return (
@@ -64,8 +123,9 @@ const Cell = ({ cellPosition, cell, key, cellIndex, rowIndex }) => {
           // dispatch(positionRow(rowIndex));
           dispatch(selectCol(null));
           dispatch(selectRow(null));
-          dispatch(SNhighlightRow(null))
-          dispatch(SNhighlightCol(null))
+          dispatch(SNhighlightRow(null));
+          dispatch(SNhighlightCol(null));
+          dispatch(setOpponentRow())
         } else if (cellIndex !== selectedCol || rowIndex !== selectedRow) {
           dispatch(selectCol(cellIndex));
           dispatch(selectRow(rowIndex));
