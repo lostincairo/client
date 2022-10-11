@@ -7,8 +7,10 @@ import { useGameContract } from "/hooks/GameContract";
 
 
 export default function EndTurn() {
+  const { playerRow, gameIdx, opponent_address } = useSelector((store) => store._starknet);
   const { address } = useAccount();
   const { contract: game } = useGameContract();
+  
   const { data, loading, invoke } = useStarknetInvoke({
     contract: game,
     method: "end_turn"
@@ -17,7 +19,7 @@ export default function EndTurn() {
 
 const call_end_turn = () => {
   invoke({
-    args:[1, 0x1],
+    args:[gameIdx, opponent_address],
   });
 };
 

@@ -5,7 +5,7 @@ import { useGameContract } from "/hooks/GameContract";
 export default function Move() {
   const { selectedRow } = useSelector((store) => store._scene);
   const { selectedCol } = useSelector((store) => store._scene);
-  const { playerRow } = useSelector((store) => store._starknet);
+  const { playerRow, gameIdx, opponent_address } = useSelector((store) => store._starknet);
   const { playerCol } = useSelector((store) => store._starknet);
 
   function call_move() {
@@ -18,7 +18,7 @@ export default function Move() {
 
     const call_end_turn = () => {
       invoke({
-        args: [1, 0x1, 2, 3],
+        args: [gameIdx, opponent_address, selectedRow, selectedCol],
       });
     };
   }

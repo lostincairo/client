@@ -47,10 +47,16 @@ export const starknetSlice = createSlice({
   setOpponentAddress: (state, action) => {
     state.opponent_address = action.payload;
   },
+  setOpponentRow: (state, action) => {
+    state.opponent_row = action.payload;
+  },
+  setOpponentCol: (state, action) => {
+    state.opponent_col = action.payload;
+  },
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { turn, action, positionRow, positionCol, direction, SNhighlightRow, SNhighlightCol, setGameIdx, setPlayerAddress, setOpponentAddress } = starknetSlice.actions
+export const { turn, action, positionRow, positionCol, direction, SNhighlightRow, SNhighlightCol, setGameIdx, setPlayerAddress, setOpponentAddress, setOpponentRow, setOpponentCol } = starknetSlice.actions
 
 export default starknetSlice.reducer

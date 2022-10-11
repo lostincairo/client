@@ -12,16 +12,22 @@ const Player = () => {
   const { highlightedCell } = useSelector((store) => store._scene);
   const { selectedCell } = useSelector((store) => store._scene);
   const { movePlayer } = useSelector((store) => store._scene);
+  const { positionRow, positionCol } = useSelector((store) => store._starknet);
 
   // Texture setup
   const playerMapUL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
-  const playerMapUR = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
-  const playerMapDL = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
-  const playerMapDR = useLoader(TextureLoader, "sprite_walk_up_left.svg ");
+  const playerMapUR = useLoader(TextureLoader, "sprite_walk_up_right.svg ");
+  const playerMapDL = useLoader(TextureLoader, "sprite_walk_down_left.svg ");
+  const playerMapDR = useLoader(TextureLoader, "sprite_walk_down_right.svg ");
 
+ var playerMap = playerMapUL;
+  if (positionRow < 7) {
+    const playerMap = playerMapUL
+  } else {
+    const playerMap = playerMapDR
+  }
 
-
-  const playerMap = playerMapUL
+  
 
   playerMap.magFilter = THREE.NearestFilter
   playerMapUL.encoding = THREE.LinearEncoding
@@ -38,18 +44,7 @@ const Player = () => {
   const timeElapsed = 0;
   const counter = 0;
 
-  const row = 1;
-  const rowIndex = 1;
-
-
-  
-  const pos_x = 1
-
-
-
   const ref = useRef()
-
-
   // Sprite Animation
   // TODO: Add transition for movement from one cell to another
   useFrame(({ clock }, delta) => {
@@ -58,12 +53,14 @@ const Player = () => {
 
     // console.log(timeElapsed);
     if (timeElapsed > 2) {
-      playerMap.offset.x = 0;
+      playerMap.offset.x = 1/8;
       
       timeElapsed = 0;
-    } else if (counter > 0.6) {
+      counter = 0;
+    } else if (counter > 0.5) {
+
       playerMap.offset.x += 1 / 8;
-      ref.current.position.z = 0.2
+      ref.current.position.z = 0
       
       counter = 0;
     }
@@ -74,8 +71,8 @@ const Player = () => {
   return (
     <sprite
       ref={ref}
-      scale={[1, 1, 1]}
-      position={[0, 0.6, 0]}
+      scale={[1, 2, 1]}
+      position={[0, 1, 0]}
       rotation={[1, 1, 1]}
     >
      <spriteMaterial transparent map={playerMap} />

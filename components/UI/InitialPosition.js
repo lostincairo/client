@@ -14,7 +14,7 @@ import { exitInit } from "/redux/gameSlice";
 export default function InitialPosition() {
 
     const { selectedRow, selectedCol } = useSelector((store) => store._scene);
-    const { playerRow, playerCol } = useSelector((store) => store._starknet);
+    const { playerRow, playerCol, gameIdx } = useSelector((store) => store._starknet);
     const dispatch = useDispatch();
     const { address } = useAccount();
     const { contract: game } = useGameContract();
@@ -26,7 +26,7 @@ export default function InitialPosition() {
   
   const call_set_initial_position = () => {
     invoke({
-      args:[1, selectedRow, selectedCol],
+      args:[gameIdx, selectedRow, selectedCol],
     });
   };
     
