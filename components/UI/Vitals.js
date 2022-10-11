@@ -7,16 +7,10 @@ import { useGameContract } from "/hooks/GameContract";
 
 export default function Vitals() {
   return (
-    <div className="font-mario text-2xl flex flex-row justify-start mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div>
+    <div className="flex flex-row items-center font-mario text-2xl lg:px-8">
         <Health />
-      </div>
-      <div>
         <Action />
-      </div>
-      <div>
-        <Movement />
-      </div>
+       <Movement />
     </div>
   );
 }
@@ -36,7 +30,7 @@ function Health() {
 
   const HEALTH_POINTS = data ? data[0].toString() : [];
 
-  return <div className="pt-8	pl-9 w-20 h-20 bg-no-repeat bg-center bg-[url('../public/life_nav_bar.svg')]">{HEALTH_POINTS}</div>;
+  return <div className="text-white bg-cover bg-no-repeat bg-center bg-[url('../public/life_nav_bar.svg')]">{HEALTH_POINTS}</div>;
 }
 
 function Action() {
@@ -54,7 +48,7 @@ function Action() {
 
   const ACTION_POINTS = data ? data[0].toString() : [];
 
-  return <div className="font-superMario pt-8 pl-9 w-20 h-20 bg-contain bg-no-repeat bg-center bg-[url('../public/AP.svg')]">{ACTION_POINTS}</div>;
+  return <div className="bg-cover bg-no-repeat bg-center bg-[url('../public/AP.svg')]">{ACTION_POINTS}</div>;
 }
 
 function Movement() {
@@ -72,5 +66,5 @@ function Movement() {
 
   const MOVEMENT_POINTS = data ? data[0].toString() : [];
 
-  return <div className="pt-8 pl-9 w-20 h-20 bg-contain bg-no-repeat bg-center bg-[url('../public/MP.svg')]">{MOVEMENT_POINTS}</div>;
+  return <div className="bg-contain bg-no-repeat bg-center bg-[url('../public/MP.svg')]">{MOVEMENT_POINTS}</div>;
 }

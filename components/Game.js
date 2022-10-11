@@ -10,13 +10,16 @@ export default function Game({ properties }) {
   const { inInit } = useSelector((store) => store._game);
 
   return (
-    <div className="flex flex-col items-center relative h-screen w-full bg-[url('../public/scene.png')] bg-cover">
+    <div className="flex flex-col px-4 pt-2 relative h-screen w-full bg-[url('../public/scene.png')] bg-cover">
       <TopBar />
 
       <Combat />
-
+      <div className="flex flex-col items-center justify-center">
       {inInit && <InitialPosition />}
+      </div>
+      <div className="flex flex-col items-center -mb-7">
       {inInit || <ControlBar properties={properties} />}
+      </div>
     </div>
   );
 }

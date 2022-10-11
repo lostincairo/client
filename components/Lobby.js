@@ -73,7 +73,7 @@ function CallFirstPlayerAddress(GAME_IDX) {
   const { data, loading, error, refresh } = useStarknetCall({
     contract: game,
     method: "game_idx_to_first_player_read",
-    args: [GAME_IDX],
+    args: [1],
     options: {
       watch: true,
     },
@@ -91,7 +91,7 @@ function CallSecondPlayerAddress(GAME_IDX) {
   const { data, loading, error, refresh } = useStarknetCall({
     contract: game,
     method: "game_idx_to_second_player_read",
-    args: [GAME_IDX],
+    args: [1],
     options: {
       watch: true,
     },
@@ -121,8 +121,8 @@ export default function Lobby() {
     refresh: call_refresh,
   } = CallReadQueueIndex();
 
-  const QUEUE_INDEX = queue_index ? queue_index[0] : [];
-  console.log(QUEUE_INDEX);
+  const QUEUE_INDEX = queue_index ? queue_index.idx.words[0] : [];
+
 
 
   const {
@@ -132,19 +132,21 @@ export default function Lobby() {
     refresh: game_idx_refresh,
   } = CallPlayerAddressToGameIdx();
 
-const GAME_IDX = game_idx ? game_idx[0] : [];
-console.log(GAME_IDX);
+const GAME_IDX = game_idx ? game_idx.game_idx.words[0] : [];
+
 
 ////////////////////////////////////////////////////////////////
-
+// WHOOSH Little magic trick
+// TODO: find out why we get an array of felt and how to extract the address from the function response
 const {
   data: first_player,
   loading: first_player_loading,
   error: first_player_error,
   refresh: first_player_refresh,
-} = CallFirstPlayerAddress();
+} = CallFirstPlayerAddress(GAME_IDX);
 
-const FIRST_PLAYER = first_player ? first_player[0] : [];
+// const FIRST_PLAYER = first_player ? first_player.first_player_address : [];
+const FIRST_PLAYER = "0x00Bed5456bfF4DF658E5EC00EDb2CE66E0194dF12f1Cfe3f99f9B279a7230cc6"
 console.log(FIRST_PLAYER);
 
 
@@ -153,21 +155,22 @@ const {
   loading: second_player_loading,
   error: second_player_error,
   refresh: second_player_refresh,
-} = CallSecondPlayerAddress();
+} = CallSecondPlayerAddress(GAME_IDX);
 
-const SECOND_PLAYER = second_player ? second_player[0] : [];
-console.log(SECOND_PLAYER);
+// const SECOND_PLAYER = second_player ? second_player[0] : [];
+const SECOND_PLAYER = "0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92de572f7aa0"
+// console.log(SECOND_PLAYER);
 
 let PLAYER;
 let OPPONENT;
 if (!FIRST_PLAYER && !SECOND_PLAYER) {
-  const OPPONENT = "...";
+  OPPONENT = "...";
 } else if (address === FIRST_PLAYER) {
-  const PLAYER = first_player ? first_player[0] : [];
-  const OPPONENT = second_player ? second_player[0] : [];
+  PLAYER = FIRST_PLAYER
+  OPPONENT = SECOND_PLAYER;
 } else {
-  const PLAYER = second_player ? second_player[0] : [];
-  const OPPONENT = first_player ? first_player[0] : [];
+  PLAYER = SECOND_PLAYER
+  OPPONENT = FIRST_PLAYER
 }
 
 ////////////////////////////////////////////////////////////////
@@ -175,7 +178,7 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
   // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
   // Little trick for now
   const txHash =
-    "0x14ca13f3ef0847f8095aa1386318487edca659d3f6869c6a3da586e279f6879";
+    "0x4f57613506755761d35e654db430b1fff70f1650430c322dff37aca223e3e03";
   const {
     data: tx_data,
     loading: tx_loading,
@@ -324,7 +327,7 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
           ))}
         </ol>
       </nav>
-      <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/play_button_hover.svg')] bg-[url('/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby()),,dispatch(setGameIdx(GAME_IDX)),,dispatch(setPlayerAddress(PLAYER)),,dispatch(setOpponentAddress(OPPONENT))]}></button>
+      <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/play_button_hover.svg')] bg-[url('/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby()),dispatch(setGameIdx(GAME_IDX)),dispatch(setPlayerAddress(PLAYER)),dispatch(setOpponentAddress(OPPONENT))]}></button>
       </div>
     </div>
   );

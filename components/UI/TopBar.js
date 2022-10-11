@@ -5,14 +5,15 @@ import ConnectButton from "/components/Starknet/Connect/ConnectButton";
 
 export default function TopBar() {
   return (
-    <div className="flex flex-row justify-around">
-      <div>
+    <div className="flex flex-row justify-between ">
+      <div className="flex-col">
       <NetworkInfo /> 
       <OpponentStats />
       </div>
            
-      <ConnectButton />
-      <div className="">
+     
+      <div className="flex items-start">
+        <ConnectButton />
         <ExitButton />
       </div>
     </div>

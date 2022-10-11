@@ -10,7 +10,7 @@ import { action, positionCol, positionRow, direction, SNhighlightRow, SNhighligh
 
 const actions = [
   { name: "Bow", description: "Launches an arrow towards the opponent", href:"/spell_card.svg" },
-  { name: "Punch", description: "Trows a powerful punch towards the opponent", href:"/spell_card.svg" },
+  // { name: "Punch", description: "Trows a powerful punch towards the opponent", href:"/spell_card.svg" },
 ];
 
 //TODO: Add game_idx, opponent address to state
@@ -35,9 +35,9 @@ const call_action = (x,y) => {
 
 
   return actions.map((_action) => (
-    <div className='justify-center mt-6'>
+    <div className='w-24 ml-20'>
     <a onClick={(e) => dispatch(action("bow"))}>
-    <Image key={_action.name} src={_action.href} width="70" height="70"/>
+    <Image key={_action.name} src={_action.href} width="62" height="62"/>
     </a>
     </div>
   ))

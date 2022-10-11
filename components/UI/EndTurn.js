@@ -25,10 +25,10 @@ const call_end_turn = () => {
 
 
     return (
-        <div className="flex justify-center max-w-7xl p-5 flex-col lg:px-8">
+        <div className="justify-items-end	 lg:px-8">
           <button
             type="button"
-            className="mx-auto w-40 h-20 hover:bg-[url('/button_next_round_hover.svg')] bg-[url('/button_next_round.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" 
+            className="h-40 w-40 hover:bg-[url('/button_next_round_hover.svg')] bg-[url('/button_next_round.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" 
             onClick={call_end_turn}
           ></button>
         </div>

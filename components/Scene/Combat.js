@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import Board from "./Board";
 import Player from "./Player";
+import Opponent from "./Opponent";
 import * as THREE from 'three';
 import _scene from "/redux/sceneSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +23,7 @@ const Combat = () => {
   const camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 1000 );
   
   camera.position.set( -15, 15, -15 ); // all components equal
-  camera.lookAt( 10,0,10 ); // or the origin
+  camera.lookAt( 9,0,9 ); // or the origin
   camera.zoom = 80
 
 
@@ -52,6 +53,7 @@ const Combat = () => {
          </mesh> */}
       </group>
       <Player />
+      <Opponent />
     </Canvas>
   );
 };
