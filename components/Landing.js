@@ -3,11 +3,12 @@ import Image from "next/image";
 import JoinLobbyButton from "./Starknet/JoinLobbyButton";
 import ConnectButton from './Starknet/Connect/ConnectButton';
 import Lobby from "./Lobby";
+import EventHistory from "./UI/EventHistory";
 import { useDispatch, useSelector } from "react-redux";
 import { enterGame, enterLobby } from "/redux/gameSlice";
 import { useStarknet } from '@starknet-react/core';
 
-export default function Landing({ }) {
+export default function Landing({properties}) {
   const { value } = useSelector((store) => store._connect);
   const { inLobby } = useSelector((store) => store._game);
 
@@ -24,6 +25,7 @@ export default function Landing({ }) {
             />
 
           <SwitchButton />
+          <EventHistory properties={properties}/>
         </div>
       )}
     </div>

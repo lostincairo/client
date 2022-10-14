@@ -10,7 +10,7 @@ import { useStarknet, useConnectors } from "@starknet-react/core";
 import { useDispatch, useSelector } from "react-redux";
 import { connected } from "/redux/connectSlice";
 
-export default function Navigation({ properties}) {
+export default function Navigation({properties}) {
   const { account } = useStarknet();
   const dispatch = useDispatch();
   const { inGame, inLobby, inInit } = useSelector((store) => store._game);
@@ -33,7 +33,7 @@ export default function Navigation({ properties}) {
     return(
       <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
       <Navbar />
-      <Landing />
+      <Landing properties={properties}/>
     </div>
     )
   }

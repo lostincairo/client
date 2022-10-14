@@ -1,18 +1,14 @@
-
 import { GetServerSideProps } from "next";
+import { Base64 } from "/utils/base64";
 
 export default function EventHistory({properties}) {
-    
-  // const id = properties.map((property) => {
-  //   return <div>{property_id}</div>
-  // });
-  
 
   return (
     <div className="overflow-hidden	">
-      <div className="mx-auto mt-3 max-w-7xl sm:px-6 lg:px-8">
+      <div className="mx-auto mt-3 sm:px-6 lg:px-8">
         {properties && properties.map(property => (
-          <p>{property.name} - Game ID: {Buffer.from(property.data[0],'base64')}</p>
+          <p>{property.name} - {Buffer.from(property.address,'')} - Game ID: {Buffer.from(property.data[0],'base64')}</p>,
+          // <p>{property.address}</p>
         ))}</div>
     </div>
   )}
