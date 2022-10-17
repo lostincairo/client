@@ -7,7 +7,7 @@ export default function EventHistory({properties}) {
     <div className="overflow-hidden	">
       <div className="mx-auto mt-3 sm:px-6 lg:px-8">
         {properties && properties.map(property => (
-          <p>{property.name} - {Buffer.from(property.address,'')} - Game ID: {Buffer.from(property.data[0],'base64')}</p>,
+          <p>{property.name} - {Buffer.from(property.address,'')} - Game ID: {Buffer.from(property.data[0],'base64')}</p>
           // <p>{property.address}</p>
         ))}</div>
     </div>
