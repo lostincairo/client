@@ -12,9 +12,6 @@ import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import Actions from '/components/UI/Actions';
 
-const { highlightedRow, highlightedCol, selectedRow, selectedCol } = useSelector((store) => store._scene);
-const {  gameIdx, opponent_address, opponentRow, opponentCol, selectedAction, playerRow, playerCol, highlightActionRow, highlightActionCol } = useSelector((store) => store._starknet);
-
 
 const red = "#AEE5A5";
 const blue = "#DEFFE8"; 
@@ -65,6 +62,8 @@ const clickOnCell = () => {
 
 const Cell = ({ cellPosition, cellIndex, rowIndex }) => {
 
+  const { highlightedRow, highlightedCol, selectedRow, selectedCol } = useSelector((store) => store._scene);
+  const {  gameIdx, opponent_address, opponentRow, opponentCol, selectedAction, playerRow, playerCol, highlightActionRow, highlightActionCol } = useSelector((store) => store._starknet);
   const dispatch = useDispatch();
 
   const color = "white";
@@ -80,7 +79,7 @@ const Cell = ({ cellPosition, cellIndex, rowIndex }) => {
         dispatch(highlightRow(rowIndex)),
         dispatch(highlightCol(cellIndex)),
       ]}
-      onClick={clickOnCell}
+      // onClick={clickOnCell}
     >
 
       <meshStandardMaterial

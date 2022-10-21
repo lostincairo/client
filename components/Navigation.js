@@ -39,17 +39,3 @@ export default function Navigation({properties}) {
   }
 }
 
-//   return (
-//     <div className="flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right">
-//       { inLobby || <Navbar /> } 
-//       { inGame || <Navbar /> } 
-//       { inLobby || <Landing /> }
-//       { inGame && <Game properties={properties}/> }
-//       {/* { inInit && <Game properties={properties}/> } */}
-//       {/* <Game properties={properties}/> */}
-
-
-//       {/* <Game /> */}
-//     </div>
-//   );
-// }
