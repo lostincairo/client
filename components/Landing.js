@@ -1,47 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import JoinLobbyButton from "./Starknet/JoinLobbyButton";
-import ConnectButton from './Starknet/Connect/ConnectButton';
-import Lobby from "./Lobby";
-import EventHistory from "./UI/EventHistory";
-import { useDispatch, useSelector } from "react-redux";
-import { enterGame, enterLobby } from "/redux/gameSlice";
-import { useStarknet } from '@starknet-react/core';
+import ConnectButton from "./Starknet/Connect/ConnectButton";
+import { useConnectors } from "@starknet-react/core";
 
-export default function Landing({properties}) {
-  const { value } = useSelector((store) => store._connect);
-  const { inLobby } = useSelector((store) => store._game);
-
+export default function Landing() {
 
   return (
     <div className="my-2 h-full">
-      {inLobby || (
-        <div className="flex flex-auto justify-center content-center mx-auto max-w-3xl p-5 flex-col lg:px-8">
-            <Image
-              src="/lost_in_cairo.svg"
-              layout="responsive"
-              height="98"
-              width="183"
-            />
-
-          <SwitchButton />
-          <EventHistory properties={properties}/>
-        </div>
-      )}
+      <div className="flex flex-auto justify-center content-center mx-auto max-w-3xl p-5 flex-col lg:px-8">
+        <Image
+          src="/lost_in_cairo.svg"
+          layout="responsive"
+          height="98"
+          width="183"
+        />
+        <SwitchButton />
+      </div>
     </div>
   );
 }
 
-
 function SwitchButton() {
-  const { account } = useStarknet();
+  const { status } = useConnectors();
 
-  if(account) {
-    return(
-      <JoinLobbyButton />
-    )} else {
-      return(
-        <ConnectButton />
-        )
-    }
+  if (status === "disconnected") {
+    return <ConnectButton />;
+  } else {
+    return <JoinLobbyButton />;
   }
+}
