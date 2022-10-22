@@ -67,7 +67,7 @@ const Cell = ({ cellPosition, cellIndex, rowIndex }) => {
   const dispatch = useDispatch();
 
   const color = "white";
-  const rockMap = useLoader(TextureLoader, "test_tile.svg");
+  const rockMap = useLoader(TextureLoader, "tile_base.svg");
 
 
   return (

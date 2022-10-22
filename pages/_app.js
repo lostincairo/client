@@ -1,19 +1,24 @@
 import '../styles/globals.css'
-import { StarknetProvider, getInstalledInjectedConnectors } from '@starknet-react/core'
+import { StarknetConfig, InjectedConnector } from '@starknet-react/core'
 import { Provider } from "react-redux"
 import store from "../redux/store"
 import ControllerConnector from "@cartridge/connector";
 
 
 function MyApp({ Component, pageProps }) {
-  const connectors = getInstalledInjectedConnectors()
+
+  const connectors = [
+    new InjectedConnector({ options: { id: 'braavos' }}),
+    new InjectedConnector({ options: { id: 'argentX' }}),
+  ]
+
   // const cartridge = new ControllerConnector();
 
   return (
     <Provider store={store}>
-      <StarknetProvider autoConnect connectors={connectors}>
+      <StarknetConfig autoConnect connectors={connectors}>
         <Component {...pageProps} />
-      </StarknetProvider>
+      </StarknetConfig>
     </Provider>
   ); 
 }
