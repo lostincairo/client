@@ -8,83 +8,22 @@ import {
 } from "@starknet-react/core";
 import { useLobbyContract } from "/hooks/LobbyContract";
 import { useGameContract } from "/hooks/GameContract";
-import {
-  Accepted,
-  Rejected,
-  Pending,
-} from "/components/Starknet/Transaction/Status";
-import Panel from "/components/Starknet/Transaction/Panel";
+
 import { useDispatch, useSelector } from "react-redux";
 import { enterGame, exitLobby, enterInit, exitInit } from "/redux/gameSlice";
 import { setGameIdx, setPlayerAddress, setOpponentAddress } from "/redux/starknetSlice";
 
 
-// TODO: Clean and searate those functions. This is gross.
 // TODO: Only display the button when the game is active.
+// Add spinner to the ongoing task
 
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function CallReadQueueIndex() {
 
-
-
-  const { address } = useAccount();
-  const { contract: lobby } = useLobbyContract();
-  const { data, loading, error, refresh } = useStarknetCall({
-    contract: lobby,
-    method: "address_to_queue_index_read",
-    args: [address],
-    options: {
-      watch: true,
-    },
-  });
-
-  return { data, loading, error, refresh };
-}
-
-
-////////////////////////////////////////////////////////////////
-
-function CallPlayerAddressToGameIdx() {
-
-  const { address } = useAccount();
-  const { contract: game } = useGameContract();
-  const { data, loading, error, refresh } = useStarknetCall({
-    contract: game,
-    method: "player_address_to_game_idx_read",
-    args: [address],
-    options: {
-      watch: true,
-    },
-  });
-
-  return { data, loading, error, refresh };
-}
-
-////////////////////////////////////////////////////////////////
-
-function CallFirstPlayerAddress(GAME_IDX) {
-
-  const { address } = useAccount();
-  const { contract: game } = useGameContract();
-  const { data, loading, error, refresh } = useStarknetCall({
-    contract: game,
-    method: "game_idx_to_first_player_read",
-    args: [1],
-    options: {
-      watch: true,
-    },
-  });
-
-  return { data, loading, error, refresh };
-}
-
-////////////////////////////////////////////////////////////////
-
-function CallSecondPlayerAddress(GAME_IDX) {
+function CallSecondPlayerAddress() {
 
   const { address } = useAccount();
   const { contract: game } = useGameContract();
@@ -100,9 +39,8 @@ function CallSecondPlayerAddress(GAME_IDX) {
   return { data, loading, error, refresh };
 }
 
-
-
-////////////////////////////////////////////////////////////////
+// TODO: isolate button into a separate function
+{/* <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/play_button_hover.svg')] bg-[url('/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby()),dispatch(setGameIdx(GAME_IDX)),dispatch(setPlayerAddress(PLAYER)),dispatch(setOpponentAddress(OPPONENT))]}></button> */}
 
 
 export default function Lobby() {
@@ -110,66 +48,30 @@ export default function Lobby() {
   const { inInit } = useSelector((store) => store._game);
   const dispatch = useDispatch();
 
-
-  const { transactions } = useTransactionManager();
   const { address } = useAccount();
 
-  const {
-    data: queue_index,
-    loading: call_loading,
-    error: call_error,
-    refresh: call_refresh,
-  } = CallReadQueueIndex();
-
-  const QUEUE_INDEX = queue_index ? queue_index.idx.words[0] : [];
 
 
 
-  const {
-    data: game_idx,
-    loading: game_idx_loading,
-    error: game_idx_error,
-    refresh: game_idx_refresh,
-  } = CallPlayerAddressToGameIdx();
+  // const QUEUE_INDEX = queue_index ? queue_index.idx.words[0] : [];
 
-const GAME_IDX = game_idx ? game_idx.game_idx.words[0] : [];
+
+
 
 
 ////////////////////////////////////////////////////////////////
 // WHOOSH Little magic trick
 // TODO: find out why we get an array of felt and how to extract the address from the function response
-const {
-  data: first_player,
-  loading: first_player_loading,
-  error: first_player_error,
-  refresh: first_player_refresh,
-} = CallFirstPlayerAddress(GAME_IDX);
 
 // const FIRST_PLAYER = first_player ? first_player.first_player_address : [];
 const FIRST_PLAYER = "0x00Bed5456bfF4DF658E5EC00EDb2CE66E0194dF12f1Cfe3f99f9B279a7230cc6"
 
-const {
-  data: second_player,
-  loading: second_player_loading,
-  error: second_player_error,
-  refresh: second_player_refresh,
-} = CallSecondPlayerAddress(GAME_IDX);
 
 // const SECOND_PLAYER = second_player ? second_player[0] : [];
 const SECOND_PLAYER = "0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92de572f7aa0"
 // console.log(SECOND_PLAYER);
 
-let PLAYER;
-let OPPONENT;
-if (!FIRST_PLAYER && !SECOND_PLAYER) {
-  OPPONENT = "...";
-} else if (address === FIRST_PLAYER) {
-  PLAYER = FIRST_PLAYER
-  OPPONENT = SECOND_PLAYER;
-} else {
-  PLAYER = SECOND_PLAYER
-  OPPONENT = FIRST_PLAYER
-}
+
 
 ////////////////////////////////////////////////////////////////
 
@@ -197,6 +99,8 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
 
   // Listen for game activation and dispatch(ExitLobby) and EnterGame.
 
+
+
   const steps = [
     {
       name: `Access key identified for player ${address}`,
@@ -211,19 +115,19 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
       status: "current",
     },
     {
-      name: `Position in queue : ${QUEUE_INDEX} `,
+      name: `Position in queue : ${2} `,
       description: "You are the 3rd in queue",
       href: "#",
       status: "upcoming",
     },
     {
-      name: `Opening the arena for game #${GAME_IDX}`,
+      name: `Opening the arena for game #${1}`,
       description: "Training will start soon",
       href: "#",
       status: "upcoming",
     },
     {
-      name: `It's your turn, be brave. You're facing ${OPPONENT}`,
+      name: `It's your turn, be brave. You're facing ${1}`,
       description: "Iusto et officia maiores porro ad non quas.",
       href: "#",
       status: "upcoming",
@@ -265,7 +169,6 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
                     </span>
                     <span className="ml-4 flex min-w-0 flex-col">
                       <span className="text-sm text-black font-medium">{step.name}</span>
-                      {/* <span className="text-sm text-gray-500">{step.description}</span> */}
                     </span>
                   </a>
                 </>
@@ -291,7 +194,7 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
                       <span className="text-sm font-medium text-orange-700">
                         {step.name}
                       </span>
-                      {/* <span className="text-sm text-gray-500">{step.description}</span> */}
+
                     </span>
                   </a>
                 </>
@@ -316,7 +219,6 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
                       <span className="text-sm font-medium text-gray-500">
                         {step.name}
                       </span>
-                      {/* <span className="text-sm text-gray-500">{step.description}</span> */}
                     </span>
                   </a>
                 </>
@@ -325,7 +227,6 @@ if (!FIRST_PLAYER && !SECOND_PLAYER) {
           ))}
         </ol>
       </nav>
-      <button className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/play_button_hover.svg')] bg-[url('/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" onClick={(e) => [dispatch(enterInit()),dispatch(enterGame()),dispatch(exitLobby()),dispatch(setGameIdx(GAME_IDX)),dispatch(setPlayerAddress(PLAYER)),dispatch(setOpponentAddress(OPPONENT))]}></button>
       </div>
     </div>
   );

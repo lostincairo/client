@@ -1,17 +1,20 @@
-import React from "react";
-import { useStarknetBlock } from '@starknet-react/core'
-
-// TODO: Add UseMemo if compute of Network Status introduces performance issues.
+import React, { useMemo } from "react";
+import { useBlock } from '@starknet-react/core'
 
 export default function NetworkStatus() {
 
-  const { data, loading, error } = useStarknetBlock() 
+  const { data, isLoading, isError } = useBlock() 
 
+  const indicatorColor = useMemo(() => {
     if (data) {
       return ( <div className="mt-1 ml-5 w-6 h-6 rounded-full bg-green-500"></div> )
     }
-    if (error) {
+    if (isError) {
       return ( <div className="mt-1 ml-5  w-6 h-6  rounded-full bg-red-500"></div> )
     }
     return ( <div className="mt-1 ml-5  w-6 h-6  rounded-full bg-blue-500"></div> )
+  }, [data, isError]) 
+
+  return indicatorColor;
+
   }

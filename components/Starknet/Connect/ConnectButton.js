@@ -1,4 +1,4 @@
-import { useStarknet, useConnectors } from "@starknet-react/core";
+import { useConnectors } from "@starknet-react/core";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _connect, {
@@ -12,8 +12,7 @@ import WalletModal from "./WalletModal";
 // TODO: refactor to implement Disconnect modal incl. transaction queue and link to explorer
 
 export default function ConnectButton() {
-  const { account } = useStarknet();
-  const { available, connect, disconnect } = useConnectors();
+  const { account, disconnect } = useConnectors();
 
   const dispatch = useDispatch();
   const { isOpen } = useSelector((store) => store._connectModal);

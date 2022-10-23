@@ -1,18 +1,14 @@
-import { Fragment, useRef, useState, useMemo } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useStarknet, useConnectors } from "@starknet-react/core";
+import { useConnectors } from "@starknet-react/core";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useSelector, useDispatch } from "react-redux";
 import { connected, connecting, disconnected } from "/redux/connectSlice";
 import { ShowModal, HideModal } from "/redux/modalSlice";
-import ControllerConnector from "@cartridge/connector";
+
 
 export default function WalletModal() {
   const { isOpen } = useSelector((store) => store._connectModal);
   const dispatch = useDispatch();
-
-  const { account } = useStarknet();
-  const { available, connect, disconnect } = useConnectors();
 
   return (
     <Dialog
@@ -66,11 +62,7 @@ export default function WalletModal() {
 // TODO: Add formatting to the paragraph
 const Providers = () => {
   const { available, connect } = useConnectors();
-  // const cartridge = new ControllerConnector();
 
-  // if (available.length < 3) {
-  // available.push(cartridge);
-  // }
 
   return available.map((connector) => (
     <div
