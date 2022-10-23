@@ -1,16 +1,31 @@
-import { configureStore } from "@reduxjs/toolkit";
-import connectReducer from './connectSlice'
-import connectModalReducer from './modalSlice'
-import sceneReducer from './sceneSlice'
-import gameReducer from './gameSlice'
-import starknetReducer from './starknetSlice'
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import connectReducer from "./connectSlice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+import connectModalReducer from "./modalSlice";
+import sceneReducer from "./sceneSlice";
+import gameReducer from "./gameSlice";
+import starknetReducer from "./starknetSlice";
+import thunk from "redux-thunk";
 
-export default configureStore({
-    reducer: {
-        _connect: connectReducer,
-        _connectModal: connectModalReducer,
-        _scene: sceneReducer,
-        _game: gameReducer,
-        _starknet: starknetReducer
-    },
+const reducers = combineReducers({
+  _connect: connectReducer,
+  _connectModal: connectModalReducer,
+  _scene: sceneReducer,
+  _game: gameReducer,
+  _starknet: starknetReducer,
 });
+
+const persistConfig = {
+    key: 'root',
+    storage
+}
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: [thunk]
+});
+
+export default store;
