@@ -51,7 +51,7 @@ const EnterGameBtn = () => {
         dispatch(exitLobby()),
         dispatch(setGameIdx(1)),
         dispatch(setPlayerAddress(2)),
-        dispatch(setOpponentAddress(3)),
+        dispatch(setOpponentAddress("324092482020302840498")),
       ]}
     ></button>
   );

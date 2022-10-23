@@ -17,11 +17,11 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
         <StarknetConfig autoConnect connectors={connectors}>
           <Component {...pageProps} />
         </StarknetConfig>
-      </PersistGate>
+      {/* </PersistGate> */}
     </Provider>
   );
 }

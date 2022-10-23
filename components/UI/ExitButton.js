@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from "react";
-import { Transition } from '@headlessui/react'
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { exitGame } from "/redux/gameSlice";
 import { exitLobby } from "/redux/gameSlice";
+
+// TODO: Call forfeit and add confirmation modal
 
 export default function ExitButton() {
   const dispatch = useDispatch();

@@ -7,19 +7,14 @@ import {
   } from "@starknet-react/core";
   import { useGameContract } from "/hooks/GameContract";
   import { setOpponentRow, setOpponentCol } from "/redux/starknetSlice";
-import { EllipsisHorizontalCircleIcon } from "@heroicons/react/20/solid";
 
 
 
 export default function OpponentStats() {
 
     const { opponentRow, opponentCol, direction, opponent_address, gameIdx } = useSelector((store) => store._starknet);
-
     const dispatch = useDispatch();
 
-
-
-    
     function CallHealthOpponent(opponent_address) {
 
       const { address } = useAccount();
@@ -136,9 +131,6 @@ export default function OpponentStats() {
         <div>ACTION: {ACTION}</div>
         <div>MOVEMENT: {MOVEMENT}</div>
         <div>POSITION: {opponentRow}, {opponentCol}</div>
-        {/* <CallHealthOpponent opponent_address={opponent_address}/>
-        <CallActionOpponent opponent_address={opponent_address}/>
-        <CallMovementOpponent opponent_address={opponent_address}/> */}
         </div>
         )
 }
