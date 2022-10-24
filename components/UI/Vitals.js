@@ -1,8 +1,4 @@
-import {
-  useAccount,
-  useStarknetCall,
-} from "@starknet-react/core";
-import { useLobbyContract } from "/hooks/LobbyContract";
+import { useAccount, useStarknetCall } from "@starknet-react/core";
 import { useGameContract } from "/hooks/GameContract";
 
 export default function Vitals() {
@@ -19,14 +15,7 @@ function Health() {
 
   const { address } = useAccount();
   const { contract: game } = useGameContract();
-  const { data, loading, error, refresh } = useStarknetCall({
-    contract: game,
-    method: "health_per_player_read",
-    args: [address],
-    options: {
-      watch: true,
-    },
-  });
+  const { data } = useStarknetCall({contract: game, method: "health_per_player_read", args: [address]});
 
   const HEALTH_POINTS = data ? data[0].toString() : [];
 
@@ -37,14 +26,7 @@ function Action() {
 
   const { address } = useAccount();
   const { contract: game } = useGameContract();
-  const { data, loading, error, refresh } = useStarknetCall({
-    contract: game,
-    method: "action_per_player_read",
-    args: [address],
-    options: {
-      watch: true,
-    },
-  });
+  const { data } = useStarknetCall({contract: game, method: "action_per_player_read", args: [address]});
 
   const ACTION_POINTS = data ? data[0].toString() : [];
 
@@ -55,14 +37,7 @@ function Movement() {
 
   const { address } = useAccount();
   const { contract: game } = useGameContract();
-  const { data, loading, error, refresh } = useStarknetCall({
-    contract: game,
-    method: "movement_per_player_read",
-    args: [address],
-    options: {
-      watch: true,
-    },
-  });
+  const { data } = useStarknetCall({contract: game, method: "movement_per_player_read", args: [address]});
 
   const MOVEMENT_POINTS = data ? data[0].toString() : [];
 

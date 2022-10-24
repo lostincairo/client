@@ -8,14 +8,18 @@ export default function EndTurn() {
   const { address } = useAccount();
   const { contract: game } = useGameContract();
   
-  const { data, execute } = useStarknetExecute({contract: game, method: "end_turn"});
+  const { execute } = useStarknetExecute({
+    contractAddress: game,
+    entrypoint: "end_turn",
+    calldata: [gameIdx, opponent_address]
+  });
 
     return (  
         <div className="justify-items-end">
           <button
             type="button"
             className="mr-8 h-40 w-40 bg-[url('/button_next_round.svg')] bg-contain bg-no-repeat bg-center px-4 py-4" 
-            onClick={execute({args: [gameIdx, opponent_address]})}
+            onClick={execute}
           ></button>
         </div>
       );
