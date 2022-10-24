@@ -49,9 +49,9 @@ const EnterGameBtn = () => {
         dispatch(enterInit()),
         dispatch(enterGame()),
         dispatch(exitLobby()),
-        dispatch(setGameIdx(1)),
+        dispatch(setGameIdx(6)),
         dispatch(setPlayerAddress(2)),
-        dispatch(setOpponentAddress("324092482020302840498")),
+        dispatch(setOpponentAddress("0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92de572f7aa0")),
       ]}
     ></button>
   );

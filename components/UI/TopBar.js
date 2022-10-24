@@ -9,7 +9,7 @@ export default function TopBar() {
 
   const { data, isLoading, isError } = useBlock() 
 
-  const indicatorText = useMemo(() => {
+  const blockNum = useMemo(() => {
     if (data) {
       return data.block_number;
     }
@@ -25,7 +25,7 @@ export default function TopBar() {
   return (
     <div className="flex flex-row justify-between ">
       <div className="flex-col">
-      <NetworkInfo props={indicatorText}/> 
+      <NetworkInfo props={blockNum}/> 
       <OpponentStats />
       </div>
            

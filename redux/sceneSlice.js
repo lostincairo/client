@@ -1,40 +1,37 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedRow: null,
-  selectedCol: null,
-  highlightedRow: null,
-  highlightedCol: null,
-  availableMoves: [],
-  history: [],
-  isOver: "false",
-  playerPosition: null,
-}
-
+  selected_x: null,
+  selected_y: null,
+  highlighted_x: null,
+  highlighted_y: null,
+  available_moves: [],
+};
 
 export const sceneSlice = createSlice({
   name: "_scene",
   initialState,
   reducers: {
-    selectRow: (state, action) => {
-        state.selectedRow = action.payload;
+    setSelectedX: (state, action) => {
+      state.selected_x = action.payload;
     },
-    selectCol: (state, action) => {
-        state.selectedCol = action.payload;
+    setSelectedY: (state, action) => {
+      state.selected_y = action.payload;
     },
-    highlightRow: (state, action) => {
-        state.highlightedRow = action.payload;
+    setHighlightedX: (state, action) => {
+      state.highlighted_x = action.payload;
     },
-    highlightCol: (state, action) => {
-        state.highlightedCol = action.payload;
+    setHighlightedY: (state, action) => {
+      state.highlighted_y = action.payload;
     },
-    movePlayer: (state, action) => {
-        state.playerPosition = action.payload;
-    }
-  }
+    addAvailableMoves: (state, action) => {
+      state.available_moves.push(action.payload);
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
-export const { selectRow, selectCol, highlightRow, highlightCol, movePlayer } = sceneSlice.actions
+export const { setSelectedX, setSelectedY, setHighlightedX, setHighlightedY, addAvailableMoves } =
+  sceneSlice.actions;
 
-export default sceneSlice.reducer
+export default sceneSlice.reducer;
