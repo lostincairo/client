@@ -1,66 +1,33 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selected_x, selected_y } from "../../redux/sceneSlice";
+import { setSelectedX, setSelectedY, setHighlightedX, setHighlightedY } from "../../redux/sceneSlice";
 import { action, positionCol, positionRow, direction, SNhighlightRow, SNhighlightCol, setOpponentRow, setOpponentCol } from "../../redux/starknetSlice";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import Actions from '/components/UI/Actions';
 
+const darkgreen = "#AEE5A5";
+const lightgreen = "#DEFFE8"; 
+const red = "#FFC5C9";
 
-const red = "#AEE5A5";
-const blue = "#DEFFE8"; 
-const yellow = "#FFC5C9";
 
-// TODO: Clean this function
-const clickOnCell = () => {
-    if (
-      cellIndex === selectedCol &&
-      rowIndex === selectedRow &&
-      playerCol !== cellIndex &&
-      playerRow !== rowIndex
-    ) {
+const colorCell = (x, y) => {
+  const { selected_x, selected_y, highlighted_x, highlighted_y } = useSelector((store) => store._scene);
 
-      dispatch(selectCol(null));
-      dispatch(selectRow(null));
-      dispatch(SNhighlightRow(null));
-      dispatch(SNhighlightCol(null));
-      dispatch(setOpponentRow())
-    } else if (cellIndex !== selectedCol || rowIndex !== selectedRow) {
-      dispatch(selectCol(cellIndex));
-      dispatch(selectRow(rowIndex));
-      dispatch(SNhighlightRow(null))
-      dispatch(SNhighlightCol(null))
-      // TODO: See why you need a double click to make it work
-    } else if (playerCol === cellIndex && playerRow === rowIndex && selectedCol === cellIndex && selectedRow === rowIndex) {
-      console.log('move')
-      dispatch(action("move"))
-      dispatch(SNhighlightCol(cellIndex))
-      dispatch(SNhighlightRow(rowIndex))
-    } else if (selectedAction === "move"){ 
-      call_move(rowIndex, cellIndex)
-    } else if (selectedAction === "bow"){ 
-      Actions(call_action(rowIndex, cellIndex))
-    } else {
-      dispatch(selectCol(null));
-      dispatch(selectRow(null));
-      dispatch(SNhighlightRow(null))
-      dispatch(SNhighlightCol(null))
-      console.log("move invalid, please try again");
-    }
-};
+  if( selected_x === x && selected_y === y ) {
+    return red;
+  } else if ( highlighted_x === x && highlighted_y === y ) {
+    return lightgreen;
+  }
+  return "white"
+}
 
 
 
+const Cell = ({ position}) => {
 
-// TODO: Create a function with rules for highlighting the right cells
-
-const Cell = ({ cellPosition, cellIndex, rowIndex }) => {
-
-  const { highlightedRow, highlightedCol, selectedRow, selectedCol } = useSelector((store) => store._scene);
-  const {  gameIdx, opponent_address, opponentRow, opponentCol, selectedAction, playerRow, playerCol, highlightActionRow, highlightActionCol } = useSelector((store) => store._starknet);
   const dispatch = useDispatch();
-
-  const color = "white";
+  const color = colorCell(position.x, position.y);
   const rockMap = useLoader(TextureLoader, "tile_base.svg");
 
 
@@ -68,12 +35,12 @@ const Cell = ({ cellPosition, cellIndex, rowIndex }) => {
     <mesh
       scale={[1, 1, 0.1]}
       rotation={[Math.PI / -2, 0, 0]}
-      position={[cellPosition.x, 0, cellPosition.y]}
+      position={[position.x, 0, position.y]}
       onPointerEnter={(e) => [
-        dispatch(highlightRow(rowIndex)),
-        dispatch(highlightCol(cellIndex)),
+        dispatch(setHighlightedX(position.x)),
+        dispatch(setHighlightedY(position.y)),
       ]}
-      // onClick={clickOnCell}
+      onClick={() => {dispatch(setSelectedX(position.x)); dispatch(setSelectedY(position.y))}}
     >
 
       <meshStandardMaterial

@@ -33,9 +33,7 @@ const Board = () => {
             <Cell
               key={rowIndex.toString() + cellIndex.toString()}
               cell={cell}
-              cellIndex={cellIndex}
-              rowIndex={rowIndex}
-              cellPosition={{ x: rowIndex, z: 0, y: cellIndex }}
+              position={{ x: rowIndex, z: 0, y: cellIndex }}
             />
           ))}
         </React.Fragment>
