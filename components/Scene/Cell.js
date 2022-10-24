@@ -1,12 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectRow,
-  selectCol,
-  highlightRow,
-  highlightCol,
-  movePlayer,
-} from "../../redux/sceneSlice";
+import { selected_x, selected_y } from "../../redux/sceneSlice";
 import { action, positionCol, positionRow, direction, SNhighlightRow, SNhighlightCol, setOpponentRow, setOpponentCol } from "../../redux/starknetSlice";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";

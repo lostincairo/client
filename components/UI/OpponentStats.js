@@ -5,7 +5,7 @@ import { useGameContract } from "/hooks/GameContract";
 
 
 export default function OpponentStats() {
-  const { opponentRow, opponentCol, direction, opponent_address, gameIdx } =
+  const { game_idx, opponent_x, opponent_y, opponent_address } =
     useSelector((store) => store._starknet);
   const dispatch = useDispatch();
 
@@ -14,15 +14,14 @@ export default function OpponentStats() {
   const { data: x } = useStarknetCall({
     contract: game,
     method: "x_position_per_player_read",
-    args: [gameIdx, opponent_address],
+    args: [game_idx, opponent_address],
   });
   const X = x ? x.x.words[0] : [];
-  dispatch(setOp)
 
   const { data: y } = useStarknetCall({
     contract: game,
     method: "y_position_per_player_read",
-    args: [gameIdx, opponent_address],
+    args: [game_idx, opponent_address],
   });
   const Y = y ? y.y.words[0] : [];
 
@@ -53,7 +52,7 @@ export default function OpponentStats() {
 
   return (
     <div className="p-2 mt-4 bg-white font-mario text-black rounded-lg">
-      <div>Game {gameIdx}</div>
+      <div>Game {game_idx}</div>
       <div>
         Facing {opponent_address.substring(0, 6)}...
         {opponent_address.substring(opponent_address.length - 4)}

@@ -13,9 +13,6 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const { account } = useConnectors();
-  const { inGame } = useSelector((store) => store._game);
-
   return (
     <Disclosure as="nav" className="">
       {({ open }) => (

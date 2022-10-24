@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Landing from "./Landing";
 import Game from "./Game";
 import Navbar from "./Navbar";
@@ -11,20 +11,24 @@ import { connected } from "/redux/connectSlice";
 export default function Navigation({properties}) {
   const { account } = useAccount();
   const dispatch = useDispatch();
-  const { inGame, inLobby, inInit } = useSelector((store) => store._game);
+  const { inGame, inLobby, inInit, step } = useSelector((store) => store._game);
 
   const background = "flex h-screen w-full flex-col bg-[url('../public/background.png')] bg-cover bg-right"
 
-  if (account) {
-    dispatch(connected());
-  }
+  useMemo(() => {
+    if (account) {
+      dispatch(connected());
+    }
+    return;
+  }, [account]);
 
-  if (inLobby) {
+
+  if (step === "LOBBY") {
     return( 
     <div className={background}>
       <Lobby />
     </div>
-  )} else if (inGame) {
+  )} else if (step === "GAME" || step === "INIT") {
     return(
       <div className={background}>
       <Game />

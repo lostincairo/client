@@ -7,7 +7,7 @@ import InitialPosition from "/components/UI/InitialPosition";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Game({ properties }) {
-  const { inInit } = useSelector((store) => store._game);
+  const { step } = useSelector((store) => store._game);
 
   return (
     <div className="flex flex-col px-4 pt-2 relative h-screen w-full bg-[url('../public/scene.png')] bg-cover">
@@ -15,10 +15,10 @@ export default function Game({ properties }) {
 
       <Combat />
       <div className="flex flex-col items-center justify-center">
-      {inInit && <InitialPosition />}
+      {step === "INIT" && <InitialPosition />}
       </div>
       <div className="flex flex-col items-center -mb-7">
-      {inInit || <ControlBar properties={properties} />}
+      {step === "GAME" && <ControlBar properties={properties} />}
       </div>
     </div>
   );

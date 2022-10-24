@@ -10,8 +10,8 @@ import { useLobbyContract } from "/hooks/LobbyContract";
 import { useGameContract } from "/hooks/GameContract";
 
 import { useDispatch, useSelector } from "react-redux";
-import { enterGame, exitLobby, enterInit, exitInit } from "/redux/gameSlice";
-import { setGameIdx, setPlayerAddress, setOpponentAddress } from "/redux/starknetSlice";
+import { setStep } from "/redux/gameSlice";
+import { setGameIdx, setOwnAddress, setOpponentAddress } from "/redux/starknetSlice";
 
 
 // TODO: Only display the button when the game is active.
@@ -46,11 +46,9 @@ const EnterGameBtn = () => {
     <button
       className="flex flew-row items-center pt-20 ml-50 w-40 h-20 hover:bg-[url('/play_button_hover.svg')] bg-[url('/play_button.svg')] bg-contain bg-no-repeat bg-center px-4 py-4"
       onClick={(e) => [
-        dispatch(enterInit()),
-        dispatch(enterGame()),
-        dispatch(exitLobby()),
+        dispatch(setStep("INIT")),
         dispatch(setGameIdx(6)),
-        dispatch(setPlayerAddress(2)),
+        dispatch(setOwnAddress(2)),
         dispatch(setOpponentAddress("0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92de572f7aa0")),
       ]}
     ></button>
