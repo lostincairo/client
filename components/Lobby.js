@@ -10,7 +10,7 @@ import { useLobbyContract } from "/hooks/LobbyContract";
 import { useGameContract } from "/hooks/GameContract";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setStep } from "/redux/gameSlice";
+import { setStep, setLobbyStep } from "/redux/gameSlice";
 import { setGameIdx, setOwnAddress, setOpponentAddress } from "/redux/starknetSlice";
 
 
@@ -26,7 +26,7 @@ function classNames(...classes) {
 function CallSecondPlayerAddress() {
 
   const { address } = useAccount();
-  const { contract: game } = useGameContract();
+
   const { data, loading, error, refresh } = useStarknetCall({
     contract: game,
     method: "game_idx_to_second_player_read",
@@ -58,16 +58,48 @@ const EnterGameBtn = () => {
 
 export default function Lobby() {
 
-  const { inInit } = useSelector((store) => store._game);
-
-
   const { address } = useAccount();
+  const { contract: game } = useGameContract();
+  const dispatch = useDispatch();
+
+  // Step 1: Check for Access Key NFT 
+  // TODO: Create ERC-721 contract
 
 
+
+  // Step 2: Waiting for queue confirmation
+  // TODO: Dynamically allocate txHash + Get Queue Index in the same step
+
+  const txHash =
+    "0x4f57613506755761d35e654db430b1fff70f1650430c322dff37aca223e3e03";
+  const {
+    data: tx_data,
+    loading: tx_loading,
+    error: tx_error,
+  } = useTransaction({ hash: txHash });
+
+  const TX_DATA = tx_data ? tx_data.status : [];
+
+  let TX_STATUS;
+  if (TX_DATA === "TRANSACTION_RECEIVED" || TX_DATA === "RECEIVED" || TX_DATA === "PENDING" || TX_DATA === "REJECTED")
+    TX_STATUS = "Entering the Queue, please stand by";
+  if (TX_DATA === "REJECTED")
+    TX_STATUS = "Something went wrong. Please submit a bug report";
+  if (TX_DATA === "ACCEPTED_ON_L2" || TX_DATA === "ACCEPTED_ON_L1")
+    TX_STATUS = "Well done, you're in queue";
+
+  useEffect(() => {
+    if(TX_STATUS === "Well done, you're in queue") {
+      dispatch(setLobbyStep(2))
+    }
+  }, [TX_STATUS])
 
   // const QUEUE_INDEX = queue_index ? queue_index.idx.words[0] : [];
 
 
+  // Step 3: Check for game activation and display the game_idx
+  const { data: game_idx } = useStarknetCall({contract: game, method: 'player_address_to_game_idx_read', args: [address]});
+  const GAME_IDX = game_idx ? game_idx.game_idx : [];
 
 
 
@@ -89,27 +121,15 @@ const SECOND_PLAYER = "0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92d
 
   // TODO: Need to dynamically allocate the hash based on data from useStarknetCall
   // Little trick for now
-  const txHash =
-    "0x4f57613506755761d35e654db430b1fff70f1650430c322dff37aca223e3e03";
-  const {
-    data: tx_data,
-    loading: tx_loading,
-    error: tx_error,
-  } = useTransaction({ hash: txHash });
 
-  // Need to refresh the state
-  const TX_DATA = tx_data ? tx_data.status : [];
 
-  let TX_STATUS;
-  if (TX_DATA === "TRANSACTION_RECEIVED" || TX_DATA === "RECEIVED" || TX_DATA === "PENDING" || TX_DATA === "REJECTED")
-    TX_STATUS = "Entering the Queue, please stand by";
-  // if (TX_DATA === "REJECTED")
-  //   TX_STATUS = "Something went wrong. Please submit a bug report";
-  if (TX_DATA === "ACCEPTED_ON_L2" || TX_DATA === "ACCEPTED_ON_L1")
-    TX_STATUS = "Well done, you're in queue";
+
 
 
   // Listen for game activation and dispatch(ExitLobby) and EnterGame.
+
+
+  // Set the status based on the State
 
 
 
@@ -118,31 +138,31 @@ const SECOND_PLAYER = "0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92d
       name: `Access key identified for player ${address}`,
       description: "Vitae sed mi luctus laoreet.",
       href: "#",
-      status: "complete",
+      status: "COMPLETE",
     },
     {
       name: `${TX_STATUS}`,
       description: "Cursus semper viverra facilisis et et some more.",
       href: "#",
-      status: "current",
+      status: "CURRENT",
     },
     {
       name: `Position in queue : ${2} `,
       description: "You are the 3rd in queue",
       href: "#",
-      status: "upcoming",
+      status: "ONGOING",
     },
     {
-      name: `Opening the arena for game #${1}`,
+      name: `Opening the arena for game #${GAME_IDX}`,
       description: "Training will start soon",
       href: "#",
-      status: "upcoming",
+      status: "UPCOMING",
     },
     {
       name: `It's your turn, be brave. You're facing ${1}`,
       description: "Iusto et officia maiores porro ad non quas.",
       href: "#",
-      status: "upcoming",
+      status: "UPCOMING",
     },
   ];
 
@@ -159,7 +179,7 @@ const SECOND_PLAYER = "0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92d
                 "relative"
               )}
             >
-              {step.status === "complete" ? (
+              {step.status === "COMPLETE" ? (
                 <>
                   {stepIdx !== steps.length - 1 ? (
                     <div
@@ -184,7 +204,7 @@ const SECOND_PLAYER = "0x0725726df5631feec3ecb92f0a44006fb2368afeb6e62bd901ba92d
                     </span>
                   </a>
                 </>
-              ) : step.status === "current" ? (
+              ) : step.status === "CURRENT" ? (
                 <>
                   {stepIdx !== steps.length - 1 ? (
                     <div

@@ -23,8 +23,7 @@ const colorCell = (x, y) => {
 }
 
 
-
-const Cell = ({ position}) => {
+const Cell = ({ position }) => {
 
   const dispatch = useDispatch();
   const color = colorCell(position.x, position.y);
